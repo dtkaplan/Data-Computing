@@ -1,8 +1,9 @@
 ---
-title       : Data Computing: Chapter 1
+title       : "Data Computing: Chapter 1"
 description : Exercises
 attachments :
   slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
+---
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1
 ## Starting with R graphics

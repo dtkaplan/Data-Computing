@@ -1,0 +1,87 @@
+---
+title       : Data Computing: Chapter 1
+description : Exercises
+attachments :
+  slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1
+## Starting with R graphics
+
+In your work with *Data Computing*, you will be using the `ggplot2` package for making graphics.  The sample code shows a few lines from a data table named `Diamonds`. The `ggplot()` command plots price against size (`carat`) for different cuts of diamonds.
+
+*** =instructions
+- Execute each of the two commands in the sample code to verify that it is working.
+- Once you have done this, modify the `ggplot()` command so that the `clarity` variable is used instead of `cut`. If you read the existing command carefully, you should be able to figure out how to do this.
+
+*** =hint
+The phrase `color = cut` instructs `ggplot()` to set the color of each dot according to the value of the variable `cut`. So change `cut` to `clarity`.
+
+*** =pre_exercise_code
+```{r}
+library(ggplot2)
+Diamonds <- diamonds
+```
+
+*** =sample_code
+```{r}
+# Show the first few lines of the data table
+head(Diamonds)
+# Plot out some of the data
+ggplot(Diamonds, aes(x = carat, y = price, color = cut)) + 
+  geom_point()
+# Modify the above to display the diamonds' clarity rather than cut.
+```
+
+*** =solution
+```{r}
+ggplot(Diamonds, aes(x = carat, y = price, color = clarity)) + 
+  geom_point()
+```
+
+*** =sct
+```{r}
+test_function("aes", args = "color",
+              incorrect_message = "Remember to set color = clarity."  )
+success_msg("Good. Even though you may never have programmed before, you were still able to figure it out!")
+```
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1
+## Starting with wrangling
+
+The sample code finds the mean price for each cut of diamonds. Look through the code to see where each of those variables, `price` and `cut`, appears.
+
+*** =instructions
+- Modify the code to find the mean price for each clarity of diamonds. 
+
+
+*** =hint
+Notice that the variable `cut` appears in the `group_by()` part of the expression. You can change `cut` to `clarity` to get the job done.
+
+*** =pre-exercise-code
+```{r}
+library(dplyr)
+data(diamonds, package = "ggplot2")
+Diamonds <- diamonds
+```
+
+*** =sample_code
+```{r}
+Diamonds %>%
+  group_by(cut) %>%
+  summarise(val = mean(price))
+```
+
+*** = solution
+```{r}
+Diamonds %>%
+  group_by(clarity) %>%
+  summarise(val = mean(price))
+```
+
+
+*** =sct
+```{r}
+test_student_typed("group_by(clarity)", fixed = FALSE, 
+                   not_typed_msg = "Have you changed the variable name in `group_by(cut)` to `clarity`?")
+success_msg("Good. The purpose of this exercise was just to give you practice with DataCamp.")
+```

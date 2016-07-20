@@ -5,7 +5,7 @@ attachments :
   slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
 ---
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:7edaec5a41
 ## Starting with R graphics
 
 In your work with *Data Computing*, you will be using the `ggplot2` package for making graphics.  The sample code shows a few lines from a data table named `Diamonds`. The `ggplot()` command plots price against size (`carat`) for different cuts of diamonds.
@@ -46,7 +46,7 @@ test_function("aes", args = "color",
 success_msg("Good. Even though you may never have programmed before, you were still able to figure it out!")
 ```
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:8553b72780
 ## Starting with wrangling
 
 The sample code finds the mean price for each cut of diamonds. Look through the code to see where each of those variables, `price` and `cut`, appears.

@@ -65,6 +65,11 @@ library(ggplot2)
 
 *** =sample_code
 ```{r}
+# load the packages
+require(dplyr)
+data(diamonds, package = "ggplot2")
+
+# do the wrangling
 diamonds %>%
   group_by(cut) %>%
   summarise(val = mean(price))
@@ -72,7 +77,12 @@ diamonds %>%
 
 *** = solution
 ```{r}
-Diamonds %>%
+# load the packages
+require(dplyr)
+data(diamonds, package = "ggplot2")
+
+# do the wrangling
+diamonds %>%
   group_by(clarity) %>%
   summarise(val = mean(price))
 ```

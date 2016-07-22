@@ -26,23 +26,23 @@ Diamonds <- diamonds
 *** =sample_code
 ```{r}
 # Show the first few lines of the data table
-head(Diamonds)
+head(diamonds)
 # Plot out some of the data
-ggplot(Diamonds, aes(x = carat, y = price, color = cut)) + 
+ggplot(diamonds, aes(x = carat, y = price, color = cut)) + 
   geom_point()
 # Modify the above to display the diamonds' clarity rather than cut.
 ```
 
 *** =solution
 ```{r}
-ggplot(Diamonds, aes(x = carat, y = price, color = clarity)) + 
+ggplot(diamonds, aes(x = carat, y = price, color = clarity)) + 
   geom_point()
 ```
 
 *** =sct
 ```{r}
 test_student_typed(c("color *= *clarity"), fixed = FALSE, 
-              incorrect_msg = "Remember to set color = clarity."  )
+              not_typed_msg = "Remember to set color = clarity."  )
 success_msg("Good. Even though you may never have programmed before, you were still able to figure it out!")
 ```
 

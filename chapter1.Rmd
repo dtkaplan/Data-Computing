@@ -41,7 +41,7 @@ ggplot(Diamonds, aes(x = carat, y = price, color = clarity)) +
 
 *** =sct
 ```{r}
-test_function("aes", args = "color",
+test_student_typed(c("color *= *clarity"), fixed = FALSE, 
               incorrect_msg = "Remember to set color = clarity."  )
 success_msg("Good. Even though you may never have programmed before, you were still able to figure it out!")
 ```
@@ -82,7 +82,7 @@ Diamonds %>%
 
 *** =sct
 ```{r}
-test_student_typed("group_by(clarity)", fixed = FALSE, 
+test_student_typed("group_by\\( *clarity *\\)", fixed = FALSE, 
                    not_typed_msg = "Have you changed the variable name in `group_by(cut)` to `clarity`?")
 success_msg("Good. The purpose of this exercise was just to give you practice with DataCamp.")
 ```

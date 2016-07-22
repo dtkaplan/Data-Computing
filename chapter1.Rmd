@@ -42,7 +42,7 @@ ggplot(Diamonds, aes(x = carat, y = price, color = clarity)) +
 *** =sct
 ```{r}
 test_function("aes", args = "color",
-              incorrect_message = "Remember to set color = clarity."  )
+              incorrect_msg = "Remember to set color = clarity."  )
 success_msg("Good. Even though you may never have programmed before, you were still able to figure it out!")
 ```
 

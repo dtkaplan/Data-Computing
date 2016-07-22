@@ -20,7 +20,6 @@ The phrase `color = cut` instructs `ggplot()` to set the color of each dot accor
 *** =pre_exercise_code
 ```{r}
 library(ggplot2)
-Diamonds <- diamonds
 ```
 
 *** =sample_code
@@ -61,13 +60,12 @@ Notice that the variable `cut` appears in the `group_by()` part of the expressio
 *** =pre-exercise-code
 ```{r}
 library(dplyr)
-data(diamonds, package = "ggplot2")
-Diamonds <- diamonds
+library(ggplot2)
 ```
 
 *** =sample_code
 ```{r}
-Diamonds %>%
+diamonds %>%
   group_by(cut) %>%
   summarise(val = mean(price))
 ```

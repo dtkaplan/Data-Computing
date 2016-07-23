@@ -5,6 +5,81 @@ attachments :
   slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
 ---
 
+--- type:NormalExercise lang:r xp:50 skills:1 
+## Starting with Data Camp
+
+DataCamp is a system that lets you type and modify and let's your work be evaluated so that hints can be given.
+
+*** =instructions
+- Change the value of `second_thing` so that the sum is 50
+
+*** =solution
+```{r}
+first_thing <- 10
+second_thing <- 20  # change this
+
+# their sum
+first_thing + second_thing
+
+```
+
+--- type:NormalExercise lang:r xp:50 skills:1 
+## Evaluating Commands in DataCamp 
+
+DataCamp is a system that lets you type and modify and let's your work be evaluated so that hints can be given.
+
+In this exercise, you are going to intentionally provide a wrong answer so that you see how the DataCamp interface works
+
+*** =instructions
+- Change the value of `second_thing` so that the sum of `first_thing` and `second_thing` is 40.  But **intentionally make a mistake** so that the sum is **50**.
+- Press submit. You'll be told that you're wrong.
+- Now correct your answer your answer so that the sum is 40.
+
+*** =pre
+```{r}
+target <- 40
+```
+
+*** =solution
+```{r}
+first_thing <- 10
+second_thing <- 20  # change this
+
+# their sum
+first_thing + second_thing
+```
+
+--- type:NormalExercise lang:r xp:50 skills:1 
+## DataCamp vs RStudio/RMarkdown
+
+When you work in RStudio, you'll be creating markdown documents and putting your commands in those documents. The documents will also include narrative, graphics, and so on. (This will be introduced in Chapter XXXXX 3?). But in DataCamp you will be creating a "script" that consists only of commands. With DataCamp, there are three ways to execute the commands you give:
+
+1. Type a command at the R Console
+2. Type or edit a command in the script window. Highlight it and press command/return. If the command has multiple lines, you'll need to highlight all the lines --- you can't run them one at a time.
+3. Press "Submit Answer". This sends everything in the script, highlighted or not, for evaluation.
+
+
+
+*** =instructions
+- The script has been pre-populated with some R commands. Ignore these for now. Instead, you're going to give commands in the R Console:
+    - Put this command at the prompt (`>`) in the R Console: `x <- 25`. Execute it. Another prompt will be shown.
+    - Put this command in the R Console: `sqrt(x)`. Execute it. You'll get the response `[1] 5` and another prompt will be shown.
+- Back to the Script. Highlight the first command and press CMD-RETURN. Look for the response in the R Console.
+- Also in the script. Highlight the several lines of the second command. Press CMD-RETURN. Again you'll see the response in the R console.
+- Try highlighting just the first line in the second command and pressing CMD-RETURN. You'll get a message in the console, "unexpected end of input."
+- Finally, for the third way of running the commands. Press "Submit Answer." All of the commands in the script will be run. The results will be checked, and you'll get a message about how you did from the DataCamp system.
+
+*** =solution
+```{r}
+first_thing <- 10
+second_thing <- 20  # change this
+
+# their sum
+first_thing + second_thing
+
+```
+
+
 --- type:NormalExercise lang:r xp:50 skills:1 key:7edaec5a41
 ## Starting with R graphics
 

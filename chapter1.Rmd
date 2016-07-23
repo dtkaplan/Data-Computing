@@ -5,7 +5,7 @@ attachments :
   slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
 ---
 
---- type:NormalExercise lang:r xp:50 skills:1 
+--- type:NormalExercise lang:r xp:50 skills:1  key:88bc8f8611
 ## Starting with Data Camp
 
 DataCamp is a system that lets you type and modify and let's your work be evaluated so that hints can be given.
@@ -23,7 +23,7 @@ first_thing + second_thing
 
 ```
 
---- type:NormalExercise lang:r xp:50 skills:1 
+--- type:NormalExercise lang:r xp:50 skills:1  key:94fe242b81
 ## Evaluating Commands in DataCamp 
 
 DataCamp is a system that lets you type and modify and let's your work be evaluated so that hints can be given.
@@ -49,7 +49,7 @@ second_thing <- 20  # change this
 first_thing + second_thing
 ```
 
---- type:NormalExercise lang:r xp:50 skills:1 
+--- type:NormalExercise lang:r xp:50 skills:1  key:b439b5d3fe
 ## DataCamp vs RStudio/RMarkdown
 
 When you work in RStudio, you'll be creating markdown documents and putting your commands in those documents. The documents will also include narrative, graphics, and so on. (This will be introduced in Chapter XXXXX 3?). But in DataCamp you will be creating a "script" that consists only of commands. With DataCamp, there are three ways to execute the commands you give:

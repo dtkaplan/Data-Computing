@@ -3,7 +3,7 @@ title       : "Data Computing: Chapter 2"
 description : Exercises
 ---
 
---- type:MultipleChoiceExercise lang:r xp:10 skills:1 
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1  key:4350d12adb
 ## Problem 2.1A
 
 Fix the syntax so that the command works.

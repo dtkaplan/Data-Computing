@@ -56,7 +56,7 @@ test_object("message", incorrect_msg = "You shouldn't change the contents of the
 success_msg("Good.")
 ```
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:eaa16f8a2c
 ## Problem 2.1.C
 
 *** =instructions

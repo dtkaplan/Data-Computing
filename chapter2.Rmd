@@ -3,7 +3,7 @@ title       : "Data Computing: Chapter 2"
 description : Exercises
 ---
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:4350d12adb
 ## Problem 2.1A
 
 Fix the syntax so that the command works.
@@ -29,7 +29,7 @@ test_student_typed("sqrt\\( *100 *\\)", fixed = FALSE,
 success_msg("Good.")
 ```
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:b99a32ad13
 ## Problem 2.1B
 
 Fix the syntax so that the command works.

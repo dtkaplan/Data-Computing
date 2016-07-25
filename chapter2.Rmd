@@ -3,7 +3,7 @@ title       : "Data Computing: Chapter 2"
 description : Exercises
 ---
 
---- type:MultipleChoiceExercise lang:r xp:10 skills:1  key:4350d12adb
+--- type:NormalExercise lang:r xp:10 skills:1 
 ## Problem 2.1A
 
 Fix the syntax so that the command works.
@@ -26,5 +26,30 @@ The arguments to functions must *always* be in parentheses.
 test_object("ralph", incorrect_msg = "You were supposed to calculate the square root of 100.")
 test_student_typed("sqrt\\( *100 *\\)", fixed = FALSE, 
                    not_typed_msg = "We want you to do the sqrt() function to do the calculation. It's not the answer we're concerned with here but that process of getting to the answer.")
+success_msg("Good.")
+```
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 2.1B
+
+Fix the syntax so that the command works.
+
+*** =sample_code 
+```{r}
+message <- Say 'hello' to her, please.
+```
+
+*** =solution
+```{r}
+message <- "Say 'hello' to her, please."
+```
+
+*** =hint
+Text meant to be taken literally should be formatted as a character string. That is, it should be in quotes like this: `"a character string"`
+
+*** =sct
+```{r}
+test_object("message", incorrect_msg = "You shouldn't change the contents of the string, just put it in quotes.")
+
 success_msg("Good.")
 ```

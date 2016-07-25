@@ -5,28 +5,11 @@ attachments :
   slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
 ---
 
---- type:NormalExercise lang:r xp:50 skills:1  key:88bc8f8611
-## Starting with Data Camp
-
-DataCamp is a system that lets you type and modify and let's your work be evaluated so that hints can be given.
-
-*** =instructions
-- Change the value of `second_thing` so that the sum is 50
-
-*** =solution
-```{r}
-first_thing <- 10
-second_thing <- 20  # change this
-
-# their sum
-first_thing + second_thing
-
-```
 
 --- type:NormalExercise lang:r xp:50 skills:1  key:94fe242b81
-## Evaluating Commands in DataCamp 
+## Problem 1.1 
 
-DataCamp is a system that lets you type and modify and let's your work be evaluated so that hints can be given.
+DataCamp is a system that lets you type and modify and lets your work be evaluated so that hints can be given.
 
 In this exercise, you are going to intentionally provide a wrong answer so that you see how the DataCamp interface works
 
@@ -37,20 +20,39 @@ In this exercise, you are going to intentionally provide a wrong answer so that 
 
 *** =pre
 ```{r}
-target <- 40
+.target <- 40
 ```
 
 *** =solution
 ```{r}
 first_thing <- 10
-second_thing <- 20  # change this
+second_thing <- 30  # change this
 
 # their sum
 first_thing + second_thing
 ```
 
+*** =sample_code
+```{r}
+first_thing <- 10
+second_thing <- 10  # change this
+
+# their sum
+first_thing + second_thing
+```
+
+*** =sct
+```{r}
+test_object(first_thing, 
+            incorrect_msg = "The instructions didn't say anything about changing `first_thing`. Change its value back to 10.")
+test_object(second_thing, 
+            incorrect_msg = "Feedback messages look like this. Your `second_thing` is not set to a value that will make the sum with `first_thing` equal to 40.")
+success_msg("When you have correctly solved the problem, you'll get a success message and you're ready to go on to the next problem. Of course, you can also navigate to the next problem without having solved the first one, and perhaps go back to the first one when you have the time.")
+```
+
+
 --- type:NormalExercise lang:r xp:50 skills:1  key:b439b5d3fe
-## DataCamp vs RStudio/RMarkdown
+## Problem 1.2
 
 When you work in RStudio, you'll be creating markdown documents and putting your commands in those documents. The documents will also include narrative, graphics, and so on. (This will be introduced in Chapter XXXXX 3?). But in DataCamp you will be creating a "script" that consists only of commands. With DataCamp, there are three ways to execute the commands you give:
 
@@ -65,23 +67,43 @@ When you work in RStudio, you'll be creating markdown documents and putting your
     - Put this command at the prompt (`>`) in the R Console: `x <- 25`. Execute it. Another prompt will be shown.
     - Put this command in the R Console: `sqrt(x)`. Execute it. You'll get the response `[1] 5` and another prompt will be shown.
 - Back to the Script. Highlight the first command and press CMD-RETURN. Look for the response in the R Console.
-- Also in the script. Highlight the several lines of the second command. Press CMD-RETURN. Again you'll see the response in the R console.
+- Also in the script ... Highlight the several lines of the second command. Press CMD-RETURN. Again you'll see the response in the R console.
 - Try highlighting just the first line in the second command and pressing CMD-RETURN. You'll get a message in the console, "unexpected end of input."
 - Finally, for the third way of running the commands. Press "Submit Answer." All of the commands in the script will be run. The results will be checked, and you'll get a message about how you did from the DataCamp system.
 
+
+*** =sample_code
+```{r}
+# A single-line command
+library(DataComputing)
+
+# A multi-line command.
+WorldCities %>%
+  group_by(country) %>%
+  summarise(total = sum(population)) %>%
+  filter(total > 10000000) %>%
+  arrange(desc(total))
+```
 *** =solution
 ```{r}
-first_thing <- 10
-second_thing <- 20  # change this
+# A single-line command
+library(DataComputing)
 
-# their sum
-first_thing + second_thing
-
+# A multi-line command.
+WorldCities %>%
+  group_by(country) %>%
+  summarise(total = sum(population)) %>%
+  filter(total > 10000000) %>%
+  arrange(desc(total))
 ```
 
+*** =sct
+```{r}
+success_msg("Ready to move on ....")
+```
 
 --- type:NormalExercise lang:r xp:50 skills:1 key:7edaec5a41
-## Starting with R graphics
+## Problem 1.3
 
 In your work with *Data Computing*, you will be using the `ggplot2` package for making graphics.  The sample code shows a few lines from a data table named `Diamonds`. The `ggplot()` command plots price against size (`carat`) for different cuts of diamonds.
 
@@ -121,7 +143,7 @@ success_msg("Good. Even though you may never have programmed before, you were st
 ```
 
 --- type:NormalExercise lang:r xp:50 skills:1 key:8553b72780
-## Starting with wrangling
+## Problem 1.4
 
 The sample code finds the mean price for each cut of diamonds. Look through the code to see where each of those variables, `price` and `cut`, appears.
 

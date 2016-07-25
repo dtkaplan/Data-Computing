@@ -4,8 +4,9 @@ description : Exercises
 ---
 
 --- type:NormalExercise lang:r xp:10 skills:1  key:4350d12adb
-## Problem 2.1A
+## Problem 2.1.A
 
+*** =instructions
 Fix the syntax so that the command works.
 
 *** =sample_code
@@ -30,8 +31,9 @@ success_msg("Good.")
 ```
 
 --- type:NormalExercise lang:r xp:10 skills:1  key:b99a32ad13
-## Problem 2.1B
+## Problem 2.1.B
 
+*** =instructions
 Fix the syntax so that the command works.
 
 *** =sample_code 
@@ -50,6 +52,32 @@ Text meant to be taken literally should be formatted as a character string. That
 *** =sct
 ```{r}
 test_object("message", incorrect_msg = "You shouldn't change the contents of the string, just put it in quotes.")
+
+success_msg("Good.")
+```
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 2.1.C
+
+*** =instructions
+Fix the syntax so that the command works.
+
+*** =sample_code 
+```{r}
+y <- sin[2 pi]
+```
+
+*** =solution
+```{r}
+y <- sin(2 * pi)
+```
+
+*** =hint
+There are two errors here. One is about the punctuation for arguments: it's not square brackets. The other is about multiplication. In R, multiplication must be explicitly stated with `*`.
+
+*** =sct
+```{r}
+test_object("y", incorrect_msg = "Are you sure you set y to be the sin of `2 * pi`?")
 
 success_msg("Good.")
 ```

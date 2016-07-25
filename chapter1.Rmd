@@ -43,9 +43,9 @@ first_thing + second_thing
 
 *** =sct
 ```{r}
-test_object(first_thing, 
+test_object("first_thing", 
             incorrect_msg = "The instructions didn't say anything about changing `first_thing`. Change its value back to 10.")
-test_object(second_thing, 
+test_object("second_thing", 
             incorrect_msg = "Feedback messages look like this. Your `second_thing` is not set to a value that will make the sum with `first_thing` equal to 40.")
 success_msg("When you have correctly solved the problem, you'll get a success message and you're ready to go on to the next problem. Of course, you can also navigate to the next problem without having solved the first one, and perhaps go back to the first one when you have the time.")
 ```

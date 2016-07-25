@@ -1,0 +1,30 @@
+---
+title       : "Data Computing: Chapter 2"
+description : Exercises
+---
+
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1 
+## Problem 2.1A
+
+Fix the syntax so that the command works.
+
+*** =sample_code
+```{r}
+ralph <- sqrt 100
+```
+
+*** =solution
+```{r}
+ralph <- sqrt(100)
+```
+
+*** =hint
+The arguments to functions must *always* be in parentheses.
+
+*** =sct
+```{r}
+test_object("ralph", incorrect_msg = "You were supposed to calculate the square root of 100.")
+test_student_typed("sqrt\\( *100 *\\)", fixed = FALSE, 
+                   not_typed_msg = "We want you to do the sqrt() function to do the calculation. It's not the answer we're concerned with here but that process of getting to the answer.")
+success_msg("Good.")
+```

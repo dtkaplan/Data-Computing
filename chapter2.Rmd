@@ -82,7 +82,7 @@ test_object("y", incorrect_msg = "Are you sure you set y to be the sin of `2 * p
 success_msg("Good.")
 ```
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:a0d4251e9d
 ## Problem 2.1.D
 
 *** =instructions
@@ -107,7 +107,7 @@ If there are multiple arguments to a function, they are always separated by a co
 success_msg("Good.")
 ```
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:8376ea0375
 ## Problem 2.2
 
 The sample code contains a statement that will read in a data table from the internet.
@@ -150,7 +150,7 @@ test_function("names", args = "x")
 success_msg("Good. These are simple ways to see basic properties of a data table.")
 ```
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:8b7f5b15fd
 ## Problem 2.3
 
 *** =instructions

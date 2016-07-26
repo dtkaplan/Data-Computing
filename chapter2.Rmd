@@ -83,6 +83,31 @@ success_msg("Good.")
 ```
 
 --- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 2.1.D
+
+*** =instructions
+Fix the syntax so that the command works.
+
+*** =sample_code 
+```{r}
+paste("one"; "two"; sep = " and ")
+```
+
+*** =solution
+```{r}
+paste("one", "two", sep = " and ")
+```
+
+
+*** =hint
+If there are multiple arguments to a function, they are always separated by a comma.
+
+*** =sct
+```{r}
+success_msg("Good.")
+```
+
+--- type:NormalExercise lang:r xp:10 skills:1 
 ## Problem 2.2
 
 The sample code contains a statement that will read in a data table from the internet.
@@ -124,3 +149,32 @@ test_function("ncol", args = "x")
 test_function("names", args = "x")
 success_msg("Good. These are simple ways to see basic properties of a data table.")
 ```
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 2.3
+
+*** =instructions
+Many of the object names in the sample code include illegal characters. Remove **only** those illegal characters to form proper object names.
+
+*** =sample_code
+```{r}
+7eleven <- "store"
+seven-eleven <- "convenience store"
+R^2 <- 0.25
+p_value <- 0.07
+file name <- "cats.csv"
+"Data set" <- mtcars
+```
+
+*** =solution
+```{r}
+eleven <- "store"
+seveneleven <- "convenience store"
+R2 <- 0.25
+p_value <- 0.07
+filename <- "cats.csv"
+Dataset <- mtcars
+```
+
+*** =hint
+Legal object names contain only letters and numbers and the period and underslash characters (`.` and `_`). They can't start with a number or an underslash.

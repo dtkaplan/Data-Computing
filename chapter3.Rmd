@@ -3,7 +3,7 @@ title       : "Data Computing: Chapter 3"
 description : Exercises
 ---
 
---- type:NormalExercise lang:r xp:10 skills:1  
+--- type:NormalExercise lang:r xp:10 skills:1   key:bb80c301aa
 ## Problem 3.1.A
 
 *** =instructions

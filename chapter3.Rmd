@@ -1,0 +1,42 @@
+---
+title       : "Data Computing: Chapter 3"
+description : Exercises
+---
+
+--- type:NormalExercise lang:r xp:10 skills:1  
+## Problem 3.1.A
+
+*** =instructions
+Fix the statement so that it has the proper form.
+
+*** =hint
+- Literal names, like `"Prince"`, should be in quotes.
+- A pipe can never be at the start of a line.
+- A data table should be given before the first pipe (`%>%`).
+- When a data table is piped into a function, you should not also include the table as an explicit first argument, so `BabyNames %>% filter(name == "Prince")` instead of `BabyNames %>% filter(BabyNames, name == "Prince")`.
+
+*** =pre
+```{r}
+library(DataComputing)
+Prince <- "Fred"
+```
+
+*** =sample_code
+```{r}
+Just_the_Princes <- 
+  %>% 
+  filter(BabyNames, name == Prince)
+```
+
+*** =solution
+```{r}
+Result <-
+  BabyNames %>%
+  filter(name == "Prince")
+```
+
+*** =sct
+```{r}
+test_student_typed("BabyNames *%>%", fixed = FALSE,
+                   not_typed_msg = "Remember, the data table `BabyNames` should come before the first type.")
+```

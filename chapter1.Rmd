@@ -124,14 +124,16 @@ library(ggplot2)
 # Show the first few lines of the data table
 head(diamonds)
 # Plot out some of the data
-ggplot(diamonds, aes(x = carat, y = price, color = cut)) + 
+ggplot(diamonds, 
+       aes(x = carat, y = price, color = cut)) + 
   geom_point()
 # Modify the above to display the diamonds' clarity rather than cut.
 ```
 
 *** =solution
 ```{r}
-ggplot(diamonds, aes(x = carat, y = price, color = clarity)) + 
+ggplot(diamonds, 
+       aes(x = carat, y = price, color = clarity)) + 
   geom_point()
 ```
 
@@ -145,10 +147,10 @@ success_msg("Good. Even though you may never have programmed before, you were st
 --- type:NormalExercise lang:r xp:50 skills:1 key:8553b72780
 ## Problem 1.4
 
-The sample code finds the mean price for each cut of diamonds. Look through the code to see where each of those variables, `price` and `cut`, appears.
+The sample code finds the mean price for each cut of diamonds. Look through the code to see where the variables `price` and `cut` appear.
 
 *** =instructions
-- Modify the code to find the mean price for each clarity of diamonds. 
+- Modify the code to find the mean weight (`carat`) for each clarity of diamonds. 
 
 
 *** =hint
@@ -181,7 +183,7 @@ data(diamonds, package = "ggplot2")
 # do the wrangling
 diamonds %>%
   group_by(clarity) %>%
-  summarise(val = mean(price))
+  summarise(val = mean(carat))
 ```
 
 
@@ -189,5 +191,5 @@ diamonds %>%
 ```{r}
 test_student_typed("group_by\\( *clarity *\\)", fixed = FALSE, 
                    not_typed_msg = "Have you changed the variable name in `group_by(cut)` to `clarity`?")
-success_msg("Good. The purpose of this exercise was just to give you practice with DataCamp.")
+success_msg("It looks like you're ready to move on.")
 ```

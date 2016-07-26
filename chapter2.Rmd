@@ -81,3 +81,46 @@ test_object("y", incorrect_msg = "Are you sure you set y to be the sin of `2 * p
 
 success_msg("Good.")
 ```
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 2.2
+
+The sample code contains a statement that will read in a data table from the internet.
+
+*** =instructions
+Add commands that use the appropriate functions to:
+
+- Calculate the number of rows
+- Calculate the number of columns
+- Find the names of the variables
+
+*** =hint
+The functions are `nrow()`, `ncol()`, and `names()`. Each of them takes as an argument the data table.
+
+*** =sample_code
+```{r}
+motors <- read.csv("http://tiny.cc/mosaic/engines.csv")
+
+nrow(motors)
+ncol(motors)
+names(motors)
+```
+
+*** =solution
+```{r}
+motors <- read.csv("http://tiny.cc/mosaic/engines.csv")
+
+nrow(motors)
+ncol(motors)
+names(motors)
+```
+
+*** =sct
+```{r}
+test_function("nrow", args = "x", 
+              not_called_msg = "Did you calculate the number of rows?",
+              args_not_specified_msg = "Remember to give the data table as an argument.")
+test_function("ncol", args = "x")
+test_function("names", args = "x")
+success_msg("Good. These are simple ways to see basic properties of a data table.")
+```

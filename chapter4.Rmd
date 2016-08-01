@@ -65,11 +65,11 @@ It's also possible to refer to package data by explicitly naming the package, li
 The name before the double colons is the package name. The data table name follows the double colons. 
 
 In order to use a data table from a package, you should either attach the package (with the `library()` command) or use the `data()` function. So either
-```r
-library(DataComputing)
-# ... or ...
-data(BabyNames, package = "DataComputing")
-```
+
+    library(DataComputing)
+    # ... or ...
+    data(BabyNames, package = "DataComputing")
+
 
 Either way, you will have access to the data table by name (e.g. `BabyNames`). It is not quoted, even though the name of the package is in quotes.
 

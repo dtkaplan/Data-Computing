@@ -97,5 +97,8 @@ data(CPS85, package = "mosaicData")
 
 *** =sct
 ```{r}
+test_student_typed("data(", not_typed_msg = "Remember to use the `data()` function.")
+test_student_typed("CPS85", not_typed_msg = "Did you ask for `CPS85` (and spell it correctly?")
+test_student_typed("package *= *\"mosaicData\"", not_typed_msg = "Remember to give the name of the mosaicData package in quotes.")
 success_msg("Good.")
 ```

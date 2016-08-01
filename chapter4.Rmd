@@ -3,7 +3,7 @@ title       : "Data Computing: Chapter 4"
 description : Exercises
 ---
 
---- type:MultipleChoiceExercise lang:r xp:10 skills:1 
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1  key:75fbbe31ff
 ## Problem 4.1
 
 For this course, most data will come to you in data-table form. But there are several ways that the data might be provided:

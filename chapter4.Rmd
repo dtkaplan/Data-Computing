@@ -76,12 +76,16 @@ Either way, you will have access to the data table by name (e.g. `BabyNames`). I
 *** =Instructions
 You've been referred to a data table `CPS85`, but don't know what package it comes from.
 
-- Use `??` to get some help locating `CPS85`.
+- Use `??` to get some help locating `CPS85`. This would work on your own system, but it doesn't display properly in DataCamp. So, I'll just have to tell you that `CPS85` comes from the `"mosaicData"` package.
 - Use the `data()` function to bring the data table into your session.
+
+*** =hint
+The `CPS85` data table comes from the `"mosaicData"` package.
 
 *** =sample_code
 ```{r}
-??CPS85
+# ordinarily, use ??CPS85
+# but that doesn't work here.
 
 data( .___, package = ".___")
 ```

@@ -41,7 +41,57 @@ Look at the name of the file.
 *** =sct
 ```{r}
 msg1 <- "No. Notice how the name begins."
-msg2 <- "Right. The name starts with a web indicator (`http::`) and ends with a filetype extension (`.rda`)."
+msg2 <- "Right. The name starts with a web indicator (`http:`) and ends with a filetype extension (`.rda`)."
 msg3 <- "The name isn't in quotes, so it can't refer to a file."
 test_mc(correct = 2, feedback_msgs = c(msg1, msg2, msg3))
+```
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 4.2
+
+In the exercises and other activities for *Data Computing*, you will often see instructions like this:
+
+> Use the `BabyNames` data table to ...
+
+Note that the name is not in quotes, suggesting that it is a data table provided by a package. Unfortunately, you can't tell just from the name what package it is. If in doubt, one way to figure out which package provides the data table is with the `??` help notation, e.g.
+```r
+??BabyNames
+```
+
+It's also possible to refer to package data by explicitly naming the package, like this:
+
+> Use the `DataComputing::BabyNames` data table to ...
+
+The name before the double colons is the package name. The data table name follows the double colons. 
+
+In order to use a data table from a package, you should either attach the package (with the `library()` command) or use the `data()` function. So either
+```r
+library(DataComputing)
+# ... or ...
+data(BabyNames, package = "DataComputing")
+```
+
+Either way, you will have access to the data table by name (e.g. `BabyNames`). It is not quoted, even though the name of the package is in quotes.
+
+*** =Instructions
+You've been referred to a data table `CPS85`, but don't know what package it comes from.
+
+- Use `??` to get some help locating `CPS85`.
+- Use the `data()` function to bring the data table into your session.
+
+*** =sample_code
+```{r}
+??CPS85
+
+data( .___, package = ".___")
+```
+
+*** =solution
+```{r}
+data(CPS85, package = "mosaicData")
+```
+
+*** =sct
+```{r}
+success_msg("Good.")
 ```

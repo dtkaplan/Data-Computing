@@ -46,7 +46,7 @@ msg3 <- "The name isn't in quotes, so it can't refer to a file."
 test_mc(correct = 2, feedback_msgs = c(msg1, msg2, msg3))
 ```
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:cea17e0f68
 ## Problem 4.2
 
 In the exercises and other activities for *Data Computing*, you will often see instructions like this:

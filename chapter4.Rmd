@@ -104,7 +104,7 @@ test_student_typed("package *= *\"mosaicData\"", fixed = FALSE,
 success_msg("Good.")
 ```
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:9e40660bf6
 ## Problem 4.3
 
 When you read a `.csv` or `.xlmx` spreadsheet file, you need to create a name by which to refer to the resulting data table.

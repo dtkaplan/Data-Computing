@@ -134,7 +134,7 @@ Use the `read.csv()` function and assignment to `CCodes`
 
 *** =sct
 ```{r}
-check_student_typed("\"http://tiny.cc/dcf/CountryCodes.csv\"",
+check_student_typed('http://tiny.cc/dcf/CountryCodes.csv"',
                     not_typed_msg = "Remember the entire file name must be given, in quotes.")
 success_msg("There are several other functions for reading CSV and other forms of file, but we don't need to use them in the next several chapters.")
 ```

@@ -1,0 +1,47 @@
+---
+title       : "Data Computing: Chapter 4"
+description : Exercises
+---
+
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1 
+## Problem 4.1
+
+For this course, most data will come to you in data-table form. But there are several ways that the data might be provided:
+
+* As data from an R package. Many R packages, including `ScientificProgramming`, provide data tables as part of the package. To access these tables, you can load the package. (In these DataCamp exercises, this has often been done for you.)
+* As a file. Data-table files come in many different types. The type is often indicated by the last part of the name (the "filetype extension"). Three common types are:
+    - a specialized spreadsheet file, e.g. `.xmlx` in the Excel system.
+    - a generic spreadsheet file, often a `.csv` (comma-separated values).
+    - a highly efficient format provided by R with file endings like `.rda` or `.Rdata`.
+
+You refer to a table from a package by name, **not in quotes**. The name has to be a legal R object name. The name will **not** end with a filename extension such as `.csv` or `.Rda`.
+
+You refer to a data file by a name also, **always in quotes**. The name often consists of many parts, separated by dashes. 
+
+* Files available over the internet have names beginning with something like `http://` and end with extensions like `.csv` or `.Rdata`, etc.
+* Files on your own computer (or on your account in the RStudio server) often start with `/` or `./` or `~/` and end with `.csv` or `.Rdata`, etc.
+
+
+Which of the following is a data table identified by `"http://tiny.cc/dcf/CountryCodes.rda"`.
+
+
+*** =instructions
+- A file on my computer.
+- A file available through the internet.
+- A file provided by a package.
+
+*** =hint
+Look at the name of the file.
+
+- Is it in quotes?
+- Does it have foward slashes in it? 
+- Does it start with something like `https::` or does it start with a single `/` or `~/` or `./`?
+- Does it end with an extension like `.csv` or `.Rda`?
+
+*** =sct
+```{r}
+msg1 <- "No. Notice how the name begins."
+msg2 <- "Right. The name starts with a web indicator (`http::`) and ends with a filetype extension (`.rda`)."
+msg3 <- "The name isn't in quotes, so it can't refer to a file."
+test_mc(correct = 2, feedback_msgs = c(msg1, msg2, msg3))
+```

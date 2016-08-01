@@ -123,11 +123,14 @@ library(ggplot2)
 ```{r}
 # Show the first few lines of the data table
 head(diamonds)
+
 # Plot out some of the data
 ggplot(diamonds, 
        aes(x = carat, y = price, color = cut)) + 
   geom_point()
+
 # Modify the above to display the diamonds' clarity rather than cut.
+
 ```
 
 *** =solution

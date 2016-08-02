@@ -74,20 +74,21 @@ In order to use a data table from a package, you should either attach the packag
 Either way, you will have access to the data table by name (e.g. `BabyNames`). It is not quoted, even though the name of the package is in quotes. I prefer the second style, because it explicitly documents where the data table is coming from.
 
 *** =Instructions
-You've been referred to a data table `CPS85`, but don't know what package it comes from.
-
-- Use `??` to get some help locating `CPS85`. This would work on your own system, but it doesn't display properly in DataCamp. So, I'll just have to tell you that `CPS85` comes from the `"mosaicData"` package.
+- The `CPS85` data table comes from the `"mosaicData"` package. 
 - Use the `data()` function to bring the data table into your session.
 
 *** =hint
-The `CPS85` data table comes from the `"mosaicData"` package.
+The `CPS85` data table comes from the `"mosaicData"` package. Remember the quotes around the name of the package, which will be handed to the `package =` argument.
 
 *** =sample_code
 ```{r}
-# ordinarily, use ??CPS85
-# but that doesn't work here.
+# Ordinarily, use ??CPS85
+# to help discover which package provides a particular package.
+# But that doesn't work on DataCamp.
+# If you had used ??CPS85, you would see that CPS85 comes from
+# the "mosaicData" package.
 
-data( .___, package = ".___")
+data( .___, package = "___")
 ```
 
 *** =solution

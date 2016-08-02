@@ -71,7 +71,7 @@ In order to use a data table from a package, you should either attach the packag
     data(BabyNames, package = "DataComputing")
 
 
-Either way, you will have access to the data table by name (e.g. `BabyNames`). It is not quoted, even though the name of the package is in quotes.
+Either way, you will have access to the data table by name (e.g. `BabyNames`). It is not quoted, even though the name of the package is in quotes. I prefer the second style, because it explicitly documents where the data table is coming from.
 
 *** =Instructions
 You've been referred to a data table `CPS85`, but don't know what package it comes from.

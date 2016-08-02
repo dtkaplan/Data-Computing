@@ -17,7 +17,8 @@ Fix the statement so that it has the proper form.
 
 *** =pre
 ```{r}
-library(DataComputing)
+library(dplyr)
+data(BabyNames, package = "DataComputing")
 Prince <- "Fred"
 ```
 

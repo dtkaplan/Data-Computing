@@ -72,10 +72,15 @@ When you work in RStudio, you'll be creating markdown documents and putting your
 - Finally, for the third way of running the commands. Press "Submit Answer." All of the commands in the script will be run. The results will be checked, and you'll get a message about how you did from the DataCamp system.
 
 
+*** =pre
+```{r}
+library(dplyr)
+```
+
 *** =sample_code
 ```{r}
 # A single-line command
-library(DataComputing)
+data(WorldCities, package = "DataComputing")
 
 # A multi-line command.
 WorldCities %>%
@@ -87,7 +92,7 @@ WorldCities %>%
 *** =solution
 ```{r}
 # A single-line command
-library(DataComputing)
+data(WorldCities, package = "DataComputing")
 
 # A multi-line command.
 WorldCities %>%

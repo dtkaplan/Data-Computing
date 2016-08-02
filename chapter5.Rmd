@@ -22,15 +22,15 @@ Use the `library()` function to attach the `"statisticalModeling"` package. Then
 The formula will be `death ~ life`.
 
 *** =instructions
-- Use `library()` to attach the `"statisticalModeling"` package.
-- Similarly, attach the `"DataComputing"` package.
+- Use `library()` to attach the `"statisticalModeling"` package, which provides the `gf_` interface to `"ggplot2"`.
+- Use `data()` to load the `CountryData` table from `"DataComputing"`.
 - `gf_point()` makes a scatter plot: one point for each case.
     - plot the death rate (`death`) versus birth rate (`birth`) the `CountryData`. This means that `death` should be on the left side of the formula and `birth` on the right side.
 
 *** =sample_code
 ```{r}
 library(___)
-library(___)
+data(CountryData, package = "DataComputing")
 
 gf_point(__formula__, data = __datatable__)
 ```
@@ -38,7 +38,7 @@ gf_point(__formula__, data = __datatable__)
 *** =solution
 ```{r}
 library("statisticalModeling")
-library("DataComputing")
+data(CountryData, package = "DataComputing")
 
 gf_point(death ~ birth, data = CountryData)
 ```
@@ -50,3 +50,48 @@ test_student_typed("data *= *CountryData", fixed = FALSE, not_typed_msg = "Use `
 success_msg("Good!")
 ```
 
+--- type:NormalExercise lang:r xp:10 skills:1
+## Problem 5.2
+
+The figure shows the graphic you made in the last exercise. There's a U-shaped pattern in the graph: at low birth rates, as birth rate increases from one country to another the death rate goes down. But for high birth rates, increasing birth rate is associated with increasing death rate.
+
+The tragic factor behind this pattern is overall health in each country. In countries with good health, the death rate is largely shaped by the age distribution in the country. In such countries, a high birth rate is associated with a younger population, hence one with a lower death rate. (Example: Mexico, which has a much lower death rate than its neighbor, the US) In countries with poor health, the death rate is high. But at the same time, women in those countries have many children who, often, have a high mortality rate.
+
+The graphic, as it is, does not incorporate the overall health of countries, so it's not possible to compare the hypothesis in the previous paragraph with the data.
+
+*** =instructions
+- Life expectancy (`life`) is one measure of a country's overall health.
+- Map `life` to the glyph size in the plot. Do this by adding on to the formula: `+ size:life`.
+- Examine the plot carefully to see if the graphic supports the hypothesis given above.
+- Now, rather than using size to represent `life`, use color. You do this by modifying the formula in the obvious way, `color:life` in place of `size:life`.
+
+
+*** =hint
+The formula will have to parts on the right-hand side of the tilde: `death ~ birth + size:life`. 
+
+*** =sample_code
+```{r}
+# attach the package with the gf_ functions
+library(statisticalModeling)
+# grab the CountryData table
+data(CountryData, package = "DataComputing")
+
+# map the variable life to the size aesthetic
+gf_point(death ~ birth + size:___, data = CountryData)
+
+# Make another graphic in which you
+# map the variable life to the color aesthetic
+gf_point(death ~ birth + ___:life, data = CountryData)
+```
+
+*** =solution
+```{r}
+library(statisticalModeling)
+data(CountryData, package = "DataComputing")
+
+gf_point(death ~ birth + size:life, data = CountryData)
+gf_point(death ~ birth + color:life, data = CountryData)
+```
+
+*** =sct
+success_msg("Many design choices in graphic design are a matter of mapping variables to the aesthetic properties of glyphs.  In the `gf_` function formulas, the variable on the left of the tilde determines the variable mapped to y. The first variable on the right sets the variable to be mapped to x. Then other aesthetics are set by pairs in the form aethetic:variable, for instance `size:life` or `color:life`.")

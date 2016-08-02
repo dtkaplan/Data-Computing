@@ -1,0 +1,52 @@
+---
+title       : "Data Computing: Chapter 5"
+description : Exercises
+---
+
+--- type:NormalExercise lang:r xp:10 skills:1  
+## Problem 5.1
+
+R is an open-source platform. As such, many people can contribute their ideas and the community of users can choose among them. One of the areas where this plays out is in graphics. There are many ways to draw graphics using R.
+
+The graphics system we use in this course is provided by the `"ggplot2"` package. This is one of many extremely popular packages written by [Hadley Wickham](https://en.wikipedia.org/wiki/Hadley_Wickham), the chief scientist at RStudio.
+
+The functions provided by `"ggplot2"` constitute what can be called an Application Programming Interface (API). Many people find the `"ggplot2"` API hard to figure out at first. In the *Data Computing* textbook, a menu-driven alternative is provided.
+
+In these exercises, you'll use yet another alternative interface provided by the `"statisticalModeling"` package. This interface, implemented by functions whose names start with `gf_`, allows you to use model formulas to specify `"ggplot2"` graphics.
+
+A *formula* in R is an expression built around the `~` ("tilde") sign. It enables you to describe a relationship among variables. For instance: `wage ~ age` means "wage versus age."
+
+Use the `library()` function to attach the `"statisticalModeling"` package. Then ask for help on one of the functions: `help(gf_point)`. The help documentation should show up in another window in your browser.
+
+*** =hint
+The formula will be `death ~ life`.
+
+*** =instructions
+- Use `library()` to attach the `"statisticalModeling"` package.
+- Similarly, attach the `"DataComputing"` package.
+- `gf_point()` makes a scatter plot: one point for each case.
+    - plot the death rate (`death`) versus birth rate (`birth`) the `CountryData`. This means that `death` should be on the left side of the formula and `birth` on the right side.
+
+*** =sample_code
+```{r}
+library(___)
+library(___)
+
+gf_point(__formula__, data = __datatable__)
+```
+
+*** =solution
+```{r}
+library("statisticalModeling")
+library("DataComputing")
+
+gf_point(death ~ birth, data = CountryData)
+```
+
+*** =sct
+```{r}
+test_student_typed("death *~ *birth", fixed = FALSE, not_typed_msg = "The first argument should be a formula")
+test_student_typed("data *= *CountryData", fixed = FALSE, not_typed_msg = "Use `CountryData` as the value for the `data =` argument.")
+success_msg("Good!")
+```
+

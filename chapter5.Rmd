@@ -50,7 +50,7 @@ test_student_typed("data *= *CountryData", fixed = FALSE, not_typed_msg = "Use `
 success_msg("Good!")
 ```
 
---- type:NormalExercise lang:r xp:10 skills:1
+--- type:NormalExercise lang:r xp:10 skills:1 key:1ac4fd86fb
 ## Problem 5.2
 
 The figure shows the graphic you made in the last exercise. There's a U-shaped pattern in the graph: at low birth rates, as birth rate increases from one country to another the death rate goes down. But for high birth rates, increasing birth rate is associated with increasing death rate.

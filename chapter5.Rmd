@@ -3,7 +3,7 @@ title       : "Data Computing: Chapter 5"
 description : Exercises
 ---
 
---- type:NormalExercise lang:r xp:10 skills:1  
+--- type:NormalExercise lang:r xp:10 skills:1   key:36737e0973
 ## Problem 5.1
 
 R is an open-source platform. As such, many people can contribute their ideas and the community of users can choose among them. One of the areas where this plays out is in graphics. There are many ways to draw graphics using R.

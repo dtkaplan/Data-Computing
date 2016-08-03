@@ -63,7 +63,7 @@ The count itself is not a variable, but is being derived from a categorical vari
 
 *** =pre
 ```{r}
-require(statisticalModeling)
+library(statisticalModeling)
 data(HELPrct, package = "mosaicData")
 gf_counts( ~ substance, data = HELPrct)
 ```

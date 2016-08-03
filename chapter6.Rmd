@@ -10,7 +10,7 @@ In the previous exercise, you graphed a summary of the `CPS85` data like that sh
 
 *** =instructions
 - Set the "fill" color for the bars based on whether the person belongs to a `union`. To do this, fill in the blank following `fill:` with the variable that is to be mapped to the fill aesthetic.
-- Facet the graph based on `sex`. To do this, complete the formula in the `facet_grid()` function that follows `gf_counts()`.
+- Facet the graph based on `sex`. To do this, complete the formula argument to the `facet_grid()` function.
 
 *** =pre
 ```{r}
@@ -26,7 +26,8 @@ In this exercise, you need only replace the blanks `___` with the appropriate va
 
 *** =sample_code
 ```{r}
-library(statisticalModeling)
+library("statisticalModeling")
+library("ggplot2")
 data(CPS85, package = "mosaicData")
 gf_counts( ~ sector + fill:___, data = CPS85) + facet_grid( ~ ___)
 ```
@@ -35,6 +36,7 @@ gf_counts( ~ sector + fill:___, data = CPS85) + facet_grid( ~ ___)
 *** =solution
 ```{r}
 library(statisticalModeling)
+library(ggplot2)
 data(CPS85, package = "mosaicData")
 gf_counts( ~ sector + fill:union, data = CPS85) + facet_grid( ~ sex)
 ```

@@ -19,9 +19,14 @@ data(CPS85, package = "mosaicData")
 gf_counts( ~ sector, data = CPS85)
 ```
 
+*** =hint
+In this exercise, you need only replace the blanks `___` with the appropriate variable. Everything else is all set.
+
+
 *** =sample_code
 ```{r}
 library(statisticalModeling)
+data(CPS85, package = "mosaicData")
 gf_counts( ~ sector + fill:___, data = CPS85) + facet_grid( ~ ___)
 ```
 
@@ -29,6 +34,7 @@ gf_counts( ~ sector + fill:___, data = CPS85) + facet_grid( ~ ___)
 *** =solution
 ```{r}
 library(statisticalModeling)
+data(CPS85, package = "mosaicData")
 gf_counts( ~ sector + fill:union, data = CPS85) + facet_grid( ~ sex)
 ```
 
@@ -37,6 +43,7 @@ gf_counts( ~ sector + fill:union, data = CPS85) + facet_grid( ~ sex)
 test_function("gf_points")
 test_function("facet_grid")
 success_msg("In general, aesthetics such as color, size, fill, etc. are mapped to variables by adding into the formula a component in the form `aesthetic:variable`.")
+```
 
 --- type:NormalExercise lang:r xp:10 skills:1 key:1ac4fd86fb
 ## Problem 6.2

@@ -72,13 +72,13 @@ gf_counts( ~ substance, data = HELPrct)
 ```{r}
 data(___, package = ___)
 
-gf_bar( __one_sided_formula__, data = ___)
+gf_counts( __one_sided_formula__, data = ___)
 ```
 
 *** =solution
 ```{r}
 data(CPS85, package = "mosaicData")
-gf_bar( ~ sector, data = CPS85)
+gf_counts( ~ sector, data = CPS85)
 ```
 
 *** =sct

@@ -70,6 +70,7 @@ gf_counts( ~ substance, data = HELPrct)
 
 *** =sample_code
 ```{r}
+library("statisticalModeling")
 data(___, package = ___)
 
 gf_counts( __one_sided_formula__, data = ___)
@@ -77,6 +78,7 @@ gf_counts( __one_sided_formula__, data = ___)
 
 *** =solution
 ```{r}
+library("statisticalModeling")
 data(CPS85, package = "mosaicData")
 gf_counts( ~ sector, data = CPS85)
 ```

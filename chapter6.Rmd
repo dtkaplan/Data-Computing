@@ -56,6 +56,7 @@ The graphic, as it is, does not incorporate the overall health of countries, so 
 
 *** =pre
 ```{r}
+library("ggplot2")
 data(CountryData, package = "DataComputing")
 gf_point(death ~ birth, data = CountryData)
 ```

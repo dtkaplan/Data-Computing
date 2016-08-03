@@ -50,7 +50,7 @@ test_student_typed("data *= *CountryData", fixed = FALSE, not_typed_msg = "Use `
 success_msg("Good!")
 ```
 
---- type:NormalExercise lang:r xp:10 skills:1
+--- type:NormalExercise lang:r xp:10 skills:1 key:c4cf477894
 ## Problem 5.2: Counting
 
 The `gf_counts()` function constructs a graphic with bars representing the counts in each category of a specified variable. For instance, the graphic shows the number of people in a clinical study of treatment for addition whose problem is linked to each of several drugs.

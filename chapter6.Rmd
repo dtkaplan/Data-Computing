@@ -14,7 +14,8 @@ In the previous exercise, you graphed a summary of the `CPS85` data like that sh
 
 *** =pre
 ```{r}
-library(statisticalModeling)
+library("statisticalModeling")
+library("ggplot2")
 data(CPS85, package = "mosaicData")
 gf_counts( ~ sector, data = CPS85)
 ```
@@ -116,7 +117,7 @@ gf_boxplot(wage ~ sector, data = CPS85)
 
 *** =solution
 ```{r}
-library(statisticalModeling)
+library("statisticalModeling")
 data(CPS85, package = "mosaicData")
 
 gf_boxplot(wage ~ sector + fill:sex, data = CPS85) + facet_grid( . ~ union)
@@ -126,7 +127,7 @@ gf_boxplot(wage ~ sector + fill:sex, data = CPS85) + facet_grid( . ~ union)
 *** =sct
 ```{r}
 test_student_typed("~ *union", fixed = FALSE,
-                   not_typed_msg = "To facet by `union`, you'll need to give the appropraite formula as an argument to `facet_grid()`.")
+                   not_typed_msg = "To facet by `union`, you'll need to give the appropriate formula as an argument to `facet_grid()`.")
 test_student_typed("fill:sex", not_typed_msg = "Remember to map `sex` to the `fill` aesthetic in the formula for `gf_boxplot()`.")
 success_msg("You've made the graphic! Whether it's a good graphic or not depends on what you're trying to show. This one puts the wages of men and women next to each other for each sector, which is good for comparing wages between the sexes. But for other purposes it might be appropriate to put side by side the wages for union and non-union workers, or to facet by `sector`. Different arrangements of the data can reveal different aspects of the data.")
 ```

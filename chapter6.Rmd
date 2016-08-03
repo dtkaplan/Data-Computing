@@ -102,7 +102,7 @@ test_student_typed("color:life", not_typed_msg = "Did you make a plot where you 
 test_student_typed("data *= *CountryData", fixed = FALSE, not_typed_msg = "Remember to set the value of the argument `data = ` to the data table being used.")
 success_msg("Many design choices in graphic design are a matter of mapping variables to the aesthetic properties of glyphs.  In the `gf_` function formulas, the variable on the left of the tilde determines the variable mapped to y. The first variable on the right sets the variable to be mapped to x. Then other aesthetics are set by pairs in the form aethetic:variable, for instance `size:life` or `color:life`.")
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:29b4042c3a
 ## Problem 6.3
 
 In the previous chapter, you made a box-and-whisker plot like that shown in the graphic.

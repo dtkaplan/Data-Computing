@@ -3,7 +3,7 @@ title       : "Data Computing: Chapter 6"
 description : Exercises
 ---
 
---- type:NormalExercise lang:r xp:10 skills:1
+--- type:NormalExercise lang:r xp:10 skills:1 key:f3dd9b22a2
 ## Problem 6.1
 
 In the previous exercise, you graphed a summary of the `CPS85` data like that shown in the figure: counts of people working in each sector of the economy. In this exercise, you're going to add new aethetics to the bars and facet the graph.

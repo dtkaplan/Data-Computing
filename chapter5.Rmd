@@ -94,3 +94,41 @@ success_msg("One to the next form of graph.")
 
 *** =hint
 Remember, the formula will be one-sided: `~ sector`.
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 5.3 Box-and-whisker plots
+
+Box-and-whisker plots are a way to show how a quantitative variable (like `wage` in the `CPS85` data) depends on a categorical variable (like `sector`). Use the `gf_boxplot()` function to draw these. The formula will be of the form quantitative_var `~` categorical_var.
+
+*** =instructions
+- Use `gf_boxplot()` to make a box-and-whisker plot of `wage` versus `sector` in the `CPS85` data.
+
+*** =pre
+```{r}
+#
+```
+
+*** =hint
+Fill in the left blank (`___`) with the appropriate formula. The right blank should be filled in with the `data = ` argument, specifying, of course, the data table to use in making the plot.
+
+*** =sample_code
+```{r}
+library("statisticalModeling")
+data(CPS85, package = "mosaicData")
+
+___(___, ___)
+```
+
+*** =solution
+```{r}
+library("statisticalModeling")
+data(CPS85, package = "mosaicData")
+
+gf_boxplot(wage ~ sector, data = CPS85)
+```
+
+*** =sct
+```{r}
+test_function("gf_boxplot")
+success_msg("There are many other forms of plots in the `gf_` interface. They all work in basically the same way.")
+```

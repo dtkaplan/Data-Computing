@@ -96,4 +96,50 @@ gf_point(death ~ birth + color:life, data = CountryData)
 ```
 
 *** =sct
+test_student_typed("size:life", not_typed_msg = "Did you make one plot where you map the variable `life` to the glyph `size`?")
+test_student_typed("color:life", not_typed_msg = "Did you make a plot where you mapped the variable `life` to the glyph `color`?")
+test_student_typed("data *= *CountryData", fixed = FALSE, not_typed_msg = "Remember to set the value of the argument `data = ` to the data table being used.")
 success_msg("Many design choices in graphic design are a matter of mapping variables to the aesthetic properties of glyphs.  In the `gf_` function formulas, the variable on the left of the tilde determines the variable mapped to y. The first variable on the right sets the variable to be mapped to x. Then other aesthetics are set by pairs in the form aethetic:variable, for instance `size:life` or `color:life`.")
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 6.3
+
+In the previous chapter, you made a box-and-whisker plot like that shown in the graphic.
+
+*** =pre
+```{r}
+library("statisticalModeling")
+library("ggplot2")
+data(CPS85, package = "mosaicData")
+gf_boxplot(wage ~ sector, data = CPS85)
+```
+
+*** =solution
+```{r}
+library(statisticalModeling)
+data(CPS85, package = "mosaicData")
+
+gf_boxplot(wage ~ sector + fill:sex, data = CPS85) + facet_grid( . ~ union)
+```
+
+
+*** =sct
+```{r}
+test_student_typed("~ *union", fixed = FALSE,
+                   not_typed_msg = "To facet by `union`, you'll need to give the appropraite formula as an argument to `facet_grid()`.")
+test_student_typed("fill:sex", not_typed_msg = "Remember to map `sex` to the `fill` aesthetic in the formula for `gf_boxplot()`.")
+success_msg("You've made the graphic! Whether it's a good graphic or not depends on what you're trying to show. This one puts the wages of men and women next to each other for each sector, which is good for comparing wages between the sexes. But for other purposes it might be appropriate to put side by side the wages for union and non-union workers, or to facet by `sector`. Different arrangements of the data can reveal different aspects of the data.")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+

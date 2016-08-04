@@ -107,7 +107,11 @@ success_msg("Many design choices in graphic design are a matter of mapping varia
 --- type:NormalExercise lang:r xp:10 skills:1  key:29b4042c3a
 ## Problem 6.3
 
-In the previous chapter, you made a box-and-whisker plot like that shown in the graphic.
+In the previous chapter, you made a box-and-whisker plot like that shown in the graphic. In this exercise, you're going to refine the graphic by adding in facets and aesthetics.
+
+*** =instructions
+- Add a term to the formula that maps the variable `sex` to the fill aethetic. You do this by adding a term of the form `+ fill:sex`
+- Facet the plot by the variable union. You do this by adding a new command at the end: `+ facet_grid( ~ union)`
 
 *** =pre_exercise_code
 ```{r}
@@ -122,9 +126,16 @@ gf_boxplot(wage ~ sector, data = CPS85)
 library("statisticalModeling")
 data(CPS85, package = "mosaicData")
 
-gf_boxplot(wage ~ sector + fill:sex, data = CPS85) + facet_grid( . ~ union)
+gf_boxplot(wage ~ sector + fill:sex, data = CPS85) + facet_grid( ~ union)
 ```
 
+*** =sample_code
+```{r}
+library("statisticalModeling")
+data(CPS85, package = "mosaicData")
+
+gf_boxplot(wage ~ sector + fill:___, data = CPS85) + facet_grid( ~ ___)
+```
 
 *** =sct
 ```{r}

@@ -127,7 +127,7 @@ success_msg("Not too hard, once you get the hang of it.")
 
 
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:8a50b0fc03
 ## Problem 7.3: Groupwise summaries
 
 

@@ -18,7 +18,7 @@ In this exercise, you are going to intentionally provide a wrong answer so that 
 - Press submit. You'll be told that you're wrong.
 - Now correct your answer your answer so that the sum is 40.
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 .target <- 40
 ```
@@ -72,7 +72,7 @@ When you work in RStudio, you'll be creating markdown documents and putting your
 - Finally, for the third way of running the commands. Press "Submit Answer." All of the commands in the script will be run. The results will be checked, and you'll get a message about how you did from the DataCamp system.
 
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 library(dplyr)
 ```

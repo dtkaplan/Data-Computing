@@ -15,7 +15,7 @@ The sample code shows a simple data-wrangling expression using `sample_n()`. Run
 - Second, arrange that the output of the expression is stored in an object named `My_sample`.
 - Finally, arrange the argument to `sample_n()` so that there are 10 cases in the output.
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 library(dplyr)
 ```
@@ -87,7 +87,7 @@ We'll use the `Births78` data in this exercise. This data table gives the number
 - You will use the data verb `summarise()` and will pipe the `Births78` data table to be the input to `summarise()`. You will also give, as an argument to `summarise()` an expression that calculates the total `sum()` of `births` 
 - Give the argument the name `total` so that the output data table has a variable named `total`.
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 data(Births78, package = "mosaicData")
 library("dplyr")
@@ -120,7 +120,7 @@ The reduction verb `sum()` takes a variable as input and provides as output the 
 test_student_typed("total *=", fixed = FALSE, not_typed_msg = "Remember to give the argument to `summarise()` the name `total`.")
 test_function("sum")
 test_function("summarise")
-test_student_typed("sum( *births *)", fixed = FALSE, not_typed_msg = "You need to give `sum` a variable name.")
+test_student_typed("sum\\( *births *\\)", fixed = FALSE, not_typed_msg = "You need to give `sum` a variable name.")
 success_msg("Not too hard, once you get the hang of it.")
 ```
 
@@ -138,7 +138,7 @@ Typically, you will define groups based on the level of one or more a variables.
 - The output of `group_by()` should be piped into `summarise()`. Arrange `summarise()` to have an argument named `total` that sums the number of `births`.
 - The result should be a separate sum, named `total`, for each day of the week.
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 data(Births78, package = "mosaicData")
 library(dplyr)
@@ -170,7 +170,7 @@ Births78 %>%
 test_function("group_by")
 test_function("sum")
 test_function("summarise")
-correct_msg("Note that the output contains *only* the variables used for grouping and the variables created by `summarise()`.")
+success_msg("Note that the output contains *only* the variables used for grouping and the variables created by `summarise()`.")
 ```
 
 --- type:MultipleChoiceExercise lang:r xp:10 skills:1
@@ -187,7 +187,7 @@ Which way did `sample_n()` use the groups?
 - It operated separately on each group and collected the results for all the groups together into the output.
 - It ignored the groups.
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 data(Births78, package = "mosaicData")
 library("dplyr")

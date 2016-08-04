@@ -6,18 +6,18 @@ description : Exercises
 --- type:NormalExercise lang:r xp:10 skills:1 key:f3dd9b22a2
 ## Problem 6.1
 
-In the previous exercise, you graphed a summary of the `CPS85` data like that shown in the figure: counts of people working in each sector of the economy. In this exercise, you're going to add new aethetics to the bars and facet the graph.
+In the previous chapter, you graphed a summary of the `CPS85` data like that shown in the figure: counts of people working in each sector of the economy. In this exercise, you're going to add new aethetics to the bars and facet the graph.
 
 *** =instructions
 - Set the "fill" color for the bars based on whether the person belongs to a `union`. To do this, fill in the blank following `fill:` with the variable that is to be mapped to the fill aesthetic.
 - Facet the graph based on `sex`. To do this, complete the formula argument to the `facet_grid()` function.
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 library("statisticalModeling")
 library("ggplot2")
 data(CPS85, package = "mosaicData")
-gf_counts( ~ sector, data = CPS85)
+gf_counts( ~ sector, data = CPS85))
 ```
 
 *** =hint
@@ -57,7 +57,7 @@ The tragic factor behind this pattern is overall health in each country. In coun
 
 The graphic, as it is, does not incorporate the overall health of countries, so it's not possible to compare the hypothesis in the previous paragraph with the data.
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 library("ggplot2")
 data(CountryData, package = "DataComputing")
@@ -109,7 +109,7 @@ success_msg("Many design choices in graphic design are a matter of mapping varia
 
 In the previous chapter, you made a box-and-whisker plot like that shown in the graphic.
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 library("statisticalModeling")
 library("ggplot2")

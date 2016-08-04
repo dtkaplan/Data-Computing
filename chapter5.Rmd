@@ -61,7 +61,7 @@ The count itself is not a variable, but is being derived from a categorical vari
 - Attach the data table `CPS85` from the package `"mosaicData"`.
 - Use `gf_counts()` to graph the number of people in `CPS85` who work in each `sector` of the economy.
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 library(statisticalModeling)
 data(HELPrct, package = "mosaicData")
@@ -103,7 +103,7 @@ Box-and-whisker plots are a way to show how a quantitative variable (like `wage`
 *** =instructions
 - Use `gf_boxplot()` to make a box-and-whisker plot of `wage` versus `sector` in the `CPS85` data.
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 #
 ```

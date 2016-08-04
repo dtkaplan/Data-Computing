@@ -15,7 +15,7 @@ Fix the statement so that it has the proper form.
 - A data table should be given before the first pipe (`%>%`).
 - When a data table is piped into a function, you should not also include the table as an explicit first argument, so `BabyNames %>% filter(name == "Prince")` instead of `BabyNames %>% filter(BabyNames, name == "Prince")`.
 
-*** =pre
+*** =pre_exercise_code
 ```{r}
 library(dplyr)
 data(BabyNames, package = "DataComputing")

@@ -73,11 +73,12 @@ test_student_typed("My_sample *(=|<-)", fixed = FALSE,
                    not_typed_msg = "Did you assign the output to `My_sample`?")
 ```
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:09597021b5
 ## Problem 7.2: The summarise() data verb
 
 One of the most widely used data verbs is `summarise()`. Like all data verbs, `summarise()` takes as input a data table. It performs a reduction on the data table, for example calculating the sum of the values in a variable.
 
+<<<<<<< HEAD
 Of course, you have to tell `summarise()` what summaries you want to perform. All summaries involve a "reduction verb", a function like `mean()` or `sum()` that takes the values in a variable and reduces them to a single value.
 
 We'll use the `Births78` data in this exercise. This data table gives the number of births in the US on each day of the year in 1978. The variable `births` gives the number of babies born on each day.
@@ -132,18 +133,19 @@ success_msg("Not too hard, once you get the hang of it.")
 
 Another exercise: how many are there? Compare nrow to summarise(n())
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:8a50b0fc03
+
 ## Problem 7.3: Groupwise summaries
 
 Sum `Births78` by day `wday`.
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:dcba7f6e05
 ## Problem 7.4: Groups defined by multiple variables
 
 Group by `wday` and `month`
 
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:e488715c02
 ## Problem 7.5: Transformations
 
 Where we'll use a transformation verb, e

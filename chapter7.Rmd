@@ -78,7 +78,6 @@ test_student_typed("My_sample *(=|<-)", fixed = FALSE,
 
 One of the most widely used data verbs is `summarise()`. Like all data verbs, `summarise()` takes as input a data table. It performs a reduction on the data table, for example calculating the sum of the values in a variable.
 
-<<<<<<< HEAD
 Of course, you have to tell `summarise()` what summaries you want to perform. All summaries involve a "reduction verb", a function like `mean()` or `sum()` that takes the values in a variable and reduces them to a single value.
 
 We'll use the `Births78` data in this exercise. This data table gives the number of births in the US on each day of the year in 1978. The variable `births` gives the number of babies born on each day.
@@ -91,14 +90,14 @@ We'll use the `Births78` data in this exercise. This data table gives the number
 *** =pre
 ```{r}
 data(Births78, package = "mosaicData")
-library(dplyr)
+library("dplyr")
 ```
 
 
 *** =solution
 ```{r}
 data(Births78, package = "mosaicData")
-library(dplyr)
+library("dplyr")
 
 Births78 %>% summarise(total = sum(births))
 ```
@@ -108,7 +107,7 @@ Births78 %>% summarise(total = sum(births))
 # provide access to Births78
 data(Births78, package = "mosaicData")
 # the data wrangling package
-library(dplyr)
+library("dplyr")
 
 Births78 %>% summarise(___)
 ```
@@ -130,23 +129,97 @@ success_msg("Not too hard, once you get the hang of it.")
 --- type:NormalExercise lang:r xp:10 skills:1 
 ## Problem 7.3: Groupwise summaries
 
+Wrangling often involves computing summaries for different groups of cases. The `group_by()` data verb allows you to specify how to divide the cases into groups so that `summarise()` and other data verbs know what to do. 
+
+Typically, you will define groups based on the level of one or more a variables. For instance, the `wday` variable in `Births78` tells which day of the week --- Sunday, Monday, ... --- each of the dates corresponds to.
+
+*** =instructions
+- Pipe `Births78` into `group_by()`. Give `group_by()` the argument `wday`, so that groups are defined by the day of the week.
+- The output of `group_by()` should be piped into `summarise()`. Arrange `summarise()` to have an argument named `total` that sums the number of `births`.
+- The result should be a separate sum, named `total`, for each day of the week.
+
+*** =pre
+```{r}
+data(Births78, package = "mosaicData")
+library(dplyr)
+```
+
+*** =solution
+```{r}
+data(Births78, package = "mosaicData")
+library("dplyr")
+Births78 %>%
+  group_by(wday) %>%
+  summarise(total = sum(births))
+```
+
+*** =hint
+Pipe `Births78` into `group_by(wday)`. Then, pipe the output of `group_by(wday)` to a `summarise()` function whose argument computes the quantity `total = sum(births)`. 
+
+*** =sample_code
+```{r}
+data(Births78, package = "mosaicData")
+library("dplyr")
+Births78 %>%
+  group_by(___) %>%
+  summarise(___ = sum(___))
+```
+
+*** =sct
+```{r}
+test_function("group_by")
+test_function("sum")
+test_function("summarise")
+correct_msg("Note that the output contains *only* the variables used for grouping and the variables created by `summarise()`.")
+```
+
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1
+## Problem 7.4: group_by() with other data verbs
+
+The `group_by()` function simply marks the data table as having groups (specified by the arguments to `group_by()`). Those groups can be used by any data verb, not just `summarise()`.
+
+In this exercise, you're going to pipe the output of `group_by()` into `sample_n()`. Examine the output and tried to figure out how `sample_n()` used the groups marked by `group_by()`.
+
+Which way did `sample_n()` use the groups?
+
+*** =instructions
+- It randomly picked a group and selected only cases within that group.
+- It operated separately on each group and collected the results for all the groups together into the output.
+- It ignored the groups.
+
+*** =pre
+```{r}
+data(Births78, package = "mosaicData")
+library("dplyr")
+```
+
+*** =sample_code
+```{r}
+data(Births78, package = "mosaicData")
+library("dplyr")
+
+Births78 %>% 
+  group_by(wday) %>%
+  sample_n(size = 2)
+```
+
+
 
 Another exercise: how many are there? Compare nrow to summarise(n())
 
---- type:NormalExercise lang:r xp:10 skills:1  key:8a50b0fc03
-
-## Problem 7.3: Groupwise summaries
+--- type:NormalExercise lang:r xp:10 skills:1  
+## Problem 7.4: Groupwise summaries
 
 Sum `Births78` by day `wday`.
 
---- type:NormalExercise lang:r xp:10 skills:1  key:dcba7f6e05
-## Problem 7.4: Groups defined by multiple variables
+--- type:NormalExercise lang:r xp:10 skills:1  
+## Problem 7.5: Groups defined by multiple variables
 
 Group by `wday` and `month`
 
 
---- type:NormalExercise lang:r xp:10 skills:1  key:e488715c02
-## Problem 7.5: Transformations
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 7.6: Transformations
 
 Where we'll use a transformation verb, e
 You also provide as an argument to `summarise()` a data-reduction statement.

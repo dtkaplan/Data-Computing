@@ -126,7 +126,7 @@ success_msg("Not too hard, once you get the hang of it.")
 
 
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:8a50b0fc03
 ## Problem 7.3: Groupwise summaries
 
 Wrangling often involves computing summaries for different groups of cases. The `group_by()` data verb allows you to specify how to divide the cases into groups so that `summarise()` and other data verbs know what to do. 

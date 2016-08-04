@@ -4,7 +4,7 @@ description : Exercises
 ---
 
 --- type:NormalExercise lang:r xp:10 skills:1 
-## Pipes and data verbs
+## Problem 7.1: Pipes and data verbs
 
 A data verb is a function that takes a data table as input and produces a data table as output. `sample_n()` is a data verb that performs a very simple tasks: it draws a random sample of cases from the input data table and presents that sample as the output.
 
@@ -22,6 +22,7 @@ library(dplyr)
 
 *** =solution
 ```{r}
+library("dplyr")
 # read in the Births78 data table
 data(Births78, package = "mosaicData")
 
@@ -71,3 +72,26 @@ test_student_typed("Births78 *%>% *sample_n", fixed = FALSE,
 test_student_typed("My_sample *(=|<-)", fixed = FALSE,
                    not_typed_msg = "Did you assign the output to `My_sample`?")
 ```
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 7.2: The summarise() data verb
+
+One of the most widely used data verbs is `summarise()`. Like all data verbs, `summarise()` takes as input a data table. It performs a reduction on the data table, for example calculating the sum of the values in a variable.
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 7.3: Groupwise summaries
+
+Sum `births78` by day `wday`.
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 7.4: Groups defined by multiple variables
+
+Group by `wday` and `month`
+
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 7.5: Transformations
+
+Where we'll use a transformation verb, e
+You also provide as an argument to `summarise()` a data-reduction statement.
+

@@ -173,7 +173,7 @@ test_function("summarise")
 correct_msg("Note that the output contains *only* the variables used for grouping and the variables created by `summarise()`.")
 ```
 
---- type:MultipleChoiceExercise lang:r xp:10 skills:1
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1 key:5c7130b69f
 ## Problem 7.4: group_by() with other data verbs
 
 The `group_by()` function simply marks the data table as having groups (specified by the arguments to `group_by()`). Those groups can be used by any data verb, not just `summarise()`.
@@ -207,18 +207,18 @@ Births78 %>%
 
 Another exercise: how many are there? Compare nrow to summarise(n())
 
---- type:NormalExercise lang:r xp:10 skills:1  
+--- type:NormalExercise lang:r xp:10 skills:1   key:3001619592
 ## Problem 7.4: Groupwise summaries
 
 Sum `Births78` by day `wday`.
 
---- type:NormalExercise lang:r xp:10 skills:1  
+--- type:NormalExercise lang:r xp:10 skills:1   key:f94b90f2af
 ## Problem 7.5: Groups defined by multiple variables
 
 Group by `wday` and `month`
 
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:8fc75bae48
 ## Problem 7.6: Transformations
 
 Where we'll use a transformation verb, e

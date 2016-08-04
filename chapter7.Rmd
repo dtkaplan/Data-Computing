@@ -78,10 +78,64 @@ test_student_typed("My_sample *(=|<-)", fixed = FALSE,
 
 One of the most widely used data verbs is `summarise()`. Like all data verbs, `summarise()` takes as input a data table. It performs a reduction on the data table, for example calculating the sum of the values in a variable.
 
+Of course, you have to tell `summarise()` what summaries you want to perform. All summaries involve a "reduction verb", a function like `mean()` or `sum()` that takes the values in a variable and reduces them to a single value.
+
+We'll use the `Births78` data in this exercise. This data table gives the number of births in the US on each day of the year in 1978. The variable `births` gives the number of babies born on each day.
+
+*** =instructions
+
+- You will use the data verb `summarise()` and will pipe the `Births78` data table to be the input to `summarise()`. You will also give, as an argument to `summarise()` an expression that calculates the total `sum()` of `births` 
+- Give the argument the name `total` so that the output data table has a variable named `total`.
+
+*** =pre
+```{r}
+data(Births78, package = "mosaicData")
+library(dplyr)
+```
+
+
+*** =solution
+```{r}
+data(Births78, package = "mosaicData")
+library(dplyr)
+
+Births78 %>% summarise(total = sum(births))
+```
+
+*** =sample_code
+```{r}
+# provide access to Births78
+data(Births78, package = "mosaicData")
+# the data wrangling package
+library(dplyr)
+
+Births78 %>% summarise(___)
+```
+
+*** =hint
+The reduction verb `sum()` takes a variable as input and provides as output the sum of all the values in that variable. `sum(births)` is an expression that can be given as an argument to the data verb `summarise()` to instruct it to evaluate the expression on the data table piped in as input. Naming the argument, e.g. `summarise(total = sum(births))` gives the name `total` to the corresponding output of `summarise()`.
+
+*** =sct
+```{r}
+test_student_typed("total *=", fixed = FALSE, not_typed_msg = "Remember to give the argument to `summarise()` the name `total`.")
+test_function("sum")
+test_function("summarise")
+test_student_typed("sum( *births *)", fixed = FALSE, not_typed_msg = "You need to give `sum` a variable name.")
+success_msg("Not too hard, once you get the hang of it.")
+```
+
+
+
 --- type:NormalExercise lang:r xp:10 skills:1 
 ## Problem 7.3: Groupwise summaries
 
-Sum `births78` by day `wday`.
+
+Another exercise: how many are there? Compare nrow to summarise(n())
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 7.3: Groupwise summaries
+
+Sum `Births78` by day `wday`.
 
 --- type:NormalExercise lang:r xp:10 skills:1 
 ## Problem 7.4: Groups defined by multiple variables

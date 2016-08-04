@@ -3,7 +3,7 @@ title       : "Data Computing: Chapter 7"
 description : Exercises
 ---
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1 key:3f1c2bd7bb
 ## Problem 7.1: Pipes and data verbs
 
 A data verb is a function that takes a data table as input and produces a data table as output. `sample_n()` is a data verb that performs a very simple tasks: it draws a random sample of cases from the input data table and presents that sample as the output.

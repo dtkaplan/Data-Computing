@@ -1,0 +1,73 @@
+---
+title       : "Data Computing: Chapter 7"
+description : Exercises
+---
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Pipes and data verbs
+
+A data verb is a function that takes a data table as input and produces a data table as output. `sample_n()` is a data verb that performs a very simple tasks: it draws a random sample of cases from the input data table and presents that sample as the output.
+
+The sample code shows a simple data-wrangling expression using `sample_n()`. Run that expression several times to see that the output differs from run to run: the sample is random! The `size =` argument to `sample_n()` sets how big the sample will be.
+
+*** =instructions
+- First, re-write the expression using pipe notation.
+- Second, arrange that the output of the expression is stored in an object named `My_sample`.
+- Finally, arrange the argument to `sample_n()` so that there are 10 cases in the output.
+
+*** =pre
+```{r}
+library(dplyr)
+```
+
+*** =solution
+```{r}
+# read in the Births78 data table
+data(Births78, package = "mosaicData")
+
+# select a random sample of 3 cases
+sample_n(Births78, size = 3)
+
+# First, re-write the above to use pipe notation
+Births78 %>% sample_n(size = 3)
+
+# Second, re-write the above to save the output in My_sample
+My_sample <- Births78 %>% sample_n(size = 3)
+
+# Last, arrange for there to be 10 random cases in My_sample
+My_sample <- Births78 %>% sample_n(size = 10)
+```
+
+*** =sample_code
+```{r}
+# read in the Births78 data table
+data(Births78, package = "mosaicData")
+
+# select a random sample of 3 cases
+sample_n(Births78, size = 3)
+
+# First, re-write the above to use pipe notation
+
+
+# Second, re-write the above to save the output in My_sample
+
+
+# Last, arrange for there to be 10 random cases in My_sample
+
+```
+
+*** =hint
+Two things change in pipe notation:
+- The original expression began with a data verb whose first argument was a data table. The pipe expression begins with the input data table followed by a pipe symbol `%>%`.
+- In the pipe expression, the data verb comes after the pipe.
+- In the pipe expression, the data table is **not** given as an argument inside the parentheses. Instead, the pipe is telling the data verb which data table to take as input.
+
+*** =sct
+```{r}
+test_student_typed("size *= *10", fixed = FALSE,
+                   not_typed_msg = "Did you change the sample size to 10?")
+test_student_typed("Births78 *%>% *sample_n", fixed = FALSE,
+                   not_typed_msg = "Remember, it's `data_table %>% data_verb`.")
+test_student_typed("My_sample *(=|<-)", fixed = FALSE,
+                   not_typed_msg = "Did you assign the output to `My_sample`?")
+```

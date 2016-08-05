@@ -1,0 +1,76 @@
+---
+title       : "Data Computing: Chapter 8"
+description : Exercises
+---
+
+--- type:NormalExercise lang:r xp:10 skills:1 
+## Problem 8.1: Making a graphics frame
+
+In previous exercises, you used a formula-based interface to the `ggplot2` system for graphics. That formula-based interface is intended to be easy for getting started with making simple graphics. In these exercises, you'll practice with the `ggplot` interface itself.
+
+The `ggplot()` function is used to define a the graphics frame. The frame it makes is blank, ready to have additional layers of glyphs added to it. The typical arguments to `ggplot()` are:
+
+1. A data table, given as the first argument or piped into `ggplot()`.
+2. An `aes()` statement which constructs the mapping from variables in the data table to the `x` and `y` aesthetics, that is, the frame itself.
+
+*** =pre_exercise_code
+```{r}
+data(CountryData, package = "DataComputing")
+library("ggplot2")
+library("dplyr")
+CountryData %>% ggplot(aes(x = death, y = life))
+```
+
+The graphic shows a (blank) frame constructed by `ggplot()`. (We'll add layers to this blank frame in the exercises that follow.)
+
+*** =instructions
+- Read from the graph the variables that have been mapped to the x and y aethetics.
+- Fill in the blanks in order to construct a command that will reproduce the blank frame.
+
+*** =solution
+```{r}
+data(CountryData, package = "DataComputing")
+library("ggplot2")
+CountryData %>% ggplot(aes(x = life, y = death))
+```
+
+*** =sample_code
+```{r}
+# Provide access to CountryData
+data(CountryData, package = "DataComputing")
+
+# Attach the ggplot2 package
+library("ggplot2")
+
+# Fill in the blanks ...
+CountryData %>%
+  ggplot(aes(x = life, y = death))
+```
+
+*** =hint
+As you can see, `life` is being mapped to the x aesthetic, `death` to the y aesthetic. It will seem a bit odd at first, but remember to use `aes()` as a function, given as an argument to `ggplot()`, and map the aesthetics by giving appropriate arguments to `aes()`.
+
+*** =sct
+```{r}
+test_function("aes")
+test_function("ggplot")
+test_student_typed("x *= *life", fixed = FALSE, not_typed_msg = "Did you map `life` to the x-aesthetic?")
+test_student_typed("y *= *death", fixed = FALSE, not_typed_msg = "Did you map `death` to the y-aesthetic?")
+success_msg("Good. A blank frame isn't good for much. We'll add glyphs, labels, and such in the exercises that follow.")
+```
+
+
+
+## Adding a layer
+
+## Faceting
+
+## Mapping an aesthetic in the layer
+
+## Adding x- and y-axis labels
+
+
+## Hints from the formula interface
+
+How to get the formula interface to print out the corresponding ggplot command.
+

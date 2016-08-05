@@ -17,7 +17,7 @@ In the previous chapter, you graphed a summary of the `CPS85` data like that sho
 library("statisticalModeling")
 library("ggplot2")
 data(CPS85, package = "mosaicData")
-gf_counts( ~ sector, data = CPS85))
+gf_counts( ~ sector, data = CPS85)
 ```
 
 *** =hint
@@ -59,6 +59,7 @@ The graphic, as it is, does not incorporate the overall health of countries, so 
 
 *** =pre_exercise_code
 ```{r}
+library("statisticalModeling")
 library("ggplot2")
 data(CountryData, package = "DataComputing")
 gf_point(death ~ birth, data = CountryData)
@@ -77,7 +78,7 @@ The formula will have to parts on the right-hand side of the tilde: `death ~ bir
 *** =sample_code
 ```{r}
 # attach the package with the gf_ functions
-library(statisticalModeling)
+library("statisticalModeling")
 # grab the CountryData table
 data(CountryData, package = "DataComputing")
 
@@ -91,7 +92,7 @@ gf_point(death ~ birth + ___:life, data = CountryData)
 
 *** =solution
 ```{r}
-library(statisticalModeling)
+library("statisticalModeling")
 data(CountryData, package = "DataComputing")
 
 gf_point(death ~ birth + size:life, data = CountryData)

@@ -211,7 +211,7 @@ msg3 <- "If it ignored the groups, there would be no pattern in the output relat
 test_mc(correct = 2, feedback_msgs = c(msg1, msg2, msg3))
 ```
 
---- type:MultipleChoiceExercise lang:r xp:10 skills:1  
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1   key:bb7e0e6b0e
 ## Problem 7.5: Not a data verb.
 
 A data verb is a function that takes a data table as an input and produces a data table as an input.
@@ -249,7 +249,7 @@ test_mc(correct = 3, feedback_msgs = c(msg1, msg2, msg3))
 *** =hint
 When a data table is printed, the cases are numbered in sequence on the left, one per row, and the variable names appear across the top. In contrast, a simple "set" is just a series of numbers or character strings and can be printed with more than one item on a line.
 
---- type:MultipleChoiceExercise lang:r xp:10 skills:1 
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1  key:5fa5d1141b
 ## Problem 7.6: group_by()
 
 `group_by()` can use multiple variables when forming groups. You do this by giving multiple arguments to `group_by()`.

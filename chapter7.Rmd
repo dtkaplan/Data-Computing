@@ -203,24 +203,79 @@ Births78 %>%
   sample_n(size = 2)
 ```
 
+*** =sct
+```{r}
+msg1 <- "If this were right, all of the cases in the output would have the same value of `wday`."
+msg2 <- "Right. `group_by()` marks the groups and other data verbs (from the `dplyr` package) then operate on the groups individually."
+msg3 <- "If it ignored the groups, there would be no pattern in the output relating to the groups. But there is. Look again."
+test_mc(correct = 2, feedback_msgs = c(msg1, msg2, msg3))
+```
+
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1  
+## Problem 7.5: Not a data verb.
+
+A data verb is a function that takes a data table as an input and produces a data table as an input.
+
+In the console, try each of these R expressions on the `Births78` data table.
+
+* `nrow(Births78)`
+* `names(Births78)`
+* `class(Births78)`
+
+*** =pre_exercise_code
+```{r}
+# provide access to the Births78 data
+data(Births78, package = "mosaicData")
 
 
-Another exercise: how many are there? Compare nrow to summarise(n())
+```
 
---- type:NormalExercise lang:r xp:10 skills:1   key:3001619592
-## Problem 7.4: Groupwise summaries
+None of these functions are data verbs. Explain why.
 
-Sum `Births78` by day `wday`.
-
---- type:NormalExercise lang:r xp:10 skills:1   key:f94b90f2af
-## Problem 7.5: Groups defined by multiple variables
-
-Group by `wday` and `month`
+*** =instructions
+- they don't take a data table as in input.
+- they don't have any output.
+- they don't produce a data table as an output.
 
 
---- type:NormalExercise lang:r xp:10 skills:1  key:8fc75bae48
-## Problem 7.6: Transformations
+*** =sct
+```{r}
+msg1 <- "But they are taking `Births78` as input, and `Births78` is a data table."
+msg2 <- "Each of them has an output."
+msg3 <- "The output is not in the form of a data table. `nrow()` produces a single number, `names()` produces a set of character strings, and `class()` gives a character string identifying the class of the input."
+test_mc(correct = 3, feedback_msgs = c(msg1, msg2, msg3))
+```
 
-Where we'll use a transformation verb, e
-You also provide as an argument to `summarise()` a data-reduction statement.
+*** =hint
+When a data table is printed, the cases are numbered in sequence on the left, one per row, and the variable names appear across the top. In contrast, a simple "set" is just a series of numbers or character strings and can be printed with more than one item on a line.
+
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1 
+## Problem 7.6: group_by()
+
+`group_by()` can use multiple variables when forming groups. You do this by giving multiple arguments to `group_by()`.
+
+Figure out and explain what groups are formed by `group_by()` in this data-wrangling statement.
+
+    CPS85 %>%
+      group_by(sex, sector) %>%
+      summarise(wage = mean(wage))
+      
+      
+*** =pre
+```{r}
+data(CPS85, package = "mosaicData")
+library("dplyr")
+```
+
+*** =instructions
+- It divides the groups identified by `sex` into subgroups according to what `sector` they are in.
+- It chooses one or the other of `sex` or `sector` to form the groups.
+- It provides two different groupings: one by `sex` and a separate one by `sector`, so that `summarise()` can give two separate reports.
+
+*** =sct
+```{r}
+msg1 <- "Right. You can use any number of variables to define groups."
+msg2 <- "That wouldn't be good. Why should it do the choosing? You are the one who determines what the computer is going to do, not the other way around."
+msg3 <- "No. Note that each sex is subdivided into each of the sectors; it's not a separate list of the two sexes and the 8 sectors."
+```
 

@@ -3,7 +3,7 @@ title       : "Data Computing: Chapter 8"
 description : Exercises
 ---
 
---- type:NormalExercise lang:r xp:10 skills:1 
+--- type:NormalExercise lang:r xp:10 skills:1  key:85a9761bb6
 ## Problem 8.1: Making a graphics frame
 
 In previous exercises, you used a formula-based interface to the `ggplot2` system for graphics. That formula-based interface is intended to be easy for getting started with making simple graphics. In these exercises, you'll practice with the `ggplot` interface itself.

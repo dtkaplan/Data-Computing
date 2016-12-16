@@ -1,0 +1,212 @@
+---
+title: "Tutor Template"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(tutor)
+library(ggplot2)
+library(dplyr)
+library(checkr)
+library(DataComputing)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+## Example 1
+
+```{r example_0-prepare, echo = FALSE}
+# setup code goes here
+```
+
+Modify the code to add two and two:
+
+```{r, example_0, exercise = TRUE, exercise.setup = "example_0-prepare"}
+1 + 3
+```
+
+```{r example_0-solution}
+2 + 2
+```
+
+```{r example_0-hint}
+
+
+```
+
+```{r example_0-check}
+test_0 <- fcall("whatever + whatever", "use addition (+)")
+test_1 <- fcall("2 + whatever", "first argument should be two ")
+test_2 <- fcall("whatever + 2", "second argument should also be two")
+test_3 <- fcall("2 + 2", "remember to add two plus two")
+USER_CODE %>% test_0 %>% test_1 %>% test_2 %>% test_3
+soln_test(USER_CODE, SOLN_CODE,
+             res = final_(),
+             same_num(res))
+```
+
+## Example 2
+
+Use R to compute the length of the hypotenuse of a right triangle with edges of length 3 and 4.
+
+```{r example-triangle, exercise = TRUE}
+# your code goes here
+```
+
+```{r example-triangle-solution}
+sqrt(3^2 + 4^2)
+```
+
+```{r example-triangle-check}
+test_1 <- fcall("whatever ^ 2", "need to square the lengths")
+test_A <- fcall("2 ^ whatever", "you've reversed the arguments to '^'", mistake = TRUE)
+test_2 <- fcall("3 ^ 2", "one of the lengths is 3")
+test_3 <- fcall("4 ^ 2", "one of the lengths is 4")
+test_4 <- fcall("sqrt()", "you'll have to use the square-root function to get the length.")
+test_5 <- fcall("whatever + whatever", "remember to add the squares")
+test_6 <- in_values(match_number(5, range = c(4.99, 5.01)), "the overall result should be 5.")
+USER_CODE %>% test_A %>% test_1 %>% test_2 %>% test_3 %>% test_4 %>% test_5 %>% test_6
+
+```
+
+## Example 3
+
+Fill in the code to create this plot:
+
+```{r, echo = FALSE, out.width = "30%"}
+ggplot(mtcars, aes(x = hp, y = mpg)) + 
+  geom_point(aes(color = carb))
+```
+
+```{r, mtcarplot, exercise=TRUE}
+ggplot(mtcars, aes( x = ___ , y = ___ )) + geom_point()
+```
+
+```{r mtcarplot-solution}
+ggplot(mtcars, aes(x=hp, y = mpg)) + geom_point(aes(color = carb))
+```
+
+```{r mtcarplot-check}
+test_1 <- fcall("aes(y = mpg)", message = "mpg should be the y aesthetic")
+test_2 <- fcall("aes(x = hp, y = mpg)", message = "set the aesthetics via aes() to put the right variable on each axis.")
+test_3 <- fcall("aes(color = carb)", "map carb to the color aethetic")
+USER_CODE %>% test_1
+USER_CODE %>% test_1 %>% test_2
+USER_CODE %>% test_3
+```
+
+## Example 4
+
+Use `dplyr` statements to find the mean hp of 4 cyl cars.
+
+```{r mtcardplyr, exercise = TRUE}
+require(dplyr)
+mtcars %>%
+  filter(cyl == 4) %>%
+  summarise(mn = mean(hp))
+```
+
+```{r mtcardplyr-solution}
+require(dplyr)
+mtcars %>%
+  filter(cyl == 4) %>%
+  summarise(mn = mean(hp))
+```
+
+```{r mtcardplyr-check}
+# Note that even though summarise() is used with a named argument
+# we can disregard the name
+test_1 <- in_statements("mtcars", "use the <mtcars> data frame")
+test_2 <- fcall("filter()")
+test_3 <- check_argument("cyl == grab_this", match_number(4, hint = TRUE))
+test_4 <- in_statements("cyl == 4", "it's the cylinders we want to restrict to 4")
+test_5 <- fcall("summarise(whatever)", "use summarise to compute the mean")
+test_6 <- fcall("mean(hp)", "calculate the mean horsepower")
+
+USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4 %>% test_5 %>% test_6
+
+soln_test(USER_CODE, SOLN_CODE,
+          a = final_(),
+          same_num(nrow(a)),
+          same_num(length(a)))
+
+
+```
+
+## Example 4: 
+
+> NOTE in DRAFT. I commented out the `soln_test()` line since it produces an error, "test_1 not found." But clearly `test_1` is there.  
+
+Get the `CPS85` data from the `mosaicData` package using 
+```r
+data("CPS85", package = "mosaicData")
+```
+
+Then build a model of wage as a response, using enough explanatory variables to get $R^2 > 0.25$.
+Give your model the name `my_mod`.
+
+Note, this has already been filled in so that I can get the user code without any work.
+```{r cps85r, exercise = TRUE}
+data("CPS85", package = "mosaicData")
+my_mod <- lm(wage ~ sector *educ + sex + married + union, data = CPS85)
+```
+
+```{r cps85r-solution}
+data("CPS85", package = "mosaicData")
+my_mod <- lm(wage ~ sector *educ + sex + married + union, data = CPS85)
+```
+
+```{r cps85r-check}
+test_1 <- fcall("data('CPS85')", "remember to use data() to bring in the data." )
+test_2 <- fcall("wage ~ whatever", "wage should be the response variable")
+final_val <- check_value(test = function(mod) ifelse(mosaic::rsquared(mod) > .25, "", "not good enough"), message = "your R^2 is not good enough. Try some new explanatory terms.")
+USER_CODE %>% test_1 %>% test_2 %>% final_val
+#soln_test(USER_CODE, SOLN_CODE,
+#          a = test_1,
+#          same_num(mosaic::rsquared(a) > .25))
+```
+
+## Example 7
+
+This is miscellaneous stuff just to illustrate code checking.  The tests will pass, as is. Modify the code to trigger fail messages.
+
+> Assign the name `x` to 7. Then compute $x^2 + 1$ and assign the name `y` to $\cos x$.
+
+```{r example-misc, exercise = TRUE}
+x <- 7
+x^2 + 1
+y <- cos(x)
+```
+
+```{r example-misc-check}
+test_1 <- assigns_to("x", "couldn't find assignment to x")
+test_2 <- check_value(match_number(7)) # looks at value of statement
+test_3 <- in_values(50)
+test_4 <- fcall("cos()", "didn't see the cos() function being used")
+test_5 <- fcall("x^2", "you didn't square x")
+test_6 <- fcall("x^2 + 1", "you should have added 1 to x^2")
+test_7 <- check_argument("cos(grab_this)", match_number(7))
+test_7a <- assigns_to("y", "remember to name the object cos(x) as y")
+test_8 <- check_value(match_number(50))
+test_9 <- check_value(match_number(cos(7)))
+
+USER_CODE %>% test_1 %>% test_2 %>% then %>% test_5 %>% inside %>% test_6 %>% test_8
+# Explanation
+# test_1 identifies the line where assignment to x was made
+# test_2 checks whether the value produced by the line in test_1 is 7
+# the "then" says look at the following lines
+# test_5 makes sure x was squared. The "inside" means that test_6 is restricted to 
+# the line that test_5 identified. 
+# Finally, test_8 checks that the value of this line is 50
+
+USER_CODE %>% test_3 %>% inside %>% test_5 %>% test_6 %>% test_8
+# Explanation
+# Another way of checking that x^2 + 1 is the statement producing the value 50
+
+USER_CODE %>% test_4 %>% test_7 %>% test_7a %>% test_9
+# Looks at the line in which cos() is used
+# Note that match_number() is used in test_9 so that tolerant numerical comparison 
+# will be applied
+```
+
+

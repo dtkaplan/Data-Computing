@@ -44,7 +44,7 @@ library("ggplot2")
 
 # Fill in the blanks ...
 CountryData %>%
-  ggplot(aes(x = life, y = death))
+  ggplot(aes(x = ___, y = ___))
 ```
 
 *** =hint

@@ -1,0 +1,166 @@
+---
+title: "Data Computing: Chapter 4"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(tutor)
+library(ggplot2)
+library(dplyr)
+library(checkr)
+library(DataComputing)
+library(mosaicData)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+## Problem 4.1
+
+For this course, most data will come to you in data-table form. But there are several ways that the data might be provided:
+
+* As data from an R package. Many R packages, including `ScientificProgramming`, provide data tables as part of the package. To access these tables, you can load the package. (In these DataCamp exercises, this has often been done for you.)
+* As a file. Data-table files come in many different types. The type is often indicated by the last part of the name (the "filetype extension"). Three common types are:
+    - a specialized spreadsheet file, e.g. `.xmlx` in the Excel system.
+    - a generic spreadsheet file, often a `.csv` (comma-separated values).
+    - a highly efficient format provided by R with file endings like `.rda` or `.Rdata`.
+
+You refer to a table from a package by name, **not in quotes**. The name has to be a legal R object name. The name will **not** end with a filename extension such as `.csv` or `.Rda`.
+
+You refer to a data file by a name also, **always in quotes**. The name often consists of many parts, separated by dashes. 
+
+* Files available over the internet have names beginning with something like `http://` and end with extensions like `.csv` or `.Rdata`, etc.
+* Files on your own computer (or on your account in the RStudio server) often start with `/` or `./` or `~/` and end with `.csv` or `.Rdata`, etc.
+
+
+```{r DC-chap-four-1, echo=FALSE}
+question('Which of the following is a data table identified by `"http://tiny.cc/dcf/CountryCodes.rda"`.',
+  answer("A file on my computer.", message = "Think where you see names started with `http://`" ),
+  answer("A file available through the internet", correct = TRUE),
+  answer("A file provided by a package.", message = "Packages provide data with commands like `data()`."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+## Problem 4.2
+
+In the exercises and other activities for *Data Computing*, you will often see instructions like this:
+
+> Use the `BabyNames` data table to ...
+
+Note that the name is not in quotes, suggesting that it is a data table provided by a package. Unfortunately, you can't tell just from the name what package it is. If in doubt, one way to figure out which package provides the data table is with the `??` help notation, e.g.
+```r
+??BabyNames
+```
+
+It's also possible to refer to package data by explicitly naming the package, like this:
+
+> Use the `DataComputing::BabyNames` data table to ...
+
+The name before the double colons is the package name. The data table name follows the double colons. 
+
+In order to use a data table from a package, you should either attach the package (with the `library()` command) or use the `data()` function. So either
+
+    library(DataComputing)
+    # ... or ...
+    data(BabyNames, package = "DataComputing")
+
+
+Either way, you will have access to the data table by name (e.g. `BabyNames`). It is not quoted, even though the name of the package is in quotes. I prefer the second style, because it explicitly documents where the data table is coming from.
+
+In this exercise, you will:
+
+1. Use `??CPS85` to figure out what package the `CPS85` data table comes from. You'll have to run this command to figure out the package name. Then you can fill in the blanks for (2) and (3).
+2. Use `data()` to bring the `CPS85` data table into your session.
+3. Use `head(CPS85)` to look at the first few lines of `CPS85`.
+
+```{r, DC-four-2, exercise = TRUE, echo = FALSE}
+??CPS85
+data(_____, _____)
+head(_____)
+```
+
+```{r DC-four-2-hint, echo = FALSE}
+# The CPS85 data table comes from the "mosaicData" package.
+# Remember the quotes when referring to "mosaicData"
+```
+
+```{r DC-four-2-soluton, echo = FALSE, results = "hide"}
+data(CPS85, package = "mosaicData")
+head(CPS85)
+```
+
+```{r DC-four-2-check}
+test_0 <- fcall("data(CPS85, whatever)", "the first argument to `data()` is the data table, e.g. `CPS85`")
+test_1 <- fcall("data(whatever, whatever)", "the second argument to `data()` is `package =`")
+test_2 <- fcall("head(CPS85)", "give the data table as the argument to `head()`")
+test_3 <- check_argument("data(CPS85, package = grab_this)", 
+                         test = function(x) 
+                           if(x == 'mosaicData') return("") else return("should be the name of the package (in quotes)."))
+# test_3 isn't working for some reason. Try another
+test_3 <- fcall("data(whatever, package = 'mosaicData')", message = "argument should be the name of the package (in quotes).")
+
+USER_CODE %>% test_0 %>% test_1 %>% test_2 %>% test_3
+# and this isn't working either
+# soln_test(USER_CODE, SOLN_CODE,
+#              res = final_(),
+#              same_num(nrow(res)), hint = TRUE)
+```
+
+
+```{r echo = FALSE, eval = FALSE}
+# For reference, the solution correctness test
+test_student_typed("data(", not_typed_msg = "Remember to use the `data()` function.")
+test_student_typed("CPS85", not_typed_msg = "Did you ask for `CPS85` (and spell it correctly?")
+test_student_typed("package *= *\"mosaicData\"", fixed = FALSE, 
+                   not_typed_msg = "Remember to give the name of the mosaicData package in quotes.")
+success_msg("Good.")
+```
+
+## Problem 4.3
+
+When you read a `.csv` or `.xlmx` spreadsheet file, you need to create a name by which to refer to the resulting data table.
+
+Some tips:
+
+* Remember that the name of the file goes in quotes.
+* Use ordinary assignment, e.g. `My_table <- ` to give a name to the  data table that will be created.
+* Use `read.csv()` for `.csv` files and `readxl::read_excel` for `.xlsx` files.
+
+
+Read in the file `"http://tiny.cc/dcf/CountryCodes.csv"` and name the resulting object `CCodes`.
+
+```{r DC-four-3, exercise = TRUE}
+# your statement goes here
+```
+
+```{r DC-four-3-solution, echo = FALSE}
+CCodes <- read.csv("http://tiny.cc/dcf/CountryCodes.csv")
+```
+
+```{r DC-four-3-hint, echo = FALSE}
+# Use the `read.csv()` function and make assignment to `CCodes`
+```
+
+```{r DC-four-3-check, echo = FALSE}
+test_1 <- fcall("read.csv(whatever)")
+test_2 <- in_statements("[\"'].*[\"']", 
+                        message = "you don't have the file name in quotes.",
+                        regex = TRUE)
+test_3 <- in_statements("[\"']http://tiny.cc/dcf/CountryCodes.csv[\"']", regex = TRUE,
+                        "you don't have the name of the file typed correctly.")
+test_4 <- assigns_to("CCodes", message = "remember to assign the output to `CCodes`.")
+USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4
+```
+
+```{r echo = FALSE, eval = FALSE}
+# DataCamp submission correctness tests
+test_student_typed('http://tiny.cc/dcf/CountryCodes.csv"',
+                    not_typed_msg = "Remember the entire file name must be given, in quotes.")
+success_msg("There are several other functions for reading CSV and other forms of file, but we don't need to use them in the next several chapters.")
+```
+
+There are several other functions for reading CSV and other forms of file, but we don't need to use them in the next several chapters.
+
+
+

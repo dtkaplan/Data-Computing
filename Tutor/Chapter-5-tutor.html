@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Data Computing: Chapter 5</title>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("section-TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="section-header">
+
+
+
+<h1 class="title toc-ignore">Data Computing: Chapter 5</h1>
+
+</div>
+
+
+<div id="section-problem-5.1" class="section level2">
+<h2>Problem 5.1</h2>
+<p>R is an open-source platform. As such, many people can contribute their ideas and the community of users can choose among them. One of the areas where this plays out is in graphics. There are many ways to draw graphics using R.</p>
+<p>The graphics system we use in this course is provided by the <code>&quot;ggplot2&quot;</code> package. This is one of many extremely popular packages written by <a href="https://en.wikipedia.org/wiki/Hadley_Wickham">Hadley Wickham</a>, the chief scientist at RStudio.</p>
+<p>The functions provided by <code>&quot;ggplot2&quot;</code> constitute what can be called an Application Programming Interface (API). Many people find the <code>&quot;ggplot2&quot;</code> API hard to figure out at first. In the <em>Data Computing</em> textbook, a menu-driven alternative is provided.</p>
+<p>In these exercises, you’ll use yet another alternative interface provided by the <code>&quot;statisticalModeling&quot;</code> package. This interface, implemented by functions whose names start with <code>gf_</code>, allows you to use model formulas to specify <code>&quot;ggplot2&quot;</code> graphics.</p>
+<p>A <em>formula</em> in R is an expression built around the <code>~</code> (“tilde”) sign. It enables you to describe a relationship among variables. For instance: <code>wage ~ age</code> means “wage versus age.”</p>
+<p>In this exercise, you’ll use a simple function for creating scatterplots. To illustrate its use, here’s an example:</p>
+<pre class="r"><code>data(CPS85, package = &quot;mosaicData&quot;)
+gf_point(wage ~ age, data = CPS85)</code></pre>
+<p><img src="Chapter-5-tutor_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Now it’s your turn …</p>
+<ul>
+<li>Use <code>library()</code> to attach the <code>&quot;statisticalModeling&quot;</code> package, which provides the <code>gf_point()</code> function and others connected to <code>&quot;ggplot2&quot;</code>.</li>
+<li>Use <code>data()</code> to load the <code>CountryData</code> table from the <code>&quot;DataComputing&quot;</code> package.</li>
+<li><code>gf_point()</code> makes a scatter plot: one point for each case.
+<ul>
+<li>plot the death rate (<code>death</code>) versus birth rate (<code>birth</code>) the <code>CountryData</code>. This means that <code>death</code> should be on the left side of the formula and <code>birth</code> on the right side.</li>
+</ul></li>
+</ul>
+<div class="tutor-exercise" data-label="DC-five-1" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(___)
+data(CountryData, package = &quot;DataComputing&quot;)
+
+gf_point(__formula__, data = __datatable__)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., feedback = tutor::feedback, debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                return(feedback(paste(\"Sorry, but\", R$message), ","                  correct = FALSE, type = \"info\", location = \"prepend\"))","            }","            stop(\"Statement returned neither a test result or a capture.\")","        }","    }","    feedback(\"Good job!\", correct = TRUE, type = \"success\")","}"]}</script>
+</div>
+<div class="tutor-exercise-support" data-label="DC-five-1-hint-1" data-caption="Code" data-lines="0">
+<pre class="text"><code>The formula will be `death ~ life`</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-five-1-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(&quot;statisticalModeling&quot;)
+data(CountryData, package = &quot;DataComputing&quot;)
+
+gf_point(death ~ birth, data = CountryData)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-five-1-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>test_0 &lt;- fcall(&quot;library(&#39;statisticalModeling&#39;)&quot;, &quot;give `library()` the name of the package to be loaded, putting the name in quotes.&quot;)
+test_1 &lt;- fcall(&quot;data(whatever, package = &#39;DataComputing&#39;)&quot;, &quot;the data table is provided by the `DataComputing` package.&quot;)
+test_1a &lt;- fcall(&quot;data(whatever, package = &#39;statisticalModeling&#39;)&quot;, mistake = TRUE, &quot;the CountryData data table is provided by the `DataComputing` package, not `statisticalModeling`.&quot;)
+test_2 &lt;- fcall(&quot;gf_point()&quot;, &quot;use the `gf_point()` function to make the scatter plot.&quot;)
+test_3 &lt;- fcall(&quot;whatever ~ whatever&quot;, &quot;remember the tilde ~ in the formula&quot;)
+test_3a &lt;- fcall(&quot;death ~ whatever&quot;, &quot;the y-variable `death` is on the left side of the tilde&quot;)
+test_3b &lt;- fcall(&quot;whatever ~ birth&quot;, &quot;the x-variable `births` goes on the right side of the tilde&quot;)
+test_4 &lt;- fcall(&quot;gf_point(whatever, data = CountryData)&quot;, &quot;the `data =` argument should be given the datatable `CountryData`.&quot;)
+USER_CODE %&gt;% test_0 %&gt;% test_1 %&gt;% test_1a %&gt;% test_2 %&gt;% 
+  test_3 %&gt;% test_3a %&gt;% test_3b %&gt;% test_4</code></pre>
+</div>
+</div>
+<div id="section-problem-5.2-counting" class="section level2">
+<h2>Problem 5.2: Counting</h2>
+<p>The <code>gf_counts()</code> function constructs a graphic with bars representing the counts in each category of a specified variable. For instance, the graphic shows the number of people in a clinical study of treatment for addition whose problem is linked to each of several drugs.</p>
+<p>The count itself is not a variable, but is being derived from a categorical variable, in this case the variable <code>substance</code>. The formula given to <code>gf_counts</code> will have only a right-hand side: <code>~ substance</code>. This tells what variable to place on the x-axis. The count will be calculated and placed on the y-axis.</p>
+<ul>
+<li>Attach the data table <code>CPS85</code> from the package <code>&quot;mosaicData&quot;</code>.</li>
+<li>Use <code>gf_counts()</code> to graph the number of people in <code>CPS85</code> who work in each <code>sector</code> of the economy.</li>
+</ul>
+<div class="tutor-exercise" data-label="DC-five-2" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(&quot;statisticalModeling&quot;)
+data(___, package = ___)
+
+gf_counts( __one_sided_formula__, data = ___)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., feedback = tutor::feedback, debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                return(feedback(paste(\"Sorry, but\", R$message), ","                  correct = FALSE, type = \"info\", location = \"prepend\"))","            }","            stop(\"Statement returned neither a test result or a capture.\")","        }","    }","    feedback(\"Good job!\", correct = TRUE, type = \"success\")","}"]}</script>
+</div>
+<div class="tutor-exercise-support" data-label="DC-five-2-hint" data-caption="Code" data-lines="0">
+<pre class="text"><code># Remember, the formula will be one-sided: ~ sector</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-five-2-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(&quot;statisticalModeling&quot;)
+data(CPS85, package = &quot;mosaicData&quot;)
+gf_counts( ~ sector, data = CPS85)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-five-2-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>test_0 &lt;- fcall(&quot;library(&#39;statisticalModeling&#39;)&quot;, &quot;attach the `statisticalModeling` package with `library()`.&quot;)
+test_1 &lt;- fcall(&quot;data(CPS85, package = &#39;mosaicData&#39;)&quot;, &quot;attach the CPS85 data from the `mosaicData` package.&quot;)
+test_2 &lt;- fcall(&quot;gf_counts()&quot;, &quot;use `gf_counts() to make the bar graph.&quot;)
+test_3 &lt;- fcall(&quot;~ sector&quot;, &quot;the formula should be one sided, with `sector` to the right of the tilde.&quot;)
+test_4 &lt;- fcall(&quot;gf_counts(whatever, data = CPS85)&quot;, &quot;the `data=` argument to `gf_counts()` should be set to the data table `CPS85`.&quot;)
+USER_CODE %&gt;% test_0 %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4</code></pre>
+</div>
+<p>Remember, the formula will be one-sided: <code>~ sector</code>.</p>
+</div>
+<div id="section-problem-5.3-box-and-whisker-plots" class="section level2">
+<h2>Problem 5.3 Box-and-whisker plots</h2>
+<p>Box-and-whisker plots are a way to show how a quantitative variable (like <code>wage</code> in the <code>CPS85</code> data) depends on a categorical variable (like <code>sector</code>). Use the <code>gf_boxplot()</code> function to draw these. The formula will be of the form quantitative_var <code>~</code> categorical_var.</p>
+<ul>
+<li>Use <code>gf_boxplot()</code> to make a box-and-whisker plot of <code>wage</code> versus <code>sector</code> in the <code>CPS85</code> data.</li>
+</ul>
+<div class="tutor-exercise" data-label="DC-five-3" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(&quot;statisticalModeling&quot;)
+data(CPS85, package = &quot;mosaicData&quot;)
+
+___(___, ___)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., feedback = tutor::feedback, debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                return(feedback(paste(\"Sorry, but\", R$message), ","                  correct = FALSE, type = \"info\", location = \"prepend\"))","            }","            stop(\"Statement returned neither a test result or a capture.\")","        }","    }","    feedback(\"Good job!\", correct = TRUE, type = \"success\")","}"]}</script>
+</div>
+<div class="tutor-exercise-support" data-label="DC-five-3-hint" data-caption="Code" data-lines="0">
+<pre class="text"><code># Fill in the left blank (`___`) with the appropriate formula. 
+# The right blank should be filled in with the `data = ` argument, 
+# specifying, of course, the data table to use in making the plot.</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-five-3-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(&quot;statisticalModeling&quot;)
+data(CPS85, package = &quot;mosaicData&quot;)
+
+gf_boxplot(wage ~ sector, data = CPS85)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-five-3-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>test_1 &lt;- fcall(&quot;gf_boxplot()&quot;, 
+                &quot;use &#39;gf_boxplot()&#39; to make the graph.&quot;)
+test_2 &lt;- fcall(&quot;whatever ~ whatever&quot;, &quot;remember the formula.&quot;)
+test_3 &lt;- fcall(&quot;whatever ~ sector&quot;, &quot;the sector variable should be on the right side of the tilde.&quot;)
+test_4 &lt;- fcall(&quot;wage ~ whatever&quot;, &quot;the wage variable goes on the left side of the formula.&quot;)
+USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4</code></pre>
+</div>
+
+<script type="application/shiny-prerendered" data-context="server-start">
+library(tutor)
+library(ggplot2)
+library(dplyr)
+library(checkr)
+library(statisticalModeling)
+library(DataComputing)
+library(mosaicData)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+tutor:::register_http_handlers(session, metadata = NULL)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-five-1-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-five-1-code-editor`)), session)
+output$`tutor-exercise-DC-five-1-output` <- renderUI({
+  `tutor-exercise-DC-five-1-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-five-2-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-five-2-code-editor`)), session)
+output$`tutor-exercise-DC-five-2-output` <- renderUI({
+  `tutor-exercise-DC-five-2-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-five-3-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-five-3-code-editor`)), session)
+output$`tutor-exercise-DC-five-3-output` <- renderUI({
+  `tutor-exercise-DC-five-3-result`()
+})
+</script>
+ <!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["navigation"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/navigation-1.1"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tabsets.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/highlightjs-1.1"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["default.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["4.5.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/font-awesome-4.5.0"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["css/font-awesome.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.4.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutor"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutor"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tutor.js"]},{"type":"character","attributes":{},"value":["tutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]}]}
+</script>
+<!--/html_preserve-->
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

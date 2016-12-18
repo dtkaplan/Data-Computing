@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Data Computing: Chapter 6</title>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("section-TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="section-header">
+
+
+
+<h1 class="title toc-ignore">Data Computing: Chapter 6</h1>
+
+</div>
+
+
+<div id="section-problem-6.1" class="section level2">
+<h2>Problem 6.1</h2>
+<p>In the previous chapter, you graphed a summary of the <code>CPS85</code> data like that shown in the figure: counts of people working in each sector of the economy. In this exercise, you’re going to add new aethetics to the bars and facet the graph.</p>
+<ul>
+<li>Set the “fill” color for the bars based on whether the person belongs to a <code>union</code>. To do this, fill in the blank following <code>fill:</code> with the variable that is to be mapped to the fill aesthetic.</li>
+<li>Facet the graph based on <code>sex</code>. To do this, complete the formula argument to the <code>facet_grid()</code> function.</li>
+</ul>
+<div class="tutor-exercise" data-label="DC-six-1" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(&quot;statisticalModeling&quot;)
+library(&quot;ggplot2&quot;)
+data(CPS85, package = &quot;mosaicData&quot;)
+
+gf_counts( ~ sector + fill:___, data = CPS85) + facet_grid( ~ ___)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., feedback = tutor::feedback, debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                return(feedback(paste(\"Sorry, but\", R$message), ","                  correct = FALSE, type = \"info\", location = \"prepend\"))","            }","            stop(\"Statement returned neither a test result or a capture.\")","        }","    }","    feedback(\"Good job!\", correct = TRUE, type = \"success\")","}"]}</script>
+</div>
+<div class="tutor-exercise-support" data-label="DC-six-1-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(statisticalModeling)
+library(ggplot2)
+data(CPS85, package = &quot;mosaicData&quot;)
+gf_counts( ~ sector + fill:union, data = CPS85) + facet_grid( ~ sex)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-six-1-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>test_1 &lt;- fcall(&quot;gf_counts()&quot;, &quot;use &#39;gf_counts()&#39; to make the frame of the plot.&quot;)
+test_2 &lt;- in_statements(&quot;~ *sector&quot;, &quot;use a one-sided formula with &#39;sector&#39; on the right hand side of the tilde.&quot;, regex = TRUE)
+test_3 &lt;- fcall(&quot;sector + fill:union&quot;, &quot;the formula for &#39;gf_counts()&#39; should include an aesthetic &#39;fill:&#39; which should be mapped to &#39;union&#39;.&quot;)
+test_4 &lt;- fcall(&quot;facet_grid()&quot;, &quot;use facet_grid() to split up the graph into facets.&quot;)
+test_5 &lt;- in_statements(&quot;facet_grid\\( +~ +sex *\\)&quot;, &quot;the faceting should be done by sex; use a one-sided formula with sex on the right hand side.&quot;, regex = TRUE)
+USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4 %&gt;% test_5</code></pre>
+</div>
+<p>In general, aesthetics such as color, size, fill, etc. are mapped to variables by adding into the formula a component in the form <code>aesthetic:variable</code>.</p>
+</div>
+<div id="section-problem-6.2" class="section level2">
+<h2>Problem 6.2</h2>
+<p>By running the code in the box, you’ll re-create the graphic you made in the last exercise. Do that now, pressing “run” rather than “submit.” You should see a U-shaped pattern in the graph: at low birth rates, as birth rate increases from one country to another the death rate goes down. But for high birth rates, increasing birth rate is associated with increasing death rate.</p>
+<p>The tragic factor behind this pattern is overall health in each country. In countries with good health, the death rate is largely shaped by the age distribution in the country. In such countries, a high birth rate is associated with a younger population, hence one with a lower death rate. (Example: Mexico, which has a much lower death rate than its neighbor, the US) In countries with poor health, the death rate is high. But at the same time, women in those countries have many children who, often, have a high mortality rate.</p>
+<p>The graphic, as it is, does not incorporate the overall health of countries, so it’s not possible to compare the hypothesis in the previous paragraph with the data.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Life expectancy (<code>life</code>) is one measure of a country’s overall health. Map <code>life</code> to the glyph color in the plot. Do this by adding on to the formula: <code>+ size:life</code>.</li>
+<li>Examine the plot carefully to see if the graphic supports the hypothesis given above.</li>
+</ol>
+<div class="tutor-exercise" data-label="DC-six-2" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(&quot;statisticalModeling&quot;)
+library(&quot;ggplot2&quot;)
+data(CountryData, package = &quot;DataComputing&quot;)
+
+# first plot: add color as an aethetic and map it
+# to the life expectancy variable.
+gf_point(death ~ birth, data = CountryData)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., feedback = tutor::feedback, debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                return(feedback(paste(\"Sorry, but\", R$message), ","                  correct = FALSE, type = \"info\", location = \"prepend\"))","            }","            stop(\"Statement returned neither a test result or a capture.\")","        }","    }","    feedback(\"Good job!\", correct = TRUE, type = \"success\")","}"]}</script>
+</div>
+<div class="tutor-exercise-support" data-label="DC-six-2-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>test_1 &lt;- fcall(&quot;gf_point(whatever, data = CountryData)&quot;, &quot;use gf_point() for the body of the plot&quot;)
+test_2 &lt;- fcall(&quot;birth + color:life&quot;, &quot;map the life variable to the size aesthetic by adding on to the formula the term &#39;+ color:life&#39;.&quot;)
+
+USER_CODE %&gt;% test_1 %&gt;% test_2</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-six-2-hint" data-caption="Code" data-lines="0">
+<pre class="text"><code># The formula will have two parts on the right-hand side of the tilde: 
+# `death ~ birth + color:life`</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-six-2-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(&quot;statisticalModeling&quot;)
+data(CountryData, package = &quot;DataComputing&quot;)
+
+gf_point(death ~ birth + color:life, data = CountryData)</code></pre>
+</div>
+<p>Many design choices in graphic design are a matter of mapping variables to the aesthetic properties of glyphs. In the <code>gf_</code> function formulas, the variable on the left of the tilde determines the variable mapped to y. The first variable on the right sets the variable to be mapped to x. Then other aesthetics are set by pairs in the form aethetic:variable, for instance <code>size:life</code> or <code>color:life</code>.</p>
+<div id="section-interpreting-6.2" class="section level3">
+<h3>Interpreting 6.2</h3>
+<ul>
+<li>Countries with long life-expectancies tend to be on the left side of the graph.</li>
+<li>Countries with long life-expectancies tend to have high birth rates. (FALSE)</li>
+<li>For countries with relatively low life-expectancies, the death rate and the birth rate tend to have a negative relationship. (FALSE: explain the positive relationship)</li>
+<li>For countries with relatively high life-expectancies, the death rate and the birth rate tend to have a negative relationship.</li>
+</ul>
+
+<div id="htmlwidget-9260c00d938c3e70aed0" style="width:100%;height:auto;", class = "quiz html-widget">
+<div class="panel panel-default">
+<div class="panel-body quizArea">
+</div>
+</div>
+</div>
+
+<script type="application/json" data-for="htmlwidget-9260c00d938c3e70aed0">{"x":{"question":"Looking at the graph you made in Problem 6.2, say which of the following statements are true.","answers":[{"option":"Countries with long life-expectancies tend to be on the left side of the graph.","correct":true,"message":null},{"option":"Countries with long life-expectancies tend to have high birth rates.","correct":false,"message":"☛  The x-axis is the birth rate. Countries on the right side of the graph have high birth rates. But those are the countries with short life expectancies as indicated by the dark color."},{"option":"For countries with relatively low life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":false,"message":"☛ The low life-expectancy countries are drawn in a dark color. The overall pattern among the dark points is that death rate goes up with birth rate: a positive relationship."},{"option":"For countries with relatively high life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":true,"message":null}],"label":"DC-chap-four-1","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":true,"json":{"info":{"name":"","main":""},"questions":[{"q":"Looking at the graph you made in Problem 6.2, say which of the following statements are true.","a":[{"option":"Countries with long life-expectancies tend to be on the left side of the graph.","correct":true,"message":null},{"option":"Countries with long life-expectancies tend to have high birth rates.","correct":false,"message":"☛  The x-axis is the birth rate. Countries on the right side of the graph have high birth rates. But those are the countries with short life expectancies as indicated by the dark color."},{"option":"For countries with relatively low life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":false,"message":"☛ The low life-expectancy countries are drawn in a dark color. The overall pattern among the dark points is that death rate goes up with birth rate: a positive relationship."},{"option":"For countries with relatively high life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="section-problem-6.3" class="section level2">
+<h2>Problem 6.3</h2>
+<pre class="r"><code>gf_boxplot(wage ~ sector, data = CPS85)</code></pre>
+<pre><code>## Warning in plyr::split_indices(scale_id, n): &#39;.Random.seed&#39; is not an
+## integer vector but of type &#39;NULL&#39;, so ignored</code></pre>
+<p><img src="Chapter-6-tutor_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>In the previous chapter, you made a box-and-whisker plot like that shown in the graphic. In this exercise, you’re going to refine the graphic by adding in facets and aesthetics.</p>
+<p>Recreate the graphic with these two additional features: - Add a term to the formula that maps the variable <code>sex</code> to the fill aethetic. You do this by adding a term of the form <code>+ fill:sex</code> - Facet the plot by the variable union. You do this by adding a new command at the end: <code>+ facet_grid( ~ union)</code></p>
+<div class="tutor-exercise" data-label="DC-six-3" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(______) # for statisticalModeling package
+data(_____, package = ________) # for CPS85 data table from mosaicData package
+
+# re-create the graphic
+gf_boxplot( ... your arguments here ...)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., feedback = tutor::feedback, debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                return(feedback(paste(\"Sorry, but\", R$message), ","                  correct = FALSE, type = \"info\", location = \"prepend\"))","            }","            stop(\"Statement returned neither a test result or a capture.\")","        }","    }","    feedback(\"Good job!\", correct = TRUE, type = \"success\")","}"]}</script>
+</div>
+<div class="tutor-exercise-support" data-label="DC-six-3-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(&quot;statisticalModeling&quot;)
+data(CPS85, package = &quot;mosaicData&quot;)
+
+gf_boxplot(wage ~ sector + fill:sex, data = CPS85) + facet_grid( ~ union)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-six-3-hint-1" data-caption="Code" data-lines="0">
+<pre class="text"><code># add fill:sex to the gf_boxplot() formula</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-six-3-hint-2" data-caption="Code" data-lines="0">
+<pre class="text"><code># facet the plot by &quot;adding&quot; an instruction after the gf_boxplot()
+# command: gf_boxplot(... your arguments ...) + facet_grid( ~ union)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-six-3-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>test_1 &lt;- fcall(&quot;library()&quot;, 
+                &quot;use the library() function to attach the \&quot;statisticalModeling\&quot; package.&quot;)
+test_2 &lt;- has_constants(&quot;statisticalModeling&quot;, 
+                        message = &quot;it&#39;s the \&quot;statisticalModeling\&quot; package you want to attach with library().&quot;)
+
+test_3 &lt;- fcall(&quot;data(CPS85, whatever)&quot;, 
+                &quot;access the CPS85 dataset with data&quot;)
+test_4 &lt;- fcall(&quot;data(whatever, package = \&quot;mosaicData\&quot;)&quot;, 
+                &quot;CPS85 is in the \&quot;mosaicData\&quot; package.&quot;)
+
+USER_CODE %&gt;% test_1 %&gt;% inside %&gt;% test_2 %&gt;% then %&gt;% test_3 %&gt;% test_4
+
+test_5 &lt;- fcall(&quot;gf_boxplot()&quot;, &quot;use gf_boxplot() as the main plotting function.&quot;)
+test_5a &lt;- fcall(&quot;whatever + whatever&quot;, &quot;Use &#39;+&#39; to add the faceting to the boxplot.&quot;)
+test_6 &lt;- fcall(&quot;facet_grid()&quot;, &quot;use the facet_grid() function.&quot;)
+test_7 &lt;- has_formula(test = match_formula(~ union), 
+                      &quot;the formula for faceting should be ~ union&quot;)
+test_8 &lt;- has_formula(test = match_formula(wage ~ sector + fill:sex),
+                      &quot;aethetics formula is missing something.&quot;)
+
+USER_CODE %&gt;% test_5 %&gt;% test_5a %&gt;% test_6 %&gt;% test_7 %&gt;% test_8</code></pre>
+</div>
+<p>Whether or not your new graphic is good depends on what you’re trying to show. This one puts the wages of men and women next to each other for each sector, which is good for comparing wages between the sexes. But for other purposes it might be appropriate to put side by side the wages for union and non-union workers, or to facet by <code>sector</code>. Different arrangements of the data can reveal different aspects of the data.</p>
+
+<script type="application/shiny-prerendered" data-context="server-start">
+library(tutor)
+library(ggplot2)
+library(dplyr)
+library(checkr)
+library(statisticalModeling)
+library(DataComputing)
+library(mosaicData)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+tutor:::register_http_handlers(session, metadata = NULL)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-six-1-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-six-1-code-editor`)), session)
+output$`tutor-exercise-DC-six-1-output` <- renderUI({
+  `tutor-exercise-DC-six-1-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-six-2-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-six-2-code-editor`)), session)
+output$`tutor-exercise-DC-six-2-output` <- renderUI({
+  `tutor-exercise-DC-six-2-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-six-3-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-six-3-code-editor`)), session)
+output$`tutor-exercise-DC-six-3-output` <- renderUI({
+  `tutor-exercise-DC-six-3-result`()
+})
+</script>
+ <!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["navigation"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/navigation-1.1"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tabsets.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/highlightjs-1.1"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["default.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["4.5.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/font-awesome-4.5.0"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["css/font-awesome.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.4.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutor"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutor"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tutor.js"]},{"type":"character","attributes":{},"value":["tutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["0.7"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["quiz-binding"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["quiz.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutor"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutor"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tutor.js"]},{"type":"character","attributes":{},"value":["tutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.4.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["slickquiz"]},{"type":"character","attributes":{},"value":["1.5.20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/slickquiz"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["js/slickQuiz.js"]},{"type":"character","attributes":{},"value":["css/slickQuiz.css","css/slickQuizTutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]}]}
+</script>
+<!--/html_preserve-->
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

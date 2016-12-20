@@ -133,12 +133,12 @@ data(CPS85, package = &quot;mosaicData&quot;)
 gf_counts( ~ sector + fill:union, data = CPS85) + facet_grid( ~ sex)</code></pre>
 </div>
 <div class="tutor-exercise-support" data-label="DC-six-1-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>test_1 &lt;- fcall(&quot;gf_counts()&quot;, &quot;use &#39;gf_counts()&#39; to make the frame of the plot.&quot;)
-test_2 &lt;- in_statements(&quot;~ *sector&quot;, &quot;use a one-sided formula with &#39;sector&#39; on the right hand side of the tilde.&quot;, regex = TRUE)
-test_3 &lt;- fcall(&quot;sector + fill:union&quot;, &quot;the formula for &#39;gf_counts()&#39; should include an aesthetic &#39;fill:&#39; which should be mapped to &#39;union&#39;.&quot;)
-test_4 &lt;- fcall(&quot;facet_grid()&quot;, &quot;use facet_grid() to split up the graph into facets.&quot;)
-test_5 &lt;- in_statements(&quot;facet_grid\\( +~ +sex *\\)&quot;, &quot;the faceting should be done by sex; use a one-sided formula with sex on the right hand side.&quot;, regex = TRUE)
-USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4 %&gt;% test_5</code></pre>
+<pre class="text"><code>test_1 &lt;- find_call(&quot;gf_counts()&quot;, &quot;use &#39;gf_counts()&#39; to make the frame of the plot.&quot;)
+test_2 &lt;- find_statement(&quot;~ *sector&quot;, &quot;use a one-sided formula with &#39;sector&#39; on the right hand side of the tilde.&quot;, regex = TRUE)
+test_3 &lt;- find_call(&quot;sector + fill:union&quot;, &quot;the formula for &#39;gf_counts()&#39; should include an aesthetic &#39;fill:&#39; which should be mapped to &#39;union&#39;.&quot;)
+test_4 &lt;- find_call(&quot;facet_grid()&quot;, &quot;use facet_grid() to split up the graph into facets.&quot;)
+test_5 &lt;- find_formula(match_formula(~ sex), message = &quot;the faceting should be done by sex; use a one-sided formula with sex on the right hand side.&quot;)
+USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4 %&gt;% inside %&gt;% test_5</code></pre>
 </div>
 <p>In general, aesthetics such as color, size, fill, etc. are mapped to variables by adding into the formula a component in the form <code>aesthetic:variable</code>.</p>
 </div>
@@ -162,8 +162,8 @@ gf_point(death ~ birth, data = CountryData)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., feedback = tutor::feedback, debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                return(feedback(paste(\"Sorry, but\", R$message), ","                  correct = FALSE, type = \"info\", location = \"prepend\"))","            }","            stop(\"Statement returned neither a test result or a capture.\")","        }","    }","    feedback(\"Good job!\", correct = TRUE, type = \"success\")","}"]}</script>
 </div>
 <div class="tutor-exercise-support" data-label="DC-six-2-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>test_1 &lt;- fcall(&quot;gf_point(whatever, data = CountryData)&quot;, &quot;use gf_point() for the body of the plot&quot;)
-test_2 &lt;- fcall(&quot;birth + color:life&quot;, &quot;map the life variable to the size aesthetic by adding on to the formula the term &#39;+ color:life&#39;.&quot;)
+<pre class="text"><code>test_1 &lt;- find_call(&quot;gf_point(whatever, data = CountryData)&quot;, &quot;use gf_point() for the body of the plot&quot;)
+test_2 &lt;- find_call(&quot;birth + color:life&quot;, &quot;map the life variable to the size aesthetic by adding on to the formula the term &#39;+ color:life&#39;.&quot;)
 
 USER_CODE %&gt;% test_1 %&gt;% test_2</code></pre>
 </div>
@@ -187,14 +187,14 @@ gf_point(death ~ birth + color:life, data = CountryData)</code></pre>
 <li>For countries with relatively high life-expectancies, the death rate and the birth rate tend to have a negative relationship.</li>
 </ul>
 
-<div id="htmlwidget-9260c00d938c3e70aed0" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-fc74f6f360119c70a4b4" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-9260c00d938c3e70aed0">{"x":{"question":"Looking at the graph you made in Problem 6.2, say which of the following statements are true.","answers":[{"option":"Countries with long life-expectancies tend to be on the left side of the graph.","correct":true,"message":null},{"option":"Countries with long life-expectancies tend to have high birth rates.","correct":false,"message":"☛  The x-axis is the birth rate. Countries on the right side of the graph have high birth rates. But those are the countries with short life expectancies as indicated by the dark color."},{"option":"For countries with relatively low life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":false,"message":"☛ The low life-expectancy countries are drawn in a dark color. The overall pattern among the dark points is that death rate goes up with birth rate: a positive relationship."},{"option":"For countries with relatively high life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":true,"message":null}],"label":"DC-chap-four-1","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":true,"json":{"info":{"name":"","main":""},"questions":[{"q":"Looking at the graph you made in Problem 6.2, say which of the following statements are true.","a":[{"option":"Countries with long life-expectancies tend to be on the left side of the graph.","correct":true,"message":null},{"option":"Countries with long life-expectancies tend to have high birth rates.","correct":false,"message":"☛  The x-axis is the birth rate. Countries on the right side of the graph have high birth rates. But those are the countries with short life expectancies as indicated by the dark color."},{"option":"For countries with relatively low life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":false,"message":"☛ The low life-expectancy countries are drawn in a dark color. The overall pattern among the dark points is that death rate goes up with birth rate: a positive relationship."},{"option":"For countries with relatively high life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-fc74f6f360119c70a4b4">{"x":{"question":"Looking at the graph you made in Problem 6.2, say which of the following statements are true.","answers":[{"option":"Countries with long life-expectancies tend to be on the left side of the graph.","correct":true,"message":null},{"option":"Countries with long life-expectancies tend to have high birth rates.","correct":false,"message":"☛  The x-axis is the birth rate. Countries on the right side of the graph have high birth rates. But those are the countries with short life expectancies as indicated by the dark color."},{"option":"For countries with relatively low life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":false,"message":"☛ The low life-expectancy countries are drawn in a dark color. The overall pattern among the dark points is that death rate goes up with birth rate: a positive relationship."},{"option":"For countries with relatively high life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":true,"message":null}],"label":"DC-chap-four-1","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":true,"json":{"info":{"name":"","main":""},"questions":[{"q":"Looking at the graph you made in Problem 6.2, say which of the following statements are true.","a":[{"option":"Countries with long life-expectancies tend to be on the left side of the graph.","correct":true,"message":null},{"option":"Countries with long life-expectancies tend to have high birth rates.","correct":false,"message":"☛  The x-axis is the birth rate. Countries on the right side of the graph have high birth rates. But those are the countries with short life expectancies as indicated by the dark color."},{"option":"For countries with relatively low life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":false,"message":"☛ The low life-expectancy countries are drawn in a dark color. The overall pattern among the dark points is that death rate goes up with birth rate: a positive relationship."},{"option":"For countries with relatively high life-expectancies, the death rate and the birth rate tend to have a negative relationship.","correct":true,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="section-problem-6.3" class="section level2">
@@ -227,24 +227,24 @@ gf_boxplot(wage ~ sector + fill:sex, data = CPS85) + facet_grid( ~ union)</code>
 # command: gf_boxplot(... your arguments ...) + facet_grid( ~ union)</code></pre>
 </div>
 <div class="tutor-exercise-support" data-label="DC-six-3-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>test_1 &lt;- fcall(&quot;library()&quot;, 
+<pre class="text"><code>test_1 &lt;- find_call(&quot;library()&quot;, 
                 &quot;use the library() function to attach the \&quot;statisticalModeling\&quot; package.&quot;)
-test_2 &lt;- has_constants(&quot;statisticalModeling&quot;, 
+test_2 &lt;- find_constants(&quot;statisticalModeling&quot;, 
                         message = &quot;it&#39;s the \&quot;statisticalModeling\&quot; package you want to attach with library().&quot;)
 
-test_3 &lt;- fcall(&quot;data(CPS85, whatever)&quot;, 
+test_3 &lt;- find_call(&quot;data(CPS85, whatever)&quot;, 
                 &quot;access the CPS85 dataset with data&quot;)
-test_4 &lt;- fcall(&quot;data(whatever, package = \&quot;mosaicData\&quot;)&quot;, 
+test_4 &lt;- find_call(&quot;data(whatever, package = \&quot;mosaicData\&quot;)&quot;, 
                 &quot;CPS85 is in the \&quot;mosaicData\&quot; package.&quot;)
 
 USER_CODE %&gt;% test_1 %&gt;% inside %&gt;% test_2 %&gt;% then %&gt;% test_3 %&gt;% test_4
 
-test_5 &lt;- fcall(&quot;gf_boxplot()&quot;, &quot;use gf_boxplot() as the main plotting function.&quot;)
-test_5a &lt;- fcall(&quot;whatever + whatever&quot;, &quot;Use &#39;+&#39; to add the faceting to the boxplot.&quot;)
-test_6 &lt;- fcall(&quot;facet_grid()&quot;, &quot;use the facet_grid() function.&quot;)
-test_7 &lt;- has_formula(test = match_formula(~ union), 
+test_5 &lt;- find_call(&quot;gf_boxplot()&quot;, &quot;use gf_boxplot() as the main plotting function.&quot;)
+test_5a &lt;- find_call(&quot;whatever + whatever&quot;, &quot;Use &#39;+&#39; to add the faceting to the boxplot.&quot;)
+test_6 &lt;- find_call(&quot;facet_grid()&quot;, &quot;use the facet_grid() function.&quot;)
+test_7 &lt;- find_formula(test = match_formula(~ union), 
                       &quot;the formula for faceting should be ~ union&quot;)
-test_8 &lt;- has_formula(test = match_formula(wage ~ sector + fill:sex),
+test_8 &lt;- find_formula(test = match_formula(wage ~ sector + fill:sex),
                       &quot;aethetics formula is missing something.&quot;)
 
 USER_CODE %&gt;% test_5 %&gt;% test_5a %&gt;% test_6 %&gt;% test_7 %&gt;% test_8</code></pre>

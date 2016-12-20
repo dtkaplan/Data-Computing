@@ -148,14 +148,14 @@ data(CountryData, package = &quot;DataComputing&quot;)
 gf_point(death ~ birth, data = CountryData)</code></pre>
 </div>
 <div class="tutor-exercise-support" data-label="DC-five-1-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>test_0 &lt;- fcall(&quot;library(&#39;statisticalModeling&#39;)&quot;, &quot;give `library()` the name of the package to be loaded, putting the name in quotes.&quot;)
-test_1 &lt;- fcall(&quot;data(whatever, package = &#39;DataComputing&#39;)&quot;, &quot;the data table is provided by the `DataComputing` package.&quot;)
-test_1a &lt;- fcall(&quot;data(whatever, package = &#39;statisticalModeling&#39;)&quot;, mistake = TRUE, &quot;the CountryData data table is provided by the `DataComputing` package, not `statisticalModeling`.&quot;)
-test_2 &lt;- fcall(&quot;gf_point()&quot;, &quot;use the `gf_point()` function to make the scatter plot.&quot;)
-test_3 &lt;- fcall(&quot;whatever ~ whatever&quot;, &quot;remember the tilde ~ in the formula&quot;)
-test_3a &lt;- fcall(&quot;death ~ whatever&quot;, &quot;the y-variable `death` is on the left side of the tilde&quot;)
-test_3b &lt;- fcall(&quot;whatever ~ birth&quot;, &quot;the x-variable `births` goes on the right side of the tilde&quot;)
-test_4 &lt;- fcall(&quot;gf_point(whatever, data = CountryData)&quot;, &quot;the `data =` argument should be given the datatable `CountryData`.&quot;)
+<pre class="text"><code>test_0 &lt;- find_call(&quot;library(&#39;statisticalModeling&#39;)&quot;, &quot;give `library()` the name of the package to be loaded, putting the name in quotes.&quot;)
+test_1 &lt;- find_call(&quot;data(whatever, package = &#39;DataComputing&#39;)&quot;, &quot;the data table is provided by the `DataComputing` package.&quot;)
+test_1a &lt;- find_call(&quot;data(whatever, package = &#39;statisticalModeling&#39;)&quot;, mistake = TRUE, &quot;the CountryData data table is provided by the `DataComputing` package, not `statisticalModeling`.&quot;)
+test_2 &lt;- find_call(&quot;gf_point()&quot;, &quot;use the `gf_point()` function to make the scatter plot.&quot;)
+test_3 &lt;- find_call(&quot;whatever ~ whatever&quot;, &quot;remember the tilde ~ in the formula&quot;)
+test_3a &lt;- find_call(&quot;death ~ whatever&quot;, &quot;the y-variable `death` is on the left side of the tilde&quot;)
+test_3b &lt;- find_call(&quot;whatever ~ birth&quot;, &quot;the x-variable `births` goes on the right side of the tilde&quot;)
+test_4 &lt;- find_call(&quot;gf_point(whatever, data = CountryData)&quot;, &quot;the `data =` argument should be given the datatable `CountryData`.&quot;)
 USER_CODE %&gt;% test_0 %&gt;% test_1 %&gt;% test_1a %&gt;% test_2 %&gt;% 
   test_3 %&gt;% test_3a %&gt;% test_3b %&gt;% test_4</code></pre>
 </div>
@@ -184,11 +184,11 @@ data(CPS85, package = &quot;mosaicData&quot;)
 gf_counts( ~ sector, data = CPS85)</code></pre>
 </div>
 <div class="tutor-exercise-support" data-label="DC-five-2-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>test_0 &lt;- fcall(&quot;library(&#39;statisticalModeling&#39;)&quot;, &quot;attach the `statisticalModeling` package with `library()`.&quot;)
-test_1 &lt;- fcall(&quot;data(CPS85, package = &#39;mosaicData&#39;)&quot;, &quot;attach the CPS85 data from the `mosaicData` package.&quot;)
-test_2 &lt;- fcall(&quot;gf_counts()&quot;, &quot;use `gf_counts() to make the bar graph.&quot;)
-test_3 &lt;- fcall(&quot;~ sector&quot;, &quot;the formula should be one sided, with `sector` to the right of the tilde.&quot;)
-test_4 &lt;- fcall(&quot;gf_counts(whatever, data = CPS85)&quot;, &quot;the `data=` argument to `gf_counts()` should be set to the data table `CPS85`.&quot;)
+<pre class="text"><code>test_0 &lt;- find_call(&quot;library(&#39;statisticalModeling&#39;)&quot;, &quot;attach the `statisticalModeling` package with `library()`.&quot;)
+test_1 &lt;- find_call(&quot;data(CPS85, package = &#39;mosaicData&#39;)&quot;, &quot;attach the CPS85 data from the `mosaicData` package.&quot;)
+test_2 &lt;- find_call(&quot;gf_counts()&quot;, &quot;use `gf_counts() to make the bar graph.&quot;)
+test_3 &lt;- find_call(&quot;~ sector&quot;, &quot;the formula should be one sided, with `sector` to the right of the tilde.&quot;)
+test_4 &lt;- find_call(&quot;gf_counts(whatever, data = CPS85)&quot;, &quot;the `data=` argument to `gf_counts()` should be set to the data table `CPS85`.&quot;)
 USER_CODE %&gt;% test_0 %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4</code></pre>
 </div>
 <p>Remember, the formula will be one-sided: <code>~ sector</code>.</p>
@@ -218,11 +218,11 @@ data(CPS85, package = &quot;mosaicData&quot;)
 gf_boxplot(wage ~ sector, data = CPS85)</code></pre>
 </div>
 <div class="tutor-exercise-support" data-label="DC-five-3-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>test_1 &lt;- fcall(&quot;gf_boxplot()&quot;, 
+<pre class="text"><code>test_1 &lt;- find_call(&quot;gf_boxplot()&quot;, 
                 &quot;use &#39;gf_boxplot()&#39; to make the graph.&quot;)
-test_2 &lt;- fcall(&quot;whatever ~ whatever&quot;, &quot;remember the formula.&quot;)
-test_3 &lt;- fcall(&quot;whatever ~ sector&quot;, &quot;the sector variable should be on the right side of the tilde.&quot;)
-test_4 &lt;- fcall(&quot;wage ~ whatever&quot;, &quot;the wage variable goes on the left side of the formula.&quot;)
+test_2 &lt;- find_call(&quot;whatever ~ whatever&quot;, &quot;remember the formula.&quot;)
+test_3 &lt;- find_call(&quot;whatever ~ sector&quot;, &quot;the sector variable should be on the right side of the tilde.&quot;)
+test_4 &lt;- find_call(&quot;wage ~ whatever&quot;, &quot;the wage variable goes on the left side of the formula.&quot;)
 USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4</code></pre>
 </div>
 

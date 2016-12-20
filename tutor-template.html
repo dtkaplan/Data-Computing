@@ -134,7 +134,7 @@ test_2 &lt;- fcall(&quot;whatever + 2&quot;, &quot;second argument should also b
 test_3 &lt;- fcall(&quot;2 + 2&quot;, &quot;remember to add two plus two&quot;)
 USER_CODE %&gt;% test_0 %&gt;% test_1 %&gt;% test_2 %&gt;% test_3
 soln_test(USER_CODE, SOLN_CODE,
-             res = final_(),
+             res = final_,
              same_num(res))</code></pre>
 </div>
 </div>
@@ -208,7 +208,7 @@ test_6 &lt;- fcall(&quot;mean(hp)&quot;, &quot;calculate the mean horsepower&quo
 USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4 %&gt;% test_5 %&gt;% test_6
 
 soln_test(USER_CODE, SOLN_CODE,
-          a = final_(),
+          a = final_,
           same_num(nrow(a)),
           same_num(length(a)))</code></pre>
 </div>

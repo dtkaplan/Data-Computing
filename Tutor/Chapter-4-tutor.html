@@ -130,14 +130,14 @@ $(document).ready(function () {
 <li>Files on your own computer (or on your account in the RStudio server) often start with <code>/</code> or <code>./</code> or <code>~/</code> and end with <code>.csv</code> or <code>.Rdata</code>, etc.</li>
 </ul>
 
-<div id="htmlwidget-49a9a92c87dc6c5dff20" style="width:100%;height:auto;", class = "quiz html-widget">
+<div id="htmlwidget-084215bcead2a138789b" style="width:100%;height:auto;", class = "quiz html-widget">
 <div class="panel panel-default">
 <div class="panel-body quizArea">
 </div>
 </div>
 </div>
 
-<script type="application/json" data-for="htmlwidget-49a9a92c87dc6c5dff20">{"x":{"question":"Which of the following is a data table identified by <code>&quot;http://tiny.cc/dcf/CountryCodes.rda&quot;\u003c/code>.","answers":[{"option":"A file on my computer.","correct":false,"message":"Think where you see names started with <code>http://\u003c/code>"},{"option":"A file available through the internet","correct":true,"message":null},{"option":"A file provided by a package.","correct":false,"message":"Packages provide data with commands like <code>data()\u003c/code>."}],"label":"DC-chap-four-1","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":true,"json":{"info":{"name":"","main":""},"questions":[{"q":"Which of the following is a data table identified by <code>&quot;http://tiny.cc/dcf/CountryCodes.rda&quot;\u003c/code>.","a":[{"option":"A file on my computer.","correct":false,"message":"Think where you see names started with <code>http://\u003c/code>"},{"option":"A file available through the internet","correct":true,"message":null},{"option":"A file provided by a package.","correct":false,"message":"Packages provide data with commands like <code>data()\u003c/code>."}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-084215bcead2a138789b">{"x":{"question":"Which of the following is a data table identified by <code>&quot;http://tiny.cc/dcf/CountryCodes.rda&quot;\u003c/code>.","answers":[{"option":"A file on my computer.","correct":false,"message":"Think where you see names started with <code>http://\u003c/code>"},{"option":"A file available through the internet","correct":true,"message":null},{"option":"A file provided by a package.","correct":false,"message":"Packages provide data with commands like <code>data()\u003c/code>."}],"label":"DC-chap-four-1","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":true,"json":{"info":{"name":"","main":""},"questions":[{"q":"Which of the following is a data table identified by <code>&quot;http://tiny.cc/dcf/CountryCodes.rda&quot;\u003c/code>.","a":[{"option":"A file on my computer.","correct":false,"message":"Think where you see names started with <code>http://\u003c/code>"},{"option":"A file available through the internet","correct":true,"message":null},{"option":"A file provided by a package.","correct":false,"message":"Packages provide data with commands like <code>data()\u003c/code>."}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="section-problem-4.2" class="section level2">
 <h2>Problem 4.2</h2>
@@ -174,19 +174,21 @@ head(_____)</code></pre>
 # Remember the quotes when referring to &quot;mosaicData&quot;</code></pre>
 </div>
 <div class="tutor-exercise-support" data-label="DC-four-2-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>test_0 &lt;- fcall(&quot;data(CPS85, whatever)&quot;, &quot;the first argument to `data()` is the data table, e.g. `CPS85`&quot;)
-test_1 &lt;- fcall(&quot;data(whatever, whatever)&quot;, &quot;the second argument to `data()` is `package =`&quot;)
-test_2 &lt;- fcall(&quot;head(CPS85)&quot;, &quot;give the data table as the argument to `head()`&quot;)
-test_3 &lt;- check_argument(&quot;data(CPS85, package = grab_this)&quot;, 
-                         test = function(x) 
-                           if(x == &#39;mosaicData&#39;) return(&quot;&quot;) else return(&quot;should be the name of the package (in quotes).&quot;))
-# test_3 isn&#39;t working for some reason. Try another
-test_3 &lt;- fcall(&quot;data(whatever, package = &#39;mosaicData&#39;)&quot;, message = &quot;argument should be the name of the package (in quotes).&quot;)
+<pre class="text"><code>test_0 &lt;- find_call(&quot;data(CPS85, whatever)&quot;, &quot;the first argument to `data()` is the data table, e.g. `CPS85`&quot;)
+test_1 &lt;- find_call(&quot;data(whatever, whatever)&quot;, &quot;the second argument to `data()` is `package =`&quot;)
 
-USER_CODE %&gt;% test_0 %&gt;% test_1 %&gt;% test_2 %&gt;% test_3
+test_2 &lt;- find_names(data(CPS85), &quot;remember to use the data() function to access CPS85.&quot;)
+test_3 &lt;- check_argument(&quot;data(CPS85, package = grab_this)&quot;, 
+                         test = agrees(is.character(x), 
+                                       &quot;the name of the package should be in quotes.&quot;))
+test_4 &lt;- find_constants(&quot;mosaicData&quot;, message = &quot;the package containing the data is \&quot;mosaicData\&quot;&quot;)
+test_5 &lt;- find_call(&quot;data(whatever, package = &#39;mosaicData&#39;)&quot;, message = &quot;argument should be the name of the package (in quotes).&quot;)
+test_6 &lt;- find_call(&quot;head(CPS85)&quot;, &quot;give the data table as the argument to `head()`&quot;)
+
+USER_CODE %&gt;% test_0 %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;%  test_4 %&gt;% test_5 %&gt;% test_6
 # and this isn&#39;t working either
 # soln_test(USER_CODE, SOLN_CODE,
-#              res = final_(),
+#              res = final_,
 #              same_num(nrow(res)), hint = TRUE)</code></pre>
 </div>
 </div>
@@ -211,13 +213,13 @@ USER_CODE %&gt;% test_0 %&gt;% test_1 %&gt;% test_2 %&gt;% test_3
 <pre class="text"><code># Use the `read.csv()` function and make assignment to `CCodes`</code></pre>
 </div>
 <div class="tutor-exercise-support" data-label="DC-four-3-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>test_1 &lt;- fcall(&quot;read.csv(whatever)&quot;)
-test_2 &lt;- in_statements(&quot;[\&quot;&#39;].*[\&quot;&#39;]&quot;, 
+<pre class="text"><code>test_1 &lt;- find_call(&quot;read.csv(whatever)&quot;)
+test_2 &lt;- find_statement(&quot;[\&quot;&#39;].*[\&quot;&#39;]&quot;, 
                         message = &quot;you don&#39;t have the file name in quotes.&quot;,
                         regex = TRUE)
-test_3 &lt;- in_statements(&quot;[\&quot;&#39;]http://tiny.cc/dcf/CountryCodes.csv[\&quot;&#39;]&quot;, regex = TRUE,
-                        &quot;you don&#39;t have the name of the file typed correctly.&quot;)
-test_4 &lt;- assigns_to(&quot;CCodes&quot;, message = &quot;remember to assign the output to `CCodes`.&quot;)
+test_3 &lt;- find_constants(&quot;http://tiny.cc/dcf/CountryCodes.csv&quot;, 
+                        message = &quot;you don&#39;t have the name of the file typed correctly.&quot;)
+test_4 &lt;- find_assignment(&quot;CCodes&quot;, message = &quot;remember to assign the output to `CCodes`.&quot;)
 USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4</code></pre>
 </div>
 <p>There are several other functions for reading CSV and other forms of file, but we don’t need to use them in the next several chapters.</p>

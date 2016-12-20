@@ -59,14 +59,14 @@ gf_point(death ~ birth, data = CountryData)
 ```
 
 ```{r DC-five-1-check, echo = FALSE}
-test_0 <- fcall("library('statisticalModeling')", "give `library()` the name of the package to be loaded, putting the name in quotes.")
-test_1 <- fcall("data(whatever, package = 'DataComputing')", "the data table is provided by the `DataComputing` package.")
-test_1a <- fcall("data(whatever, package = 'statisticalModeling')", mistake = TRUE, "the CountryData data table is provided by the `DataComputing` package, not `statisticalModeling`.")
-test_2 <- fcall("gf_point()", "use the `gf_point()` function to make the scatter plot.")
-test_3 <- fcall("whatever ~ whatever", "remember the tilde ~ in the formula")
-test_3a <- fcall("death ~ whatever", "the y-variable `death` is on the left side of the tilde")
-test_3b <- fcall("whatever ~ birth", "the x-variable `births` goes on the right side of the tilde")
-test_4 <- fcall("gf_point(whatever, data = CountryData)", "the `data =` argument should be given the datatable `CountryData`.")
+test_0 <- find_call("library('statisticalModeling')", "give `library()` the name of the package to be loaded, putting the name in quotes.")
+test_1 <- find_call("data(whatever, package = 'DataComputing')", "the data table is provided by the `DataComputing` package.")
+test_1a <- find_call("data(whatever, package = 'statisticalModeling')", mistake = TRUE, "the CountryData data table is provided by the `DataComputing` package, not `statisticalModeling`.")
+test_2 <- find_call("gf_point()", "use the `gf_point()` function to make the scatter plot.")
+test_3 <- find_call("whatever ~ whatever", "remember the tilde ~ in the formula")
+test_3a <- find_call("death ~ whatever", "the y-variable `death` is on the left side of the tilde")
+test_3b <- find_call("whatever ~ birth", "the x-variable `births` goes on the right side of the tilde")
+test_4 <- find_call("gf_point(whatever, data = CountryData)", "the `data =` argument should be given the datatable `CountryData`.")
 USER_CODE %>% test_0 %>% test_1 %>% test_1a %>% test_2 %>% 
   test_3 %>% test_3a %>% test_3b %>% test_4
 ```                
@@ -99,11 +99,11 @@ gf_counts( ~ sector, data = CPS85)
 ```
 
 ```{r DC-five-2-check, echo = FALSE}
-test_0 <- fcall("library('statisticalModeling')", "attach the `statisticalModeling` package with `library()`.")
-test_1 <- fcall("data(CPS85, package = 'mosaicData')", "attach the CPS85 data from the `mosaicData` package.")
-test_2 <- fcall("gf_counts()", "use `gf_counts() to make the bar graph.")
-test_3 <- fcall("~ sector", "the formula should be one sided, with `sector` to the right of the tilde.")
-test_4 <- fcall("gf_counts(whatever, data = CPS85)", "the `data=` argument to `gf_counts()` should be set to the data table `CPS85`.")
+test_0 <- find_call("library('statisticalModeling')", "attach the `statisticalModeling` package with `library()`.")
+test_1 <- find_call("data(CPS85, package = 'mosaicData')", "attach the CPS85 data from the `mosaicData` package.")
+test_2 <- find_call("gf_counts()", "use `gf_counts() to make the bar graph.")
+test_3 <- find_call("~ sector", "the formula should be one sided, with `sector` to the right of the tilde.")
+test_4 <- find_call("gf_counts(whatever, data = CPS85)", "the `data=` argument to `gf_counts()` should be set to the data table `CPS85`.")
 USER_CODE %>% test_0 %>% test_1 %>% test_2 %>% test_3 %>% test_4
                 
 ```
@@ -138,11 +138,11 @@ gf_boxplot(wage ~ sector, data = CPS85)
 
 
 ```{r DC-five-3-check, echo = FALSE}
-test_1 <- fcall("gf_boxplot()", 
+test_1 <- find_call("gf_boxplot()", 
                 "use 'gf_boxplot()' to make the graph.")
-test_2 <- fcall("whatever ~ whatever", "remember the formula.")
-test_3 <- fcall("whatever ~ sector", "the sector variable should be on the right side of the tilde.")
-test_4 <- fcall("wage ~ whatever", "the wage variable goes on the left side of the formula.")
+test_2 <- find_call("whatever ~ whatever", "remember the formula.")
+test_3 <- find_call("whatever ~ sector", "the sector variable should be on the right side of the tilde.")
+test_4 <- find_call("wage ~ whatever", "the wage variable goes on the left side of the formula.")
 USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4
 
 ```

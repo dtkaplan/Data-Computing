@@ -1,0 +1,287 @@
+---
+title: "Data Computing: Chapter 7"
+author: "Daniel Kaplan"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(tutor)
+library(ggplot2)
+library(dplyr)
+library(checkr)
+library(statisticalModeling)
+library(DataComputing)
+library(mosaicData)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+## Problem 7.1: Pipes and data verbs
+
+A data verb is a function that takes a data table as input and produces a data table as output. `sample_n()` is a data verb that performs a very simple tasks: it draws a random sample of cases from the input data table and presents that sample as the output.
+
+The sample code shows a simple data-wrangling expression using `sample_n()`. Run that expression several times to see that the output differs from run to run: the sample is random! The `size =` argument to `sample_n()` sets how big the sample will be.
+
+Now you are going to translate the `sample_n()` statement into pipe notation. Following each of the First/Second/Last comments,
+add your command to implement the expression as a pipe.
+
+- First, re-write the expression using pipe notation.
+- Second, arrange that the output of the expression is stored in an object named `My_sample`.
+- Last, arrange the argument to `sample_n()` so that there are 10 cases in the output.
+
+
+```{r DC-seven-1, exercise = TRUE}
+# read in the Births78 data table
+data(Births78, package = "mosaicData")
+
+# select a random sample of 3 cases
+sample_n(Births78, size = 3)
+
+# First, re-write the above to use pipe notation
+
+
+# Second, re-write the above to save the output in My_sample
+
+
+# Last, arrange for there to be 10 random cases in My_sample
+
+```
+
+```{r DC-seven-1-solution, echo = FALSE}
+library("dplyr")
+# read in the Births78 data table
+data(Births78, package = "mosaicData")
+
+# select a random sample of 3 cases
+sample_n(Births78, size = 3)
+
+# First, re-write the above to use pipe notation
+Births78 %>% sample_n(size = 3)
+
+# Second, re-write the above to save the output in My_sample
+My_sample <- Births78 %>% sample_n(size = 3)
+
+# Last, arrange for there to be 10 random cases in My_sample
+My_sample <- Births78 %>% sample_n(size = 10)
+```
+
+```{r DC-seven-1-check, echo = FALSE}
+test_0 <- find_assignment("..tmp1..", "start with the pipe operator 'Births78 %>%'")
+test_1 <- find_call("sample_n(..tmp1.., size = whatever)", "follow the pipe with sample_n()")
+test_2 <- find_constants(3, match_number(3, "start step 1 with a sample size of 3."))
+test_4 <- find_assignment("My_sample", "in step 2, assign the name 'My_sample' to your result.")
+test_5 <- find_constants(3, message = "in the second step, the sample size should be 3.")
+test_6 <- find_constants(10, message = "in the third step, the sample size should be 10.")
+test_7 <- check_value(test = function(x) ifelse(nrow(x) == 10, "", sprintf("sample size of 10, not %s!", nrow(x))))
+USER_CODE %>% test_0 %>% test_1 %>% test_2 
+USER_CODE %>% test_4 %>% test_5 %>% then %>% test_4 %>% test_6 %>% final_ %>% test_7
+```
+
+
+```{r, echo = FALSE, eval = FALSE}
+test_student_typed("size *= *10", fixed = FALSE,
+                   not_typed_msg = "Did you change the sample size to 10?")
+test_student_typed("Births78 *%>% *sample_n", fixed = FALSE,
+                   not_typed_msg = "Remember, it's `data_table %>% data_verb`.")
+test_student_typed("My_sample *(=|<-)", fixed = FALSE,
+                   not_typed_msg = "Did you assign the output to `My_sample`?")
+```
+
+
+## Problem 7.2: The summarise() data verb
+
+One of the most widely used data verbs is `summarise()`. Like all data verbs, `summarise()` takes as input a data table. It performs a reduction on the data table, for example calculating the sum of the values in a variable.
+
+Of course, you have to tell `summarise()` what summaries you want to perform. All summaries involve a "reduction verb", a function like `mean()` or `sum()` that takes the values in a variable and reduces them to a single value.
+
+We'll use the `Births78` data in this exercise. This data table gives the number of births in the US on each day of the year in 1978. The variable `births` gives the number of babies born on each day.
+
+Construct a wrangling statement that uses `summarise()` and `sum()` to find the total number of births. The result of the calculation should be a data table with a single column named `total` and just one row containing the total number of births.
+
+1. Pipe the `Births78` data table to be the input to `summarise()`. 
+2. The argument to `summarise()` will be named `total` and should be set equal to the sum of the values in the `birth` variable.
+
+```{r DC-seven-2, exercise = TRUE}
+data(Births78, package = "mosaicData")
+library("dplyr")
+
+Births78 %>% summarise(____)
+
+```{r DC-seven-2-solution, echo = FALSE}
+data(Births78, package = "mosaicData")
+library("dplyr")
+
+Births78 %>% summarise(total = sum(births))
+```
+
+```{r DC-seven-2-hint, echo = FALSE}
+# The reduction verb `sum()` takes a variable as input and provides 
+# as output the sum of all the values in that variable. `sum(births)` 
+# is an expression that can be given as an argument to the data verb `summarise()` 
+# to instruct it to evaluate the expression on the data table piped in as input. 
+# Naming the argument, e.g. `summarise(total = sum(births))` gives the name `total` 
+# to the corresponding output of `summarise()`.
+```
+
+```{r DC-seven-2-check, eval = FALSE}
+test_0 <- find_pipe_start("Births78", "pipe `Births78` into summarise()") 
+test_1 <- find_call("summarise()", "use the `summarise()` data verb.")
+test_2 <- find_call("sum(births)", "use `sum()` in the argument to `summarise()`")
+test_3 <- check_value(test = function(x) ifelse( names(x) == "total", "", "name the output variable 'total'."))
+test_4 <- check_value(test = function(x) ifelse( nrow(x) == 1, "", "output should have just 1 row."))
+USER_CODE %>% test_0 %>% test_1 %>% test_2 %>% test_3 %>% test_4
+```
+
+## Problem 7.3: Groupwise summaries
+
+Wrangling often involves computing summaries for different groups of cases. The `group_by()` data verb allows you to specify how to divide the cases into groups so that `summarise()` and other data verbs know what to do. 
+
+Typically, you will define groups based on the level of one or more a variables. For instance, the `wday` variable in `Births78` tells which day of the week --- Sunday, Monday, ... --- each of the dates corresponds to.
+
+*** =instructions
+- Pipe `Births78` into `group_by()`. Give `group_by()` the argument `wday`, so that groups are defined by the day of the week.
+- The output of `group_by()` should be piped into `summarise()`. Arrange `summarise()` to have an argument named `total` that sums the number of `births`.
+- The result should be a separate sum, named `total`, for each day of the week.
+
+*** =pre_exercise_code
+```{r}
+data(Births78, package = "mosaicData")
+library(dplyr)
+```
+
+*** =solution
+```{r}
+data(Births78, package = "mosaicData")
+library("dplyr")
+Births78 %>%
+  group_by(wday) %>%
+  summarise(total = sum(births))
+```
+
+*** =hint
+Pipe `Births78` into `group_by(wday)`. Then, pipe the output of `group_by(wday)` to a `summarise()` function whose argument computes the quantity `total = sum(births)`. 
+
+*** =sample_code
+```{r DC-seven-3, exercise = TRUE}
+data(Births78, package = "mosaicData")
+library("dplyr")
+Births78 %>%
+  group_by(___) %>%
+  summarise(___ = sum(___))
+```
+
+*** =sct
+```{r eval = FALSE}
+test_function("group_by")
+test_function("sum")
+test_function("summarise")
+success_msg("Note that the output contains *only* the variables used for grouping and the variables created by `summarise()`.")
+```
+
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1 key:5c7130b69f
+## Problem 7.4: group_by() with other data verbs
+
+The `group_by()` function simply marks the data table as having groups (specified by the arguments to `group_by()`). Those groups can be used by any data verb, not just `summarise()`.
+
+In this exercise, you're going to pipe the output of `group_by()` into `sample_n()`. Examine the output and tried to figure out how `sample_n()` used the groups marked by `group_by()`.
+
+Which way did `sample_n()` use the groups?
+
+*** =instructions
+- It randomly picked a group and selected only cases within that group.
+- It operated separately on each group and collected the results for all the groups together into the output.
+- It ignored the groups.
+
+*** =pre_exercise_code
+```{r}
+data(Births78, package = "mosaicData")
+library("dplyr")
+```
+
+*** =sample_code
+```{r DC-seven-4, exercise = TRUE}
+data(Births78, package = "mosaicData")
+library("dplyr")
+
+Births78 %>% 
+  group_by(wday) %>%
+  sample_n(size = 2)
+```
+
+*** =sct
+```{r eval = FALSE}
+msg1 <- "If this were right, all of the cases in the output would have the same value of `wday`."
+msg2 <- "Right. `group_by()` marks the groups and other data verbs (from the `dplyr` package) then operate on the groups individually."
+msg3 <- "If it ignored the groups, there would be no pattern in the output relating to the groups. But there is. Look again."
+test_mc(correct = 2, feedback_msgs = c(msg1, msg2, msg3))
+```
+
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1   key:bb7e0e6b0e
+## Problem 7.5: Not a data verb.
+
+A data verb is a function that takes a data table as an input and produces a data table as an input.
+
+In the console, try each of these R expressions on the `Births78` data table.
+
+* `nrow(Births78)`
+* `names(Births78)`
+* `class(Births78)`
+
+*** =pre_exercise_code
+```{r}
+# provide access to the Births78 data
+data(Births78, package = "mosaicData")
+
+
+```
+
+None of these functions are data verbs. Explain why.
+
+*** =instructions
+- they don't take a data table as in input.
+- they don't have any output.
+- they don't produce a data table as an output.
+
+
+*** =sct
+```{r eval = FALSE}
+msg1 <- "But they are taking `Births78` as input, and `Births78` is a data table."
+msg2 <- "Each of them has an output."
+msg3 <- "The output is not in the form of a data table. `nrow()` produces a single number, `names()` produces a set of character strings, and `class()` gives a character string identifying the class of the input."
+test_mc(correct = 3, feedback_msgs = c(msg1, msg2, msg3))
+```
+
+*** =hint
+When a data table is printed, the cases are numbered in sequence on the left, one per row, and the variable names appear across the top. In contrast, a simple "set" is just a series of numbers or character strings and can be printed with more than one item on a line.
+
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1  key:5fa5d1141b
+## Problem 7.6: group_by()
+
+`group_by()` can use multiple variables when forming groups. You do this by giving multiple arguments to `group_by()`.
+
+Figure out and explain what groups are formed by `group_by()` in this data-wrangling statement.
+
+    CPS85 %>%
+      group_by(sex, sector) %>%
+      summarise(wage = mean(wage))
+      
+      
+*** =pre
+```{r}
+data(CPS85, package = "mosaicData")
+library("dplyr")
+```
+
+*** =instructions
+- It divides the groups identified by `sex` into subgroups according to what `sector` they are in.
+- It chooses one or the other of `sex` or `sector` to form the groups.
+- It provides two different groupings: one by `sex` and a separate one by `sector`, so that `summarise()` can give two separate reports.
+
+*** =sct
+```{r eval = FALSE}
+msg1 <- "Right. You can use any number of variables to define groups."
+msg2 <- "That wouldn't be good. Why should it do the choosing? You are the one who determines what the computer is going to do, not the other way around."
+msg3 <- "No. Note that each sex is subdivided into each of the sectors; it's not a separate list of the two sexes and the 8 sectors."
+```
+
+

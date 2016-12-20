@@ -38,12 +38,12 @@ gf_counts( ~ sector + fill:union, data = CPS85) + facet_grid( ~ sex)
 ```
 
 ```{r DC-six-1-check, echo = FALSE}
-test_1 <- fcall("gf_counts()", "use 'gf_counts()' to make the frame of the plot.")
-test_2 <- in_statements("~ *sector", "use a one-sided formula with 'sector' on the right hand side of the tilde.", regex = TRUE)
-test_3 <- fcall("sector + fill:union", "the formula for 'gf_counts()' should include an aesthetic 'fill:' which should be mapped to 'union'.")
-test_4 <- fcall("facet_grid()", "use facet_grid() to split up the graph into facets.")
-test_5 <- in_statements("facet_grid\\( +~ +sex *\\)", "the faceting should be done by sex; use a one-sided formula with sex on the right hand side.", regex = TRUE)
-USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4 %>% test_5
+test_1 <- find_call("gf_counts()", "use 'gf_counts()' to make the frame of the plot.")
+test_2 <- find_statement("~ *sector", "use a one-sided formula with 'sector' on the right hand side of the tilde.", regex = TRUE)
+test_3 <- find_call("sector + fill:union", "the formula for 'gf_counts()' should include an aesthetic 'fill:' which should be mapped to 'union'.")
+test_4 <- find_call("facet_grid()", "use facet_grid() to split up the graph into facets.")
+test_5 <- find_formula(match_formula(~ sex), message = "the faceting should be done by sex; use a one-sided formula with sex on the right hand side.")
+USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4 %>% inside %>% test_5
 ```
 
 In general, aesthetics such as color, size, fill, etc. are mapped to variables by adding into the formula a component in the form `aesthetic:variable`.
@@ -71,8 +71,8 @@ gf_point(death ~ birth, data = CountryData)
 
 
 ```{r DC-six-2-check, echo = FALSE}
-test_1 <- fcall("gf_point(whatever, data = CountryData)", "use gf_point() for the body of the plot")
-test_2 <- fcall("birth + color:life", "map the life variable to the size aesthetic by adding on to the formula the term '+ color:life'.")
+test_1 <- find_call("gf_point(whatever, data = CountryData)", "use gf_point() for the body of the plot")
+test_2 <- find_call("birth + color:life", "map the life variable to the size aesthetic by adding on to the formula the term '+ color:life'.")
 
 USER_CODE %>% test_1 %>% test_2
                 
@@ -154,24 +154,24 @@ gf_boxplot(wage ~ sector + fill:sex, data = CPS85) + facet_grid( ~ union)
 ```
 
 ```{r DC-six-3-check, eval = FALSE, echo = FALSE}
-test_1 <- fcall("library()", 
+test_1 <- find_call("library()", 
                 "use the library() function to attach the \"statisticalModeling\" package.")
-test_2 <- has_constants("statisticalModeling", 
+test_2 <- find_constants("statisticalModeling", 
                         message = "it's the \"statisticalModeling\" package you want to attach with library().")
 
-test_3 <- fcall("data(CPS85, whatever)", 
+test_3 <- find_call("data(CPS85, whatever)", 
                 "access the CPS85 dataset with data")
-test_4 <- fcall("data(whatever, package = \"mosaicData\")", 
+test_4 <- find_call("data(whatever, package = \"mosaicData\")", 
                 "CPS85 is in the \"mosaicData\" package.")
 
 USER_CODE %>% test_1 %>% inside %>% test_2 %>% then %>% test_3 %>% test_4
 
-test_5 <- fcall("gf_boxplot()", "use gf_boxplot() as the main plotting function.")
-test_5a <- fcall("whatever + whatever", "Use '+' to add the faceting to the boxplot.")
-test_6 <- fcall("facet_grid()", "use the facet_grid() function.")
-test_7 <- has_formula(test = match_formula(~ union), 
+test_5 <- find_call("gf_boxplot()", "use gf_boxplot() as the main plotting function.")
+test_5a <- find_call("whatever + whatever", "Use '+' to add the faceting to the boxplot.")
+test_6 <- find_call("facet_grid()", "use the facet_grid() function.")
+test_7 <- find_formula(test = match_formula(~ union), 
                       "the formula for faceting should be ~ union")
-test_8 <- has_formula(test = match_formula(wage ~ sector + fill:sex),
+test_8 <- find_formula(test = match_formula(wage ~ sector + fill:sex),
                       "aethetics formula is missing something.")
 
 USER_CODE %>% test_5 %>% test_5a %>% test_6 %>% test_7 %>% test_8

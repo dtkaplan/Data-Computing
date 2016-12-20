@@ -91,19 +91,21 @@ head(CPS85)
 ```
 
 ```{r DC-four-2-check}
-test_0 <- fcall("data(CPS85, whatever)", "the first argument to `data()` is the data table, e.g. `CPS85`")
-test_1 <- fcall("data(whatever, whatever)", "the second argument to `data()` is `package =`")
-test_2 <- fcall("head(CPS85)", "give the data table as the argument to `head()`")
-test_3 <- check_argument("data(CPS85, package = grab_this)", 
-                         test = function(x) 
-                           if(x == 'mosaicData') return("") else return("should be the name of the package (in quotes)."))
-# test_3 isn't working for some reason. Try another
-test_3 <- fcall("data(whatever, package = 'mosaicData')", message = "argument should be the name of the package (in quotes).")
+test_0 <- find_call("data(CPS85, whatever)", "the first argument to `data()` is the data table, e.g. `CPS85`")
+test_1 <- find_call("data(whatever, whatever)", "the second argument to `data()` is `package =`")
 
-USER_CODE %>% test_0 %>% test_1 %>% test_2 %>% test_3
+test_2 <- find_names(data(CPS85), "remember to use the data() function to access CPS85.")
+test_3 <- check_argument("data(CPS85, package = grab_this)", 
+                         test = agrees(is.character(x), 
+                                       "the name of the package should be in quotes."))
+test_4 <- find_constants("mosaicData", message = "the package containing the data is \"mosaicData\"")
+test_5 <- find_call("data(whatever, package = 'mosaicData')", message = "argument should be the name of the package (in quotes).")
+test_6 <- find_call("head(CPS85)", "give the data table as the argument to `head()`")
+
+USER_CODE %>% test_0 %>% test_1 %>% test_2 %>% test_3 %>%  test_4 %>% test_5 %>% test_6
 # and this isn't working either
 # soln_test(USER_CODE, SOLN_CODE,
-#              res = final_(),
+#              res = final_,
 #              same_num(nrow(res)), hint = TRUE)
 ```
 
@@ -143,13 +145,13 @@ CCodes <- read.csv("http://tiny.cc/dcf/CountryCodes.csv")
 ```
 
 ```{r DC-four-3-check, echo = FALSE}
-test_1 <- fcall("read.csv(whatever)")
-test_2 <- in_statements("[\"'].*[\"']", 
+test_1 <- find_call("read.csv(whatever)")
+test_2 <- find_statement("[\"'].*[\"']", 
                         message = "you don't have the file name in quotes.",
                         regex = TRUE)
-test_3 <- in_statements("[\"']http://tiny.cc/dcf/CountryCodes.csv[\"']", regex = TRUE,
-                        "you don't have the name of the file typed correctly.")
-test_4 <- assigns_to("CCodes", message = "remember to assign the output to `CCodes`.")
+test_3 <- find_constants("http://tiny.cc/dcf/CountryCodes.csv", 
+                        message = "you don't have the name of the file typed correctly.")
+test_4 <- find_assignment("CCodes", message = "remember to assign the output to `CCodes`.")
 USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4
 ```
 

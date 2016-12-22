@@ -35,7 +35,8 @@ You refer to a data file by a name also, **always in quotes**. The name often co
 ```{r DC-chap-four-1, echo=FALSE}
 question('Which of the following is a data table identified by `"http://tiny.cc/dcf/CountryCodes.rda"`.',
   answer("A file on my computer.", message = "Think where you see names started with `http://`" ),
-  answer("A file available through the internet", correct = TRUE),
+  answer("A file available through the internet", correct = TRUE, 
+         message = "File names starting with 'http://' or 'https://' signal that the file is available via the internet."),
   answer("A file provided by a package.", message = "Packages provide data with commands like `data()`."),
   allow_retry = TRUE,
   random_answer_order = TRUE

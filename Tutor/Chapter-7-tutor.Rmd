@@ -138,19 +138,30 @@ Wrangling often involves computing summaries for different groups of cases. The 
 
 Typically, you will define groups based on the level of one or more a variables. For instance, the `wday` variable in `Births78` tells which day of the week --- Sunday, Monday, ... --- each of the dates corresponds to.
 
-*** =instructions
+Earlier, you constructed a statement to find the total count of births:
+```r
+Births78 %>% summarise(total = sum(births))
+```
+In this exercise you'll modify that statement to find the total number of births on each day of the week. 
+
 - Pipe `Births78` into `group_by()`. Give `group_by()` the argument `wday`, so that groups are defined by the day of the week.
 - The output of `group_by()` should be piped into `summarise()`. Arrange `summarise()` to have an argument named `total` that sums the number of `births`.
 - The result should be a separate sum, named `total`, for each day of the week.
 
-*** =pre_exercise_code
-```{r}
-data(Births78, package = "mosaicData")
-library(dplyr)
+```{r DC-setup, echo = FALSE}
+library(DataComputing)
 ```
 
-*** =solution
-```{r}
+
+```{r DC-seven-3, exercise = TRUE, exercise.setup = 'DC-setup'}
+data(Births78, package = "mosaicData")
+
+Births78 %>%
+  group_by(___) %>%
+  summarise(___ = sum(___))
+```
+
+```{r DC-seven-3-solution, echo = FALSE}
 data(Births78, package = "mosaicData")
 library("dplyr")
 Births78 %>%
@@ -158,130 +169,94 @@ Births78 %>%
   summarise(total = sum(births))
 ```
 
-*** =hint
-Pipe `Births78` into `group_by(wday)`. Then, pipe the output of `group_by(wday)` to a `summarise()` function whose argument computes the quantity `total = sum(births)`. 
 
-*** =sample_code
-```{r DC-seven-3, exercise = TRUE}
-data(Births78, package = "mosaicData")
-library("dplyr")
-Births78 %>%
-  group_by(___) %>%
-  summarise(___ = sum(___))
+```{r DC-seven-3-check, echo = FALSE}
+test_1 <- find_pipe_start("Births78", message = "use the Births78 data table from the mosaicData package")
+test_2 <- find_constants("wday")
+test_3 <- find_names(group_by(wday), message = "the argument to group_by() is the name of the variable you wnt to use to define the groups. In this case, it's wday. No quotes are needed. ")
+test_4 <- check_value(test = agrees(all(c("wday", "total") %in% names(x))))
+USER_CODE %>% test_1 %>% test_2 %>% 
+  was_mistake(message = "variable names in dplyr data verbs should not be quoted.") %>%
+  test_3 %>% final_ %>% test_4
 ```
 
-*** =sct
-```{r eval = FALSE}
-test_function("group_by")
-test_function("sum")
-test_function("summarise")
-success_msg("Note that the output contains *only* the variables used for grouping and the variables created by `summarise()`.")
-```
 
---- type:MultipleChoiceExercise lang:r xp:10 skills:1 key:5c7130b69f
 ## Problem 7.4: group_by() with other data verbs
 
 The `group_by()` function simply marks the data table as having groups (specified by the arguments to `group_by()`). Those groups can be used by any data verb, not just `summarise()`.
 
 In this exercise, you're going to pipe the output of `group_by()` into `sample_n()`. Examine the output and tried to figure out how `sample_n()` used the groups marked by `group_by()`.
 
-Which way did `sample_n()` use the groups?
-
-*** =instructions
-- It randomly picked a group and selected only cases within that group.
-- It operated separately on each group and collected the results for all the groups together into the output.
-- It ignored the groups.
-
-*** =pre_exercise_code
-```{r}
+```{r DC-seven-4b, exercise = TRUE, exercise.setup = 'DC-setup'}
 data(Births78, package = "mosaicData")
-library("dplyr")
-```
-
-*** =sample_code
-```{r DC-seven-4, exercise = TRUE}
-data(Births78, package = "mosaicData")
-library("dplyr")
-
+# run this code
 Births78 %>% 
   group_by(wday) %>%
   sample_n(size = 2)
 ```
 
-*** =sct
-```{r eval = FALSE}
-msg1 <- "If this were right, all of the cases in the output would have the same value of `wday`."
-msg2 <- "Right. `group_by()` marks the groups and other data verbs (from the `dplyr` package) then operate on the groups individually."
-msg3 <- "If it ignored the groups, there would be no pattern in the output relating to the groups. But there is. Look again."
-test_mc(correct = 2, feedback_msgs = c(msg1, msg2, msg3))
+```{r DC-seven-4, echo=FALSE}
+question('Which way did sample_n() use the groups?',
+  answer("It randomly picked a group and selected only cases within that group.", 
+         message = "If this were right, all of the cases in the output would have the same value of wday."),
+  answer("It operated separately on each group and collected the results for all the groups together into the output.", correct = TRUE),
+  answer("It ignored the groups", message = "If it ignored the groups, there would be no pattern in the output relating to the groups. But there is. Look again."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
 ```
 
---- type:MultipleChoiceExercise lang:r xp:10 skills:1   key:bb7e0e6b0e
 ## Problem 7.5: Not a data verb.
 
 A data verb is a function that takes a data table as an input and produces a data table as an input.
 
 In the console, try each of these R expressions on the `Births78` data table.
 
-* `nrow(Births78)`
-* `names(Births78)`
-* `class(Births78)`
-
-*** =pre_exercise_code
-```{r}
-# provide access to the Births78 data
-data(Births78, package = "mosaicData")
-
-
+```{r DC-seven-5b, exercise = TRUE}
+nrow(Births78)
+names(Births78)
+class(Births78)
 ```
 
-None of these functions are data verbs. Explain why.
-
-*** =instructions
-- they don't take a data table as in input.
-- they don't have any output.
-- they don't produce a data table as an output.
-
-
-*** =sct
-```{r eval = FALSE}
-msg1 <- "But they are taking `Births78` as input, and `Births78` is a data table."
-msg2 <- "Each of them has an output."
-msg3 <- "The output is not in the form of a data table. `nrow()` produces a single number, `names()` produces a set of character strings, and `class()` gives a character string identifying the class of the input."
-test_mc(correct = 3, feedback_msgs = c(msg1, msg2, msg3))
-```
-
-*** =hint
+```{r DC-seven-5b-hint, echo = FALSE}
 When a data table is printed, the cases are numbered in sequence on the left, one per row, and the variable names appear across the top. In contrast, a simple "set" is just a series of numbers or character strings and can be printed with more than one item on a line.
+```
 
---- type:MultipleChoiceExercise lang:r xp:10 skills:1  key:5fa5d1141b
+```{r DC-seven-5, echo = FALSE}
+question("Why aren't any of these data verbs?",
+         answer("They don't take a data table as in input.",
+                message = 'But they are taking `Births78` as input, and `Births78` is a data table.'),
+         answer("They don't have any output.",
+                message = "Each of them has an output."),
+         answer('The output is not in the form of a data table. `nrow()` produces a single number, `names()` produces a set of character strings, and class() gives a character string identifying the class of the input.', correct = TRUE),
+         allow_retry = TRUE,
+         random_answer_order = TRUE)
+```
+
 ## Problem 7.6: group_by()
 
-`group_by()` can use multiple variables when forming groups. You do this by giving multiple arguments to `group_by()`.
+`group_by()` can use multiple variables when forming groups. You do this by giving multiple arguments to `group_by()`; each argument is a variable in the data table input.
 
 Figure out and explain what groups are formed by `group_by()` in this data-wrangling statement.
 
-    CPS85 %>%
-      group_by(sex, sector) %>%
-      summarise(wage = mean(wage))
-      
-      
-*** =pre
-```{r}
-data(CPS85, package = "mosaicData")
-library("dplyr")
+```{r DC-seven-6-b, exercise = TRUE}
+CPS85 %>%
+  group_by(sex, sector) %>%
+  summarise(wage = mean(wage))
+```    
+
+```{r DC-seven-6, echo = FALSE}
+question("What is group_by() accomplishing in the above statement?",
+         answer("It divides the groups identified by sex into subgroups according to what sector they are in.",
+                correct = TRUE, message = "You can use any number of variables to define groups."),
+         answer("It chooses one or the other of sex or sector to form the groups.", 
+                message = "That would not be good. Why should it do the choosing? You are the one who determines what the computer is going to do, not the other way around."),
+         answer("It provides two different groupings: one by sex and a separate one by sector, so that summarise() can give two separate reports.", 
+                message = "No. Note that each sex is subdivided into each of the sectors; it's not a separate list of the two sexes and the 8 sectors."),
+         allow_retry = TRUE,
+         random_answer_order = TRUE)
 ```
 
-*** =instructions
-- It divides the groups identified by `sex` into subgroups according to what `sector` they are in.
-- It chooses one or the other of `sex` or `sector` to form the groups.
-- It provides two different groupings: one by `sex` and a separate one by `sector`, so that `summarise()` can give two separate reports.
 
-*** =sct
-```{r eval = FALSE}
-msg1 <- "Right. You can use any number of variables to define groups."
-msg2 <- "That wouldn't be good. Why should it do the choosing? You are the one who determines what the computer is going to do, not the other way around."
-msg3 <- "No. Note that each sex is subdivided into each of the sectors; it's not a separate list of the two sexes and the 8 sectors."
-```
 
 

@@ -1,0 +1,89 @@
+---
+title: "Data Computing: Chapter 8"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(tutor)
+library(ggplot2)
+library(dplyr)
+library(checkr)
+library(DataComputing)
+library(mosaicData)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+# Problem 8.1: Making a graphics frame
+
+In previous exercises, you used a formula-based interface to the `ggplot2` system for graphics. That formula-based interface is intended to be easy for getting started with making simple graphics. In these exercises, you'll practice with the `ggplot` interface itself.
+
+The `ggplot()` function is used to define a the graphics frame. The frame it makes is blank, ready to have additional layers of glyphs added to it. The typical arguments to `ggplot()` are:
+
+1. A data table, given as the first argument or piped into `ggplot()`.
+2. An `aes()` statement which constructs the mapping from variables in the data table to the `x` and `y` aesthetics, that is, the frame itself.
+
+
+```{r echo = FALSE}
+data(CountryData, package = "DataComputing")
+library("ggplot2")
+library("dplyr")
+CountryData %>% ggplot(aes(x = death, y = life))
+```
+
+The graphic above shows a (blank) frame constructed by `ggplot()`. We'll add layers to this blank frame in the exercises that follow, but for now your task is simple: re-create the blank frame.
+
+Read from the graph the variables that have been mapped to the x and y aesthetics.
+Fill in the blanks in order to construct a command that will reproduce the blank frame.
+
+```{r DC-eight-1, exercise = TRUE}
+# Provide access to CountryData
+data(CountryData, package = "DataComputing")
+
+# Attach the ggplot2 package
+library("ggplot2")
+
+# Fill in the blanks ...
+CountryData %>%
+  ggplot(aes(x = ___, y = ___))
+```
+
+- Read from the graph the variables that have been mapped to the x and y aethetics.
+- Fill in the blanks in order to construct a command that will reproduce the blank frame.
+
+*** =solution
+```{r DC-eight-1-solution, echo = FALSE}
+data(CountryData, package = "DataComputing")
+library("ggplot2")
+CountryData %>% ggplot(aes(x = life, y = death))
+```
+
+```{r DC-eight-1-hint, echo = FALSE}
+As you can see, `life` is being mapped to the x aesthetic, `death` to the y aesthetic. It will seem a bit odd at first, but remember to use `aes()` as a function, given as an argument to `ggplot()`, and map the aesthetics by giving appropriate arguments to `aes()`.
+
+```{r DC-eight-1-check, echo = FALSE}
+set_success_message("Good. A blank frame isn't good for much. We'll add glyphs, labels, and such in the exercises that follow.")
+test_1 <- any_test(find_call("ggplot(x = whatever)"), find_call("ggplot(y = whatever)"))
+USER_CODE %>% test_1 %>% 
+  was_mistake("remember that aesthetics drawn from variables must be placed as arguments to the `aes()` function, which itself will be an argument to `ggplot()`. ")
+test_2 <- find_call("aes(x = whatever, y = whatever)", "set both x and y aesthetics within a call to `aes()`.")
+test_3 <- find_call("aes(y = life)", 
+  message = "look again at the graphic to see which variable is being mapped to the y axis.")
+test_4 <- find_call("aes(x = death)", "are you sure you've mapped the right variable to the x axis?")
+test_5 <- check_value(test = agrees(inherits(x, "ggplot")))
+USER_CODE %>% test_2 %>% test_3 %>% test_4 %>% final_ %>% test_5
+```
+
+## Adding a layer
+
+## Faceting
+
+## Mapping an aesthetic in the layer
+
+## Adding x- and y-axis labels
+
+
+## Hints from the formula interface
+
+How to get the formula interface to print out the corresponding ggplot command.
+

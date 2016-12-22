@@ -1,0 +1,53 @@
+---
+title: "DC-2016-12-22-f379e"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+
+Some of the questions in these tutorials will be multiple choice. As soon as you click one of the answers, your answer will be checked. 
+
+As a rule, the answers are presented in a random order. Often, you will have more than one opportunity to answer, until you get things right. Try this question. We're all friends here; feel free to make an incorrect choice, so that you see what happens.
+
+```{r DC-2016-12-22-f379e-1, echo = FALSE}
+question('Which is the first month of the year?',
+  answer("May", correct = FALSE,
+         message = "Sorry, but May is the fifth month. Look for a month that's earlier in the year." ),
+  answer("March", 
+         correct = FALSE, 
+         message = "If we were living under the early Roman calendar, this would be correct. That's why the months 'September', 'October', 'November', and 'December' have names that refer to 7 ('sept'), 8 ('oct'), 9 ('nov'), and 10 ('dec')."),
+  answer("January", 
+         correct = TRUE,
+         message = "A solid, conventional choice."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+### Another example
+
+Sometimes, questions will include a code pane that is for scratch work --- use it as you would use a piece of scrap paper. For instance:
+
+```{r DC-2016-12-22-f379e-2, exercise = TRUE, echo = FALSE}
+
+```
+
+Note that there is no "Submit Code" button. This is just scratch paper, but you can run any code you put inside the pane. The results might help you answer the actual question ...
+
+
+```{r DC-2016-12-22-f379e-3, echo = FALSE}
+question('What is $\\sqrt{17}$?',
+  answer("4.123", correct = TRUE),
+  answer("1.234"),
+  answer("2.341"),
+  answer("3.412"),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```

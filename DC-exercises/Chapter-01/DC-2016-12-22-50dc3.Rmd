@@ -1,0 +1,77 @@
+---
+title: "DC-2016-12-22-50dc3"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+library(DataComputing)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2016-12-22-50dc3-setup, echo = FALSE}
+# code to be evaluated before exercise code
+library(DataComputing)
+```
+
+Many people think that it's *writing* code that's important. But more important is being able to *read* code. If you can read, then you can learn from examples. And writing code is often a matter, even for professional programmers, of copying existing code and modifying it to accomplish a new task.
+
+So, even though you haven't yet had any opportunity to learn about data wrangling commands, here's an example that you can read. You might not be able to figure out everything in it, but it's a start down the path.
+
+The `WorldCities` data table contains information about 23,000 cities around the world. Here's a random selection of a few of them:
+
+```{r echo = FALSE}
+library(DataComputing)
+WorldCities %>% sample_n(size = 5) %>%
+  select(name, latitude, longitude, country, population)
+```
+
+In the code pane below, there are two commands. The first command is a one-liner. It identifies to R where to find the `WorldCities` data.
+
+The second command spans several lines and comprises several different steps in data wrangling: grouping, summarizing, etc. The effect of this command is to find the total city population for each country, and then present the countries with the largest urban populations in descending order. 
+
+There's a blank in the command. Fill this in appropriately so that the output of the command will show only those countries where the urban population is greater than 10 million. Hint: such numbers are written without the commas, so don't write `10,000,000`
+<!-- narrative before exercise -->
+
+```{r DC-2016-12-22-50dc3, exercise = TRUE, exercise.setup = "DC-2016-12-22-50dc3-setup", exercise.eval = FALSE}
+# A single-line command
+data(WorldCities, package = "DataComputing")
+
+# A multi-line command.
+WorldCities %>%
+  group_by(country) %>%
+  summarise(total = sum(population)) %>%
+  filter(total > ______) %>%
+  arrange(desc(total))
+```
+
+
+```{r DC-2016-12-22-50dc3-hint, echo = FALSE}
+# hint text or code. Can offer multiple hints with similar chunks ending in hint-1, hint-2, etc.
+```
+
+```{r DC-2016-12-22-50dc3-solution, echo = FALSE}
+# code or text that's a solution to the exercise
+# A single-line command
+data(WorldCities, package = "DataComputing")
+
+# A multi-line command.
+WorldCities %>%
+  group_by(country) %>%
+  summarise(total = sum(population)) %>%
+  filter(total > 10000000) %>%
+  arrange(desc(total))
+```
+
+```{r DC-2016-12-22-50dc3-check, echo = FALSE}
+set_success_message("Good.  That wasn't so hard.") # change as you like
+test_1 <- find_call("total > whatever") 
+test_2 <- check_argument("whatever > grab_this", 
+                         match_number(10000000), 
+                         message("the number should be 10000000"))
+USER_CODE %>% test_1 %>% test_2
+```
+
+Some people are surprised that Brazil (BR) has the fourth largest urban population.

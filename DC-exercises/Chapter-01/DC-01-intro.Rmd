@@ -1,0 +1,82 @@
+---
+title: "DC-01-intro"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+Welcome to this *Data Computing* tutorial.
+
+The document you are reading is designed to help you learn to write data wrangling and visualization commands in R. It uses an interactive tutorial system that allows you to try commands out while giving you (hopefully) helpful feedback when you do something wrong.
+
+This welcome exercise is about how the tutorial system works. Understanding this will help you use the tutorials productively.
+
+The basic component of a tutorial exercise is a *code pane* in which you can type and execute R code to perform a specified task.  Exercises also have a *narrative*: a description of the task to be performed.  For this welcome, we'll set a relatively simple task.
+
+> Calculate using appropriate R commands the length of the hypotenuse of a right triangle with sides of length 5 and 7.
+
+```{r DC-01-intro, exercise = TRUE, exercise.eval = FALSE}
+a <- 5
+b <- 7
+_____
+```
+
+<div id="DC-01-intro-hint">
+---------
+
+> You need to translate $\sqrt{a^2 + b^2}$ into R. Square roots are calculated with the `sqrt()` function in R. The value for which to calculate the square root goes inside the parentheses. To square a number `b`, you write `b^2` in R. And, of course, addition is `+`.
+
+---------
+</div>
+
+
+The code pane here already has some content. You might recognize the meaning of the lines `a <- 5` and `b <- 7` and how they pertain to the hypotenuse problem. 
+
+Press the "Run Code" button in the code pane. You might be surprised to see the response: a red box with some gibberish. Let's not worry about the gibberish right now. Focus instead on the box's being red.
+
+A **red** box means that the code in the pane is not a proper R expression. This is because the line
+```r
+_____
+```
+is not a legal R expression.^[Perhaps you're wondering why it isn't legal. Object names must begin with a letter or a period. Underscores are allowed in names, but not at the start.] Instead, that line is a tutorial convention, a kind of prompt to help guide your solution to the problem. You'll want to replace the `_____` with something that solves the problem.
+
+Many readers of this tutorial will remember the Pythagorean Theorem, $a^2 + b^2 = c^2$, which describes the length of the hypotenuse $c$ of a right triangle. That theorem suggests how to calculate $c$ given $a$ and $b$: let $c = \sqrt{a^2 + b^2}$. 
+
+Your job in this example exercise is to replace the `_____` in the code pane with the R equivalent of the formula. Perhaps you know how to do this already. If not, you may find the "hints" button useful: press it. Either way, you can probably figure out that `sqrt(a^2 + b^2)` will do the appropriate calculation. So replace the `_____` with that expression. Press "Run Code."
+
+If you did this successfully, the red box will disappear. This means that you have constructed a valid R expression. (If the red box is still there, look very carefully at what you typed. Did you spell `sqrt` correctly? Did you use parentheses? Did you write `a^2` and `b^2`? The message in the red box might give you a clue, but fundamentally you'll have to figure out what you did wrong and how to fix it.)
+
+Once the code pane contains valid code you're ready to check whether the valid code gives the result you were asked to produce. To carry out this check, you press the "Submit Code" button. If your code is a correct solution to the problem, pressing "Submit Code" will result in a **green box** with a congratulatory message. You're done!
+
+But for the purposes of seeing how the tutorial system works, we're going to continue on modifying the code to introduce some mistaken calculations. To practice, try each of the following statements in place of `sqrt(a^2 + b^2)`, pressing "Submit Code" after each:
+
+* `a + b`
+* `sqrt(a + b)`
+*  `a^2 + b^2`
+* `sqrt(2^a + 2^b)`
+* `sqrt(a^2 / b^2)`
+
+Each of these is valid R code, but is incorrect so far as the specified task is concerned. So you won't get the congratulatory green box. 
+
+When you submit valid code that is incorrect for the task, a **blue** box will appear. Ideally, the blue box will have a message that will help you diagnose what's wrong with your submission so that you can correct it. 
+
+
+```{r DC-01-intro-check, echo = FALSE}
+set_success_message("Congratulations!") 
+
+test_1 <- find_call("whatever ^ 2", "remember to square the lengths of 'a' and 'b'.")
+test_2 <- find_call("a ^ 2", "remember to square 'a'.")
+test_3 <- find_call("b ^ 2", "b should be squared.")
+test_5 <- find_call("sqrt()", "you'll need the square root function to calculate length.")
+test_6 <- find_call("whatever + whatever", "you need to add the squares of the side lengths.")
+USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_5 %>% test_6 %>% 
+  final_ %>% check_value(match_number(sqrt(5^2 + 7^2)),
+                         message = "but that's not the value. Something's wrong with the calculation.")()
+```
+
+

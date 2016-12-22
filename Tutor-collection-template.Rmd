@@ -1,0 +1,21 @@
+---
+title: "Tutorial Collection"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+## Welcome to *Data Computing* tutorials
+
+```{r child="DC-exercises/Chapter-01/DC-01-intro.Rmd"}
+```
+
+## Multiple choice questions, too.
+
+```{r child="DC-exercises/Chapter-01/DC-2016-12-22-f379e.Rmd"}
+```

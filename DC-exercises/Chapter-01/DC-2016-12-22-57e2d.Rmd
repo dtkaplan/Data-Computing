@@ -1,0 +1,56 @@
+---
+title: "DC-2016-12-22-57e2d"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+library(DataComputing)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+Here are two examples of wrangling code that consist of very similar commands to the other.  Run each of the examples and note the difference in output.
+
+```{r DC-2016-12-22-57e2d-setup, echo = FALSE}
+# code to be evaluated before exercise code
+library(DataComputing)
+```
+
+```{r DC-2016-12-22-57e2d-a, exercise = TRUE, exercise.setup = "DC-2016-12-22-57e2d-setup"}
+WorldCities %>%
+  group_by(country) %>%
+  summarise(total = sum(population)) %>%
+  filter(total > 5000000) %>%
+  arrange(desc(total))
+```
+
+```{r DC-2016-12-22-57e2d-b, exercise = TRUE, exercise.setup = "DC-2016-12-22-57e2d-setup"}
+WorldCities %>%
+  group_by(country) %>%
+  filter(population > 5000000) %>%
+  summarise(total = sum(population)) %>%
+  arrange(desc(total))
+```
+
+
+<!-- narrative before exercise -->
+
+```{r DC-2016-12-22-57e2d, echo = FALSE}
+question('The first code pane produces a data table showing the total urban population in countries. The second code pane has the same variables, but `total` means something different. What\'s the meaning of `total` in the second pane\'s output?',
+  answer("The total population in each country in cities larger than five million.", 
+         correct = TRUE ),
+  answer("The population of the largest city in each country.", 
+         correct = FALSE),
+  answer("The total population in each country.", 
+         correct = FALSE,
+         message = "message 3"),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+

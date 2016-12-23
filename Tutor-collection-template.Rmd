@@ -19,3 +19,10 @@ knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
 
 ```{r child="DC-exercises/Chapter-01/DC-2016-12-22-f379e.Rmd"}
 ```
+
+## Reading wrangling code
+
+```{r child = "DC-exercises/Chapter-01/DC-2016-12-22-50dc3.Rmd"}
+```
+
+## Another reading example

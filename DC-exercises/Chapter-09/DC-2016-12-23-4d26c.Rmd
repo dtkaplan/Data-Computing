@@ -1,0 +1,157 @@
+---
+title: "DC-2016-12-23-4d26c"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+library(DataComputing)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r make_twenty, echo = FALSE}
+library(DataComputing)
+set.seed(101)
+twenty <- unique(sample(BabyNames$name, size = 30))[1:20]
+Twenty <- BabyNames %>% filter(name %in% twenty) %>% 
+  group_by(name, year) %>%
+  summarise(count = sum(count))
+# code to be evaluated before exercise code
+```
+
+```{r echo = FALSE}
+set.seed(102)
+twenty <- unique(sample(BabyNames$name, size = 30))[1:20]
+My_twenty <- 
+  BabyNames %>% 
+  filter(name %in% twenty) %>%
+  group_by(name, year) %>%
+  summarise(count = sum(count))
+```
+
+The data table `Twenty` consists of all the data from `BabyNames` for twenty randomly chosen names. The count for each year reflects the total of boys and girls. You're going to work with this data set to accomplish some wrangling tasks. (The reason to work with `Twenty` instead of the whole of `BabyNames` is so that you can reasonably look at the tables that result from your wrangling.)
+
+Here is a scratch window, so that you can figure out what the variables, etc. are for `Twenty`.
+
+```{r DC-2016-12-23-4d26c-scratch, exercise = TRUE, exercise.setup = "make_twenty", exercise.eval = FALSE}
+
+```
+
+### Popular?
+
+Write a wrangling statement to extract out only those names where the total number of births over all the years and both sexes is greater than 10,000.  Your result will look like this (although the names in `Twenty` will be different.)
+
+```{r echo = FALSE}
+My_twenty %>% 
+  group_by(name) %>%
+  summarise(total = sum(count)) %>%
+  filter(total > 10000)
+```
+
+```{r DC-2016-12-23-4d26c-1, exercise = TRUE, exercise.setup = "make_twenty", exercise.eval = FALSE}
+Twenty %>% 
+  group_by(____) %>%
+  summarise(____) %>%
+  filter(____)
+```
+
+```{r DC-2016-12-23-4d26c-1-check}
+set_success_message("Good job!") # change as you like
+test_1 <- final_ # replace with your own
+USER_CODE %>% test_1 %>% 
+  check_value(test = agrees(all(names(x) %in% c("name", "total"))),
+              "the output names are not correct")() %>%
+  check_value(test = agrees(all(x$total >= 10000)),
+              "are you sure you have only those names that appear 10,000 or more times.")()
+```
+
+### Popular ever?
+
+Write a wrangling statement to extract only those names for which there is some year where the total numbers of babies is greater than 50 (combining boys and girls). Your result should look like this: the name followed by the total count in the best year and the year in which that occurred.
+
+```{r echo = FALSE}
+My_twenty %>% 
+  group_by(name) %>%
+  filter(count == max(count)) %>%
+  filter(count > 50)
+```
+
+```{r make_twenty_a, echo = FALSE}
+library(DataComputing)
+set.seed(101)
+twenty <- unique(sample(BabyNames$name, size = 30))[1:20]
+Twenty <- BabyNames %>% filter(name %in% twenty) %>% 
+  group_by(name, year) %>%
+  summarise(count = sum(count))
+# code to be evaluated before exercise code
+```
+
+
+```{r DC-2016-12-23-4d26c-2, exercise = TRUE, exercise.setup = "make_twenty_a", exercise.eval = FALSE}
+  group_by(_____) %>%
+  filter(_____) %>%
+  filter(_____)
+```
+
+```{r DC-2016-12-23-4d26c-2-hint}
+# Consider this possible argument to filter()
+# count == max(count)
+```
+
+```{r DC-2016-12-23-4d26c-2-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+USER_CODE %>% final_ %>% 
+  check_value(test = agrees(all(names(x) %in% c("name", "count"))),
+              "the output names are not correct.") %>%
+  check_value(test = agrees(all(x$count) >= 50),
+              "are you sure you have only those names where there were more than 50 babies in the most popular year?")
+```
+
+### Popular always?
+
+Now write a wrangling statement that extract only those names which appear at least 50 times per year for at least 80 of the 134 year time span. Your result should look
+like this:
+
+```{r echo = FALSE}
+My_twenty %>% 
+  filter(count > 50) %>%
+  group_by(name) %>% 
+  summarise(nyears = n()) %>%
+  filter(nyears >= 80)
+```
+
+```{r DC-2016-12-23-4d26c-3, exercise = TRUE, exercise.setup = "make_twenty_a", exercise.eval = FALSE}
+Twenty %>% 
+  __your_wrangling_statements_here__
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+```{r DC-2016-12-23-4d26c-3-hint, echo = FALSE}
+# A possible sequence of steps
+
+# 1. extract only those name-years with more than 50 births
+# 2. for each name, calculate how many years that name is present
+# 3. pull out the names where the result of (2) is 80 or greater.
+```
+
+```{r DC-2016-12-23-4d26c-3-solution, echo = FALSE}
+Twenty %>% 
+  filter(count > 50) %>%
+  group_by(name) %>% 
+  summarise(nyears = n()) %>%
+  filter(nyears >= 80)
+```
+
+```{r DC-2016-12-23-4d26c-3-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- final_ # replace with your own
+USER_CODE %>% test_1 %>% 
+  check_value(test = agrees(all(names(x) %in% c("name", "nyears"))),
+              "the output names are not correct")() %>%
+  check_value(test = agrees(all(x$nyears >= 80),
+              "are you sure you have only those names that appear in 80 or more years."))()
+```
+

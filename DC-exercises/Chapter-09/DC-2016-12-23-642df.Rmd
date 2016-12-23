@@ -1,0 +1,74 @@
+---
+title: "DC-2016-12-23-642df"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+library(DataComputing)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2016-12-23-642df-setup, echo = FALSE}
+# code to be evaluated before exercise code
+library(DataComputing)
+```
+
+Here's an attempt to calculate the number of votes for candidates who received more than 10,000 votes altogether. 
+
+
+```{r DC-2016-12-23-642df, exercise = TRUE, exercise.eval = FALSE}
+Minneapolis2013 %>%
+  group_by(First) %>%
+  mutate(total_votes = n()) %>%
+  filter(total > 1000)
+```
+
+
+The intended result was:
+
+```{r echo = FALSE}
+Minneapolis2013 %>%
+  group_by(First) %>%
+  summarise(total_votes = n()) %>%
+  filter(total_votes > 10000)
+```
+
+
+But the code given in the pane above doesn't work. There are a few mistakes. Fix them so that the code does the right job.
+
+Here's some scratch space if you want to look at `Minneapolis2013`.
+
+```{r DC-2016-12-23-642df-scratch, exercise = TRUE, exercise.eval = TRUE}
+data(Minneapolis2013, package = "DataComputing")
+nrow(Minneapolis2013)
+```
+
+
+<!-- narrative to wrap up (if any) goes here -->
+
+```{r DC-2016-12-23-642df-hint, echo = FALSE}
+# Does the code
+# do anything to reduce the number of cases down to one
+# for each candidate.
+```
+
+```{r DC-2016-12-23-642df-solution, echo = FALSE}
+Minneapolis2013 %>%
+  group_by(First) %>%
+  summarise(total_votes = n()) %>%  # Note change on this line
+  filter(total_votes > 10000)
+```
+
+```{r DC-2016-12-23-642df-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+USER_CODE %>% final_ %>%
+  check_value(test = agrees(nrow(x) == 2), 
+              "there should be just two rows in the result.")() %>%
+  check_value(test = agrees(all(names(x) %in% c("First", "total_votes"))),
+              "the output should have variables `First` and `total_votes`.")()
+```
+
+

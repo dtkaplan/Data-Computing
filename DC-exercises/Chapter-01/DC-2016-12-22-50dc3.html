@@ -118,12 +118,12 @@ library(DataComputing)</code></pre>
 <p>Many people think that it’s <em>writing</em> code that’s important. But more important is being able to <em>read</em> code. If you can read, then you can learn from examples. And writing code is often a matter, even for professional programmers, of copying existing code and modifying it to accomplish a new task.</p>
 <p>So, even though you haven’t yet had any opportunity to learn about data wrangling commands, here’s an example that you can read. You might not be able to figure out everything in it, but it’s a start down the path.</p>
 <p>The <code>WorldCities</code> data table contains information about 23,000 cities around the world. Here’s a random selection of a few of them:</p>
-<pre><code>##               name  latitude longitude country population
-## 97        Vanadzor  40.80456  44.49390      AM     101098
-## 320   Bahia Blanca -38.71960 -62.27243      AR     276546
-## 9014      Sibsagar  26.98427  94.63784      IN      62104
-## 18179        Koidu   8.63333 -10.98333      SL      88000
-## 16230        Walcz  53.27787  16.47122      PL      25971</code></pre>
+<pre><code>##              name  latitude longitude country population
+## 14995      Dongen  51.62667   4.93889      NL      25464
+## 8047  El Progreso  15.40000 -87.80000      HN     100810
+## 18311       Qarah  34.15270  36.74152      SY      20656
+## 13359  Luxembourg  49.61167   6.13000      LU      76684
+## 1993      Conchal -22.33028 -47.17250      BR      21351</code></pre>
 <p>In the code pane below, there are two commands. The first command is a one-liner. It identifies to R where to find the <code>WorldCities</code> data.</p>
 <p>The second command spans several lines and comprises several different steps in data wrangling: grouping, summarizing, etc. The effect of this command is to find the total city population for each country, and then present the countries with the largest urban populations in descending order.</p>
 <p>There’s a blank in the command. Fill this in appropriately so that the output of the command will show only those countries where the urban population is greater than 10 million. Hint: such numbers are written without the commas, so don’t write <code>10,000,000</code> <!-- narrative before exercise --></p>

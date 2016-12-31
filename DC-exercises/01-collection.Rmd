@@ -1,0 +1,50 @@
+---
+title: "Data Computing Tutorial: Chapter 1"
+output: 
+  html_document: 
+    number_sections: yes
+    toc: yes
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+
+<!-- even though this chunk is empty, it sets up authentication for data logging -->
+
+```{r child = checkr::authentication()}
+```
+
+# Welcome to *Data Computing* tutorials
+
+```{r child="Chapter-01/DC-01-intro.Rmd"}
+```
+
+# Multiple choice questions, too.
+
+```{r child="Chapter-01/DC-2016-12-22-f379e.Rmd"}
+```
+
+# Reading wrangling code
+
+```{r child = "Chapter-01/DC-2016-12-22-50dc3.Rmd"}
+```
+
+# Another reading example
+
+```{r child = "Chapter-01/DC-2016-12-22-57e2d.Rmd"}
+```
+
+# Modifying graphics
+
+```{r child = "Chapter-01/DC-2016-12-30-a163b.Rmd"}
+```
+
+# Modifying a data-wrangling sequence
+
+```{r child = "Chapter-01/DC-2016-12-30-03b65.Rmd"}
+```

@@ -1,0 +1,54 @@
+---
+title: "DC-2016-12-30-a163b"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2016-12-30-a163b-setup, echo = FALSE}
+# code to be evaluated before exercise code
+library(ggplot2)
+set.seed(101)
+diamonds <- diamonds %>% dplyr::sample_n(size = 2000)
+```
+
+In your work with *Data Computing*, you will be using the `ggplot2` package for making graphics.  The code pane contains commands to show a few lines from a data table named `diamonds` and to make a plot of price against size (`carat`) for different cuts of diamonds.
+
+Read through the commands in the code pane. Then press "Run Code". Once you understand how the output is related to the commands themselves, modify the `ggplot()` command so that the `clarity` variable is used instead of `cut`. 
+
+```{r DC-2016-12-30-a163b, exercise = TRUE, exercise.setup = "DC-2016-12-30-a163b-setup", exercise.eval = FALSE}
+# Show the first few lines of the data table
+head(diamonds)
+
+# Plot out some of the data
+ggplot(diamonds, 
+       aes(x = carat, y = price, color = cut)) + 
+  geom_point()
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+```{r DC-2016-12-30-a163b-hint, echo = FALSE}
+# The phrase `color = cut` instructs `ggplot()` to 
+# set the color of each dot according to the value of the variable `cut`.
+# So change `cut` to `clarity`.
+```
+
+```{r DC-2016-12-30-a163b-solution, echo = FALSE}
+ggplot(diamonds, 
+       aes(x = carat, y = price, color = clarity)) + 
+  geom_point()
+```
+
+```{r DC-2016-12-30-a163b-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- find_call("aes(color = clarity, x = whatever, y = whatever)", "check the name of the variable that's being mapped to the `color` argument to the `aes()` function.")
+USER_CODE %>% test_1
+```
+
+

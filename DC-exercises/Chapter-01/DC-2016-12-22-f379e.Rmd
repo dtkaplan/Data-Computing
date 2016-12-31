@@ -30,7 +30,7 @@ question('Which is the first month of the year?',
 )
 ```
 
-### Another example
+## Another example
 
 Sometimes, questions will include a code pane that is for scratch work --- use it as you would use a piece of scrap paper. For instance:
 

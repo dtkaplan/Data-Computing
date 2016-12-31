@@ -1,0 +1,69 @@
+---
+title: "DC-2016-12-30-03b65"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2016-12-30-03b65-setup, echo = FALSE}
+# code to be evaluated before exercise code
+library(dplyr)
+library(ggplot2)
+```
+
+The commands in the code pane find the mean price for each cut of diamonds.  Look through the code to see where the variables `price` and `cut` appear.
+
+```{r DC-2016-12-30-03b65, exercise = TRUE, exercise.setup = "DC-2016-12-30-03b65-setup", exercise.eval = TRUE}
+# load the packages
+require(dplyr)
+data(diamonds, package = "ggplot2")
+
+# do the wrangling
+diamonds %>%
+    group_by(cut) %>%
+    summarise(val = mean(price))
+```
+
+Your job: Modify the code to find the mean weight (`carat`) for each clarity of diamonds. 
+
+
+```{r DC-2016-12-30-03b65-hint, echo = FALSE}
+# Notice that the variable `cut` appears in the `group_by()` part of
+# the expression. You can change `cut` to `clarity` to get the job done.
+```
+
+```{r DC-2016-12-30-03b65-solution, echo = FALSE}
+diamonds %>%
+    group_by(clarity) %>%
+    summarise(val = mean(carat))
+```
+
+```{r DC-2016-12-30-03b65-check, echo = FALSE}
+set_success_message("Good job!") # 
+test_0 <- find_call("mean(carat)", "you want the mean weight, so use `carat` in the `mean()` command.")
+test_1 <- find_call("group_by(whatever, clarity)", "have you changed the grouping variable to `clarity`?") 
+USER_CODE %>% test_0 %>% test_1
+```
+
+```{r DC-2016-12-30-03b65-b, echo = FALSE}
+question(
+  'Based on your result, for which `clarity` of diamonds is the mean weight the largest?',
+  answer("I1", correct = TRUE),
+  answer("SI2", correct = FALSE),
+  answer("SI1", correct = FALSE),
+  answer("VS2", correct = FALSE),
+  answer("VS1", correct = FALSE),
+  answer("VVS2", correct = FALSE),
+  answer("VVS1", correct = FALSE),
+  answer("IF", correct = FALSE),
+  
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+
+```

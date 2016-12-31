@@ -10,6 +10,10 @@ library(checkr)
 knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
 ```
 
+```{r child = checkr::authentication()}
+# even though this chunk is empty, it sets up authentication for data logging
+```
+
 ## Welcome to *Data Computing* tutorials
 
 ```{r child="DC-exercises/Chapter-01/DC-01-intro.Rmd"}

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Data Computing Tutorial: Chapter 1</title>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("section-TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="section-header">
+
+
+
+<h1 class="title toc-ignore">Data Computing Tutorial: Chapter 1</h1>
+
+</div>
+
+<div id="section-TOC">
+<ul>
+<li><a href="#section-welcome-to-data-computing-tutorials"><span class="toc-section-number">1</span> Welcome to <em>Data Computing</em> tutorials</a></li>
+<li><a href="#section-multiple-choice-questions-too."><span class="toc-section-number">2</span> Multiple choice questions, too.</a><ul>
+<li><a href="#section-another-example"><span class="toc-section-number">2.1</span> Another example</a></li>
+</ul></li>
+<li><a href="#section-reading-wrangling-code"><span class="toc-section-number">3</span> Reading wrangling code</a></li>
+<li><a href="#section-another-reading-example"><span class="toc-section-number">4</span> Another reading example</a></li>
+<li><a href="#section-modifying-graphics"><span class="toc-section-number">5</span> Modifying graphics</a></li>
+<li><a href="#section-modifying-a-data-wrangling-sequence"><span class="toc-section-number">6</span> Modifying a data-wrangling sequence</a></li>
+</ul>
+</div>
+
+<!-- even though this chunk is empty, it sets up authentication for data logging -->
+<hr />
+<p><span>Please log in:</span><div class="form-group shiny-input-container">
+<label for="user_name">User ID:</label>
+<input id="user_name" type="text" class="form-control" value=""/>
+</div><div class="form-group shiny-input-container">
+<label for="password">Password:</label>
+<input id="password" type="password" class="form-control" value=""/>
+</div><div id="login_success" class="shiny-text-output"></div></p>
+<hr />
+<div id="section-welcome-to-data-computing-tutorials" class="section level1">
+<h1><span class="header-section-number">1</span> Welcome to <em>Data Computing</em> tutorials</h1>
+<p>Welcome to this <em>Data Computing</em> tutorial.</p>
+<p>The document you are reading is designed to help you learn to write data wrangling and visualization commands in R. It uses an interactive tutorial system that allows you to try commands out while giving you (hopefully) helpful feedback when you do something wrong.</p>
+<p>This welcome exercise is about how the tutorial system works. Understanding this will help you use the tutorials productively.</p>
+<p>The basic component of a tutorial exercise is a <em>code pane</em> in which you can type and execute R code to perform a specified task. Exercises also have a <em>narrative</em>: a description of the task to be performed. For this welcome, we’ll set a relatively simple task.</p>
+<blockquote>
+<p>Calculate using appropriate R commands the length of the hypotenuse of a right triangle with sides of length 5 and 7.</p>
+</blockquote>
+<div class="tutor-exercise" data-label="DC-01-intro" data-caption="Code" data-lines="0">
+<pre class="text"><code>a &lt;- 5
+b &lt;- 7
+_____</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    cat(paste0(jsonlite::toJSON(log_entry), \"\\n\"), file = \"~/Downloads/log-test.txt\", ","        append = TRUE)","    final_result","}"]}</script>
+</div>
+<div id="section-DC-01-intro-hint">
+<hr />
+<blockquote>
+<p>You need to translate <span class="math inline">\(\sqrt{a^2 + b^2}\)</span> into R. Square roots are calculated with the <code>sqrt()</code> function in R. The value for which to calculate the square root goes inside the parentheses. To square a number <code>b</code>, you write <code>b^2</code> in R. And, of course, addition is <code>+</code>.</p>
+</blockquote>
+<hr />
+</div>
+<p>The code pane here already has some content. You might recognize the meaning of the lines <code>a &lt;- 5</code> and <code>b &lt;- 7</code> and how they pertain to the hypotenuse problem.</p>
+<p>Press the “Run Code” button in the code pane. You might be surprised to see the response: a red box with some gibberish. Let’s not worry about the gibberish right now. Focus instead on the box’s being red.</p>
+<p>A <strong>red</strong> box means that the code in the pane is not a proper R expression. This is because the line</p>
+<pre class="r"><code>_____</code></pre>
+<p>is not a legal R expression.<a href="#section-fn1" class="footnoteRef" id="section-fnref1"><sup>1</sup></a> Instead, that line is a tutorial convention, a kind of prompt to help guide your solution to the problem. You’ll want to replace the <code>_____</code> with something that solves the problem.</p>
+<p>Many readers of this tutorial will remember the Pythagorean Theorem, <span class="math inline">\(a^2 + b^2 = c^2\)</span>, which describes the length of the hypotenuse <span class="math inline">\(c\)</span> of a right triangle. That theorem suggests how to calculate <span class="math inline">\(c\)</span> given <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>: let <span class="math inline">\(c = \sqrt{a^2 + b^2}\)</span>.</p>
+<p>Your job in this example exercise is to replace the <code>_____</code> in the code pane with the R equivalent of the formula. Perhaps you know how to do this already. If not, you may find the “hints” button useful: press it. Either way, you can probably figure out that <code>sqrt(a^2 + b^2)</code> will do the appropriate calculation. So replace the <code>_____</code> with that expression. Press “Run Code.”</p>
+<p>If you did this successfully, the red box will disappear. This means that you have constructed a valid R expression. (If the red box is still there, look very carefully at what you typed. Did you spell <code>sqrt</code> correctly? Did you use parentheses? Did you write <code>a^2</code> and <code>b^2</code>? The message in the red box might give you a clue, but fundamentally you’ll have to figure out what you did wrong and how to fix it.)</p>
+<p>Once the code pane contains valid code you’re ready to check whether the valid code gives the result you were asked to produce. To carry out this check, you press the “Submit Code” button. If your code is a correct solution to the problem, pressing “Submit Code” will result in a <strong>green box</strong> with a congratulatory message. You’re done!</p>
+<p>But for the purposes of seeing how the tutorial system works, we’re going to continue on modifying the code to introduce some mistaken calculations. To practice, try each of the following statements in place of <code>sqrt(a^2 + b^2)</code>, pressing “Submit Code” after each:</p>
+<ul>
+<li><code>a + b</code></li>
+<li><code>sqrt(a + b)</code></li>
+<li><code>a^2 + b^2</code></li>
+<li><code>sqrt(2^a + 2^b)</code></li>
+<li><code>sqrt(a^2 / b^2)</code></li>
+</ul>
+<p>Each of these is valid R code, but is incorrect so far as the specified task is concerned. So you won’t get the congratulatory green box.</p>
+<p>When you submit valid code that is incorrect for the task, a <strong>blue</strong> box will appear. Ideally, the blue box will have a message that will help you diagnose what’s wrong with your submission so that you can correct it.</p>
+<div class="tutor-exercise-support" data-label="DC-01-intro-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>set_success_message(&quot;Congratulations!&quot;) 
+
+test_1 &lt;- find_call(&quot;whatever ^ 2&quot;, &quot;remember to square the lengths of &#39;a&#39; and &#39;b&#39;.&quot;)
+test_2 &lt;- find_call(&quot;a ^ 2&quot;, &quot;remember to square &#39;a&#39;.&quot;)
+test_3 &lt;- find_call(&quot;b ^ 2&quot;, &quot;b should be squared.&quot;)
+test_5 &lt;- find_call(&quot;sqrt()&quot;, &quot;you&#39;ll need the square root function to calculate length.&quot;)
+test_6 &lt;- find_call(&quot;whatever + whatever&quot;, &quot;you need to add the squares of the side lengths.&quot;)
+USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_5 %&gt;% test_6 %&gt;% 
+  final_ %&gt;% check_value(match_number(sqrt(5^2 + 7^2)),
+                         message = &quot;but that&#39;s not the value. Something&#39;s wrong with the calculation.&quot;)()</code></pre>
+</div>
+</div>
+<div id="section-multiple-choice-questions-too." class="section level1">
+<h1><span class="header-section-number">2</span> Multiple choice questions, too.</h1>
+<p>Some of the questions in these tutorials will be multiple choice. As soon as you click one of the answers, your answer will be checked.</p>
+<p>As a rule, the answers are presented in a random order. Often, you will have more than one opportunity to answer, until you get things right. Try this question. We’re all friends here; feel free to make an incorrect choice, so that you see what happens.</p>
+
+<div id="htmlwidget-ec5cbfb919896e848301" style="width:100%;height:auto;", class = "quiz html-widget">
+<div class="panel panel-default">
+<div class="panel-body quizArea">
+</div>
+</div>
+</div>
+
+<script type="application/json" data-for="htmlwidget-ec5cbfb919896e848301">{"x":{"question":"Which is the first month of the year?","answers":[{"option":"May","correct":false,"message":"Sorry, but May is the fifth month. Look for a month that&#39;s earlier in the year."},{"option":"March","correct":false,"message":"If we were living under the early Roman calendar, this would be correct. That&#39;s why the months &#39;September&#39;, &#39;October&#39;, &#39;November&#39;, and &#39;December&#39; have names that refer to 7 (&#39;sept&#39;), 8 (&#39;oct&#39;), 9 (&#39;nov&#39;), and 10 (&#39;dec&#39;)."},{"option":"January","correct":true,"message":"A solid, conventional choice."}],"label":"DC-2016-12-22-f379e-1","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":true,"json":{"info":{"name":"","main":""},"questions":[{"q":"Which is the first month of the year?","a":[{"option":"May","correct":false,"message":"Sorry, but May is the fifth month. Look for a month that&#39;s earlier in the year."},{"option":"March","correct":false,"message":"If we were living under the early Roman calendar, this would be correct. That&#39;s why the months &#39;September&#39;, &#39;October&#39;, &#39;November&#39;, and &#39;December&#39; have names that refer to 7 (&#39;sept&#39;), 8 (&#39;oct&#39;), 9 (&#39;nov&#39;), and 10 (&#39;dec&#39;)."},{"option":"January","correct":true,"message":"A solid, conventional choice."}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+<div id="section-another-example" class="section level2">
+<h2><span class="header-section-number">2.1</span> Another example</h2>
+<p>Sometimes, questions will include a code pane that is for scratch work — use it as you would use a piece of scrap paper. For instance:</p>
+<div class="tutor-exercise" data-label="DC-2016-12-22-f379e-2" data-caption="Code" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    cat(paste0(jsonlite::toJSON(log_entry), \"\\n\"), file = \"~/Downloads/log-test.txt\", ","        append = TRUE)","    final_result","}"]}</script>
+</div>
+<p>Note that there is no “Submit Code” button. This is just scratch paper, but you can run any code you put inside the pane. The results might help you answer the actual question …</p>
+
+<div id="htmlwidget-f1e933d799e91efde17f" style="width:100%;height:auto;", class = "quiz html-widget">
+<div class="panel panel-default">
+<div class="panel-body quizArea">
+</div>
+</div>
+</div>
+
+<script type="application/json" data-for="htmlwidget-f1e933d799e91efde17f">{"x":{"question":"What is \\(\\sqrt{17}\\)?","answers":[{"option":"4.123","correct":true,"message":null},{"option":"1.234","correct":false,"message":null},{"option":"2.341","correct":false,"message":null},{"option":"3.412","correct":false,"message":null}],"label":"DC-2016-12-22-f379e-3","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":true,"json":{"info":{"name":"","main":""},"questions":[{"q":"What is \\(\\sqrt{17}\\)?","a":[{"option":"4.123","correct":true,"message":null},{"option":"1.234","correct":false,"message":null},{"option":"2.341","correct":false,"message":null},{"option":"3.412","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="section-reading-wrangling-code" class="section level1">
+<h1><span class="header-section-number">3</span> Reading wrangling code</h1>
+<div class="tutor-exercise-support" data-label="DC-2016-12-22-50dc3-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code># code to be evaluated before exercise code
+library(DataComputing)</code></pre>
+</div>
+<p>Many people think that it’s <em>writing</em> code that’s important. But more important is being able to <em>read</em> code. If you can read, then you can learn from examples. And writing code is often a matter, even for professional programmers, of copying existing code and modifying it to accomplish a new task.</p>
+<p>So, even though you haven’t yet had any opportunity to learn about data wrangling commands, here’s an example that you can read. You might not be able to figure out everything in it, but it’s a start down the path.</p>
+<p>The <code>WorldCities</code> data table contains information about 23,000 cities around the world. Here’s a random selection of a few of them:</p>
+<pre><code>## Warning in sample.int(n, size, replace = replace, prob = weight):
+## &#39;.Random.seed&#39; is not an integer vector but of type &#39;NULL&#39;, so ignored</code></pre>
+<pre><code>##             name  latitude longitude country population
+## 14015   Coacalco  19.63452 -99.10050      MX     313405
+## 16621 Saint-Paul -21.00963  55.27071      RE      99307
+## 11198       Yazd  31.89722  54.36750      IR     477905
+## 15176    Bawshar  23.55563  58.39890      OM     159487
+## 2860      Calama -22.45591 -68.93015      CL     143084</code></pre>
+<p>In the code pane below, there are two commands. The first command is a one-liner. It identifies to R where to find the <code>WorldCities</code> data.</p>
+<p>The second command spans several lines and comprises several different steps in data wrangling: grouping, summarizing, etc. The effect of this command is to find the total city population for each country, and then present the countries with the largest urban populations in descending order.</p>
+<p>There’s a blank in the command. Fill this in appropriately so that the output of the command will show only those countries where the urban population is greater than 10 million. Hint: such numbers are written without the commas, so don’t write <code>10,000,000</code> <!-- narrative before exercise --></p>
+<div class="tutor-exercise" data-label="DC-2016-12-22-50dc3" data-caption="Code" data-lines="0">
+<pre class="text"><code># A single-line command
+data(WorldCities, package = &quot;DataComputing&quot;)
+
+# A multi-line command.
+WorldCities %&gt;%
+  group_by(country) %&gt;%
+  summarise(total = sum(population)) %&gt;%
+  filter(total &gt; ______) %&gt;%
+  arrange(desc(total))</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.setup":"DC-2016-12-22-50dc3-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    cat(paste0(jsonlite::toJSON(log_entry), \"\\n\"), file = \"~/Downloads/log-test.txt\", ","        append = TRUE)","    final_result","}"]}</script>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2016-12-22-50dc3-hint" data-caption="Code" data-lines="0">
+<pre class="text"><code># hint text or code. Can offer multiple hints with similar chunks ending in hint-1, hint-2, etc.</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2016-12-22-50dc3-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code># code or text that&#39;s a solution to the exercise
+# A single-line command
+data(WorldCities, package = &quot;DataComputing&quot;)
+
+# A multi-line command.
+WorldCities %&gt;%
+  group_by(country) %&gt;%
+  summarise(total = sum(population)) %&gt;%
+  filter(total &gt; 10000000) %&gt;%
+  arrange(desc(total))</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2016-12-22-50dc3-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>set_success_message(&quot;Good.  That wasn&#39;t so hard.&quot;) # change as you like
+test_1 &lt;- find_call(&quot;total &gt; whatever&quot;) 
+test_2 &lt;- check_argument(&quot;whatever &gt; grab_this&quot;, 
+                         match_number(10000000), 
+                         message(&quot;the number should be 10000000&quot;))
+USER_CODE %&gt;% test_1 %&gt;% test_2</code></pre>
+</div>
+<p>Some people are surprised that Brazil (BR) has the fourth largest urban population.</p>
+</div>
+<div id="section-another-reading-example" class="section level1">
+<h1><span class="header-section-number">4</span> Another reading example</h1>
+<p>Here are two examples of wrangling code that consist of very similar commands to the other. Run each of the examples and note the difference in output.</p>
+<div class="tutor-exercise" data-label="DC-2016-12-22-57e2d-a" data-caption="Code" data-lines="0">
+<pre class="text"><code>WorldCities %&gt;%
+  group_by(country) %&gt;%
+  summarise(total = sum(population)) %&gt;%
+  filter(total &gt; 5000000) %&gt;%
+  arrange(desc(total))</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.setup":"DC-2016-12-22-57e2d-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    cat(paste0(jsonlite::toJSON(log_entry), \"\\n\"), file = \"~/Downloads/log-test.txt\", ","        append = TRUE)","    final_result","}"]}</script>
+</div>
+<div class="tutor-exercise" data-label="DC-2016-12-22-57e2d-b" data-caption="Code" data-lines="0">
+<pre class="text"><code>WorldCities %&gt;%
+  group_by(country) %&gt;%
+  filter(population &gt; 5000000) %&gt;%
+  summarise(total = sum(population)) %&gt;%
+  arrange(desc(total))</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.setup":"DC-2016-12-22-57e2d-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    cat(paste0(jsonlite::toJSON(log_entry), \"\\n\"), file = \"~/Downloads/log-test.txt\", ","        append = TRUE)","    final_result","}"]}</script>
+</div>
+<!-- narrative before exercise -->
+
+<div id="htmlwidget-acd0917e29baae90bf86" style="width:100%;height:auto;", class = "quiz html-widget">
+<div class="panel panel-default">
+<div class="panel-body quizArea">
+</div>
+</div>
+</div>
+
+<script type="application/json" data-for="htmlwidget-acd0917e29baae90bf86">{"x":{"question":"The first code pane produces a data table showing the total urban population in countries. The second code pane has the same variables, but <code>total\u003c/code> means something different. What&#39;s the meaning of <code>total\u003c/code> in the second pane&#39;s output?","answers":[{"option":"The total population in each country in cities larger than five million.","correct":true,"message":null},{"option":"The population of the largest city in each country.","correct":false,"message":null},{"option":"The total population in each country.","correct":false,"message":"message 3"}],"label":"DC-2016-12-22-57e2d","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":true,"json":{"info":{"name":"","main":""},"questions":[{"q":"The first code pane produces a data table showing the total urban population in countries. The second code pane has the same variables, but <code>total\u003c/code> means something different. What&#39;s the meaning of <code>total\u003c/code> in the second pane&#39;s output?","a":[{"option":"The total population in each country in cities larger than five million.","correct":true,"message":null},{"option":"The population of the largest city in each country.","correct":false,"message":null},{"option":"The total population in each country.","correct":false,"message":"message 3"}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script>
+<!-- narrative to wrap up (if any) goes here -->
+</div>
+<div id="section-modifying-graphics" class="section level1">
+<h1><span class="header-section-number">5</span> Modifying graphics</h1>
+<div class="tutor-exercise-support" data-label="DC-2016-12-30-a163b-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code># code to be evaluated before exercise code
+library(ggplot2)
+set.seed(101)
+diamonds &lt;- diamonds %&gt;% dplyr::sample_n(size = 2000)</code></pre>
+</div>
+<p>In your work with <em>Data Computing</em>, you will be using the <code>ggplot2</code> package for making graphics. The code pane contains commands to show a few lines from a data table named <code>diamonds</code> and to make a plot of price against size (<code>carat</code>) for different cuts of diamonds.</p>
+<p>Read through the commands in the code pane. Then press “Run Code”. Once you understand how the output is related to the commands themselves, modify the <code>ggplot()</code> command so that the <code>clarity</code> variable is used instead of <code>cut</code>.</p>
+<div class="tutor-exercise" data-label="DC-2016-12-30-a163b" data-caption="Code" data-lines="0">
+<pre class="text"><code># Show the first few lines of the data table
+head(diamonds)
+
+# Plot out some of the data
+ggplot(diamonds, 
+       aes(x = carat, y = price, color = cut)) + 
+  geom_point()</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.setup":"DC-2016-12-30-a163b-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    cat(paste0(jsonlite::toJSON(log_entry), \"\\n\"), file = \"~/Downloads/log-test.txt\", ","        append = TRUE)","    final_result","}"]}</script>
+</div>
+<!-- narrative to wrap up (if any) goes here -->
+<div class="tutor-exercise-support" data-label="DC-2016-12-30-a163b-hint" data-caption="Code" data-lines="0">
+<pre class="text"><code># The phrase `color = cut` instructs `ggplot()` to 
+# set the color of each dot according to the value of the variable `cut`.
+# So change `cut` to `clarity`.</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2016-12-30-a163b-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>ggplot(diamonds, 
+       aes(x = carat, y = price, color = clarity)) + 
+  geom_point()</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2016-12-30-a163b-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>set_success_message(&quot;Good job!&quot;) # change as you like
+test_1 &lt;- find_call(&quot;aes(color = clarity, x = whatever, y = whatever)&quot;, &quot;check the name of the variable that&#39;s being mapped to the `color` argument to the `aes()` function.&quot;)
+USER_CODE %&gt;% test_1</code></pre>
+</div>
+</div>
+<div id="section-modifying-a-data-wrangling-sequence" class="section level1">
+<h1><span class="header-section-number">6</span> Modifying a data-wrangling sequence</h1>
+<div class="tutor-exercise-support" data-label="DC-2016-12-30-03b65-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code># code to be evaluated before exercise code
+library(dplyr)
+library(ggplot2)</code></pre>
+</div>
+<p>The commands in the code pane find the mean price for each cut of diamonds. Look through the code to see where the variables <code>price</code> and <code>cut</code> appear.</p>
+<div class="tutor-exercise" data-label="DC-2016-12-30-03b65" data-caption="Code" data-lines="0">
+<pre class="text"><code># load the packages
+require(dplyr)
+data(diamonds, package = &quot;ggplot2&quot;)
+
+# do the wrangling
+diamonds %&gt;%
+    group_by(cut) %&gt;%
+    summarise(val = mean(price))</code></pre>
+<pre><code># A tibble: 5 × 2
+        cut      val
+      &lt;ord&gt;    &lt;dbl&gt;
+1      Fair 4358.758
+2      Good 3928.864
+3 Very Good 3981.760
+4   Premium 4584.258
+5     Ideal 3457.542</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.setup":"DC-2016-12-30-03b65-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = TRUE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    cat(paste0(jsonlite::toJSON(log_entry), \"\\n\"), file = \"~/Downloads/log-test.txt\", ","        append = TRUE)","    final_result","}"]}</script>
+</div>
+<p>Your job: Modify the code to find the mean weight (<code>carat</code>) for each clarity of diamonds.</p>
+<div class="tutor-exercise-support" data-label="DC-2016-12-30-03b65-hint" data-caption="Code" data-lines="0">
+<pre class="text"><code># Notice that the variable `cut` appears in the `group_by()` part of
+# the expression. You can change `cut` to `clarity` to get the job done.</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2016-12-30-03b65-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>diamonds %&gt;%
+    group_by(clarity) %&gt;%
+    summarise(val = mean(carat))</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2016-12-30-03b65-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>set_success_message(&quot;Good job!&quot;) # 
+test_0 &lt;- find_call(&quot;mean(carat)&quot;, &quot;you want the mean weight, so use `carat` in the `mean()` command.&quot;)
+test_1 &lt;- find_call(&quot;group_by(whatever, clarity)&quot;, &quot;have you changed the grouping variable to `clarity`?&quot;) 
+USER_CODE %&gt;% test_0 %&gt;% test_1</code></pre>
+</div>
+
+<div id="htmlwidget-4606b4df1117869cd78a" style="width:100%;height:auto;", class = "quiz html-widget">
+<div class="panel panel-default">
+<div class="panel-body quizArea">
+</div>
+</div>
+</div>
+
+<script type="application/json" data-for="htmlwidget-4606b4df1117869cd78a">{"x":{"question":"Based on your result, for which <code>clarity\u003c/code> of diamonds is the mean weight the largest?","answers":[{"option":"I1","correct":true,"message":null},{"option":"SI2","correct":false,"message":null},{"option":"SI1","correct":false,"message":null},{"option":"VS2","correct":false,"message":null},{"option":"VS1","correct":false,"message":null},{"option":"VVS2","correct":false,"message":null},{"option":"VVS1","correct":false,"message":null},{"option":"IF","correct":false,"message":null}],"label":"DC-2016-12-30-03b65-b","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":true,"json":{"info":{"name":"","main":""},"questions":[{"q":"Based on your result, for which <code>clarity\u003c/code> of diamonds is the mean weight the largest?","a":[{"option":"I1","correct":true,"message":null},{"option":"SI2","correct":false,"message":null},{"option":"SI1","correct":false,"message":null},{"option":"VS2","correct":false,"message":null},{"option":"VS1","correct":false,"message":null},{"option":"VVS2","correct":false,"message":null},{"option":"VVS1","correct":false,"message":null},{"option":"IF","correct":false,"message":null}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script> 
+<script type="application/shiny-prerendered" data-context="server-start">
+library(checkr)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+# Very, very simple for now.
+output$login_success <- renderText({"Please log in."})
+output$login_success <-
+  renderText({
+    if (input$password == "pass") {
+      checkr::set_user_name(input$user_name)
+      return("Successful login!")
+    } else {
+      "Please login in."
+      return(checkr::set_user_name(""))
+    }
+  })
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+tutor:::register_http_handlers(session, metadata = NULL)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-01-intro-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-01-intro-code-editor`)), session)
+output$`tutor-exercise-DC-01-intro-output` <- renderUI({
+  `tutor-exercise-DC-01-intro-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-2016-12-22-f379e-2-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2016-12-22-f379e-2-code-editor`)), session)
+output$`tutor-exercise-DC-2016-12-22-f379e-2-output` <- renderUI({
+  `tutor-exercise-DC-2016-12-22-f379e-2-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-2016-12-22-50dc3-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2016-12-22-50dc3-code-editor`)), session)
+output$`tutor-exercise-DC-2016-12-22-50dc3-output` <- renderUI({
+  `tutor-exercise-DC-2016-12-22-50dc3-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-2016-12-22-57e2d-a-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2016-12-22-57e2d-a-code-editor`)), session)
+output$`tutor-exercise-DC-2016-12-22-57e2d-a-output` <- renderUI({
+  `tutor-exercise-DC-2016-12-22-57e2d-a-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-2016-12-22-57e2d-b-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2016-12-22-57e2d-b-code-editor`)), session)
+output$`tutor-exercise-DC-2016-12-22-57e2d-b-output` <- renderUI({
+  `tutor-exercise-DC-2016-12-22-57e2d-b-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-2016-12-30-a163b-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2016-12-30-a163b-code-editor`)), session)
+output$`tutor-exercise-DC-2016-12-30-a163b-output` <- renderUI({
+  `tutor-exercise-DC-2016-12-30-a163b-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-2016-12-30-03b65-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2016-12-30-03b65-code-editor`)), session)
+output$`tutor-exercise-DC-2016-12-30-03b65-output` <- renderUI({
+  `tutor-exercise-DC-2016-12-30-03b65-result`()
+})
+</script>
+ <!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["navigation"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/navigation-1.1"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tabsets.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/highlightjs-1.1"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["default.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["4.5.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/font-awesome-4.5.0"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["css/font-awesome.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.4.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutor"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutor"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tutor.js"]},{"type":"character","attributes":{},"value":["tutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["0.8"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["quiz-binding"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["quiz.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutor"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutor"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tutor.js"]},{"type":"character","attributes":{},"value":["tutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.4.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["slickquiz"]},{"type":"character","attributes":{},"value":["1.5.20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/slickquiz"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["js/slickQuiz.js"]},{"type":"character","attributes":{},"value":["css/slickQuiz.css","css/slickQuizTutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["0.8"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["quiz-binding"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["quiz.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutor"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutor"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tutor.js"]},{"type":"character","attributes":{},"value":["tutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.4.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["slickquiz"]},{"type":"character","attributes":{},"value":["1.5.20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/slickquiz"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["js/slickQuiz.js"]},{"type":"character","attributes":{},"value":["css/slickQuiz.css","css/slickQuizTutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["0.8"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["quiz-binding"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["quiz.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutor"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutor"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tutor.js"]},{"type":"character","attributes":{},"value":["tutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.4.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["slickquiz"]},{"type":"character","attributes":{},"value":["1.5.20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/slickquiz"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["js/slickQuiz.js"]},{"type":"character","attributes":{},"value":["css/slickQuiz.css","css/slickQuizTutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["0.8"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["quiz-binding"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["quiz.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutor"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutor"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tutor.js"]},{"type":"character","attributes":{},"value":["tutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.4.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["slickquiz"]},{"type":"character","attributes":{},"value":["1.5.20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/slickquiz"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["js/slickQuiz.js"]},{"type":"character","attributes":{},"value":["css/slickQuiz.css","css/slickQuizTutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]}]}
+</script>
+<!--/html_preserve-->
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="section-fn1"><p>Perhaps you’re wondering why it isn’t legal. Object names must begin with a letter or a period. Underscores are allowed in names, but not at the start.<a href="#section-fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

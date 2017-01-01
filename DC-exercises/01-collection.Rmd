@@ -1,6 +1,7 @@
 ---
-title: "Data Computing Tutorial: Chapter 1"
+title: "Data Computing: Chapter 1"
 output: 
+  tutor::tutorial: default
   html_document: 
     number_sections: yes
     toc: yes
@@ -19,32 +20,32 @@ knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
 ```{r child = checkr::authentication()}
 ```
 
-# Welcome to *Data Computing* tutorials
+# Introduction to tutorial exercises
 
 ```{r child="Chapter-01/DC-01-intro.Rmd"}
 ```
 
-# Multiple choice questions, too.
+## ... and questions
 
 ```{r child="Chapter-01/DC-2016-12-22-f379e.Rmd"}
 ```
 
-# Reading wrangling code
+# Practice 1: Reading code
 
 ```{r child = "Chapter-01/DC-2016-12-22-50dc3.Rmd"}
 ```
 
-# Another reading example
+# Practice 2: Wrangling sequences
 
 ```{r child = "Chapter-01/DC-2016-12-22-57e2d.Rmd"}
 ```
 
-# Modifying graphics
+# Practice 3: Graphics
 
 ```{r child = "Chapter-01/DC-2016-12-30-a163b.Rmd"}
 ```
 
-# Modifying a data-wrangling sequence
+# Practice 4: a data-wrangling sequence
 
 ```{r child = "Chapter-01/DC-2016-12-30-03b65.Rmd"}
 ```

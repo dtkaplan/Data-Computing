@@ -1,0 +1,39 @@
+---
+title: "Data Computing: Chapter 4"
+output: 
+  tutor::tutorial: default
+  html_document: 
+    number_sections: yes
+    toc: yes
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+
+<!-- even though this chunk is empty, it sets up authentication for data logging -->
+
+```{r child = checkr::authentication()}
+```
+
+# Reading data from files
+
+```{r child="Chapter-04/DC-2017-01-01-f13ea.Rmd"}
+```
+
+# Data from R packages
+```{r child="Chapter-04/DC-2017-01-01-d386f.Rmd"}
+```
+
+# Loading data from a package
+
+```{r child="Chapter-04/DC-2017-01-01-fc26d.Rmd"}
+```
+
+# Giving data a name
+```{r child="Chapter-04/DC-2017-01-01-75bca.Rmd"}
+```

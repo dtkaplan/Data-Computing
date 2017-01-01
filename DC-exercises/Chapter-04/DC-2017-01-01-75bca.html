@@ -11,7 +11,7 @@
 
 
 
-<title>DC-2016-12-30-a163b</title>
+<title>DC-2017-01-01-75bca</title>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -106,44 +106,42 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">DC-2016-12-30-a163b</h1>
+<h1 class="title toc-ignore">DC-2017-01-01-75bca</h1>
 
 </div>
 
 
-<div class="tutor-exercise-support" data-label="DC-2016-12-30-a163b-setup" data-caption="Code" data-lines="0">
-<pre class="text"><code># code to be evaluated before exercise code
-library(ggplot2)
-set.seed(101)
-diamonds &lt;- diamonds %&gt;% dplyr::sample_n(size = 2000)</code></pre>
+<div class="tutor-exercise-support" data-label="DC-2017-01-01-75bca-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code># code to be evaluated before exercise code</code></pre>
 </div>
-<p>In your work with <em>Data Computing</em>, you will be using the <code>ggplot2</code> package for making graphics. The code pane contains commands to show a few lines from a data table named <code>diamonds</code> and to make a plot of price against size (<code>carat</code>) for different cuts of diamonds.</p>
-<p>Read through the commands in the code pane. Then press “Run Code”. Once you understand how the output is related to the commands themselves, modify the <code>ggplot()</code> command so that the <code>clarity</code> variable is used instead of <code>cut</code>.</p>
-<div class="tutor-exercise" data-label="DC-2016-12-30-a163b" data-caption="Code" data-lines="0">
-<pre class="text"><code># Show the first few lines of the data table
-head(diamonds)
-
-# Plot out some of the data
-ggplot(diamonds, 
-       aes(x = carat, y = price, color = cut)) + 
-  geom_point()</code></pre>
-<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.setup":"DC-2016-12-30-a163b-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    warning(\"still writing logfile to Downloads directory.\")","    cat(paste0(jsonlite::toJSON(log_entry), \"\\n\"), file = \"~/Downloads/log-test.txt\", ","        append = TRUE)","    cat(\"hello\\n\", file = paste0(getwd(), \"/\", \"hello.txt\"), ","        append = TRUE)","    final_result","}"]}</script>
+<p>When you read a <code>.csv</code> or <code>.xlsx</code> spreadsheet file, you need to create a name by which to refer to the resulting data table in R.</p>
+<p>Some tips:</p>
+<ul>
+<li>Remember that the name of the file goes in quotes.</li>
+<li>Use ordinary assignment, e.g. <code>My_table &lt;-</code> to give a name to the data table that will be created.</li>
+<li>Use <code>read.csv()</code> for <code>.csv</code> files and <code>readxl::read_excel</code> for <code>.xlsx</code> files.</li>
+</ul>
+<p>Read in the file <code>&quot;http://tiny.cc/dcf/CountryCodes.csv&quot;</code> and name the resulting object <code>CCodes</code>.</p>
+<div class="tutor-exercise" data-label="DC-2017-01-01-75bca" data-caption="Code" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.setup":"DC-2017-01-01-75bca-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    warning(\"still writing logfile to Downloads directory.\")","    cat(paste0(jsonlite::toJSON(log_entry), \"\\n\"), file = \"~/Downloads/log-test.txt\", ","        append = TRUE)","    cat(\"hello\\n\", file = paste0(getwd(), \"/\", \"hello.txt\"), ","        append = TRUE)","    final_result","}"]}</script>
 </div>
 <!-- narrative to wrap up (if any) goes here -->
-<div class="tutor-exercise-support" data-label="DC-2016-12-30-a163b-hint" data-caption="Code" data-lines="0">
-<pre class="text"><code># The phrase `color = cut` instructs `ggplot()` to 
-# set the color of each dot according to the value of the variable `cut`.
-# So change `cut` to `clarity`.</code></pre>
+<div class="tutor-exercise-support" data-label="DC-2017-01-01-75bca-hint" data-caption="Code" data-lines="0">
+<pre class="text"><code># Use the `read.csv()` function and make assignment to `CCodes`</code></pre>
 </div>
-<div class="tutor-exercise-support" data-label="DC-2016-12-30-a163b-solution" data-caption="Code" data-lines="0">
-<pre class="text"><code>ggplot(diamonds, 
-       aes(x = carat, y = price, color = clarity)) + 
-  geom_point()</code></pre>
+<div class="tutor-exercise-support" data-label="DC-2017-01-01-75bca-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>CCodes &lt;- read.csv(&quot;http://tiny.cc/dcf/CountryCodes.csv&quot;)</code></pre>
 </div>
-<div class="tutor-exercise-support" data-label="DC-2016-12-30-a163b-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>set_success_message(&quot;Good job!&quot;) # change as you like
-test_1 &lt;- find_call(&quot;aes(color = clarity, x = whatever, y = whatever)&quot;, &quot;check the name of the variable that&#39;s being mapped to the `color` argument to the `aes()` function.&quot;)
-USER_CODE %&gt;% test_1</code></pre>
+<div class="tutor-exercise-support" data-label="DC-2017-01-01-75bca-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>set_success_message(&quot;Good job. There are several other functions for reading CSV and other forms of file, but we don&#39;t need to use them in the next several chapters.&quot;)
+test_1 &lt;- find_call(&quot;read.csv(whatever)&quot;)
+test_2 &lt;- find_statement(&quot;[\&quot;&#39;].*[\&quot;&#39;]&quot;, 
+                        message = &quot;you don&#39;t have the file name in quotes.&quot;,
+                        regex = TRUE)
+test_3 &lt;- find_constants(&quot;http://tiny.cc/dcf/CountryCodes.csv&quot;, 
+                        message = &quot;you don&#39;t have the name of the file typed correctly.&quot;)
+test_4 &lt;- find_assignment(&quot;CCodes&quot;, message = &quot;remember to assign the output to `CCodes`.&quot;)
+USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4</code></pre>
 </div>
 
 <script type="application/shiny-prerendered" data-context="server">
@@ -151,9 +149,9 @@ tutor:::register_http_handlers(session, metadata = NULL)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutor-exercise-DC-2016-12-30-a163b-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2016-12-30-a163b-code-editor`)), session)
-output$`tutor-exercise-DC-2016-12-30-a163b-output` <- renderUI({
-  `tutor-exercise-DC-2016-12-30-a163b-result`()
+`tutor-exercise-DC-2017-01-01-75bca-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-01-75bca-code-editor`)), session)
+output$`tutor-exercise-DC-2017-01-01-75bca-output` <- renderUI({
+  `tutor-exercise-DC-2017-01-01-75bca-result`()
 })
 </script>
  <!--html_preserve-->

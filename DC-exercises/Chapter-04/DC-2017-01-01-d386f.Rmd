@@ -1,0 +1,59 @@
+---
+title: "DC-2017-01-01-d386f"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+An R package is a way to distribute software and data. The examples in the *Data Computing* book are often based on data provided by the `DataComputing` package, written specifically to go along with the book. But in your work you will also encounter examples that use data from other packages, such as `mosaicData`.
+
+In the text of an exercise you will often see instructions like this: 
+
+> Use the `NCHS` data table to ...
+
+or, like this:
+
+> Use the `DataComputing::HappinessIndex` data table to ...
+
+In both cases, the name refers to a data table provided by a package. The longer name, `DataComputing::HappinessIndex` contains both the name of the package (`DataComputing`) and the name of the data table itself (`HappinessIndex`). The double colons are a form of punctuation to separate the package name from the data table name.
+
+In the shorter example, the data table is named `NCHS`. But which package does it come from?
+
+To find out, you can use a command like that shown in the code pane.
+
+```{r DC-2017-01-01-d386f-scratch, exercise = TRUE, echo = FALSE}
+??NCHS
+```
+
+```{r DC-2017-01-01-d386f-scratch-hint, echo = FALSE}
+Try the command `??CoolingWater`
+```
+
+Run the command. The output will contain the double-colon form of the table name, from which you can figure out the name of the package providing `NCHS`.
+
+
+
+```{r DC-2017-01-01-d386f, echo = FALSE}
+question('Use the code pane above to figure out what package provides the table named `CoolingWater`.',
+  answer("`mosaicData`", 
+         correct = TRUE,
+         message = "Right. `mosaicData` is a package widely used in teaching statistics." ),
+  answer("`DataComputing`", 
+         correct = FALSE, 
+         message = "Sorry. Many of the examples used in \"Data Computing\" will draw on the data in the `DataComputing` package, but not this one."),
+  answer("`ggplot2`", 
+         correct = FALSE,
+         message = "Did you see `ggplot2::GaltonData` in the output? I don't think so."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+
+
+

@@ -1,0 +1,82 @@
+---
+title: "DC-2017-01-01-fc26d"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-01-fc26d-setup, echo = FALSE}
+# code to be evaluated before exercise code
+library(mosaicData)
+library(DataComputing)
+```
+
+Here's one way to access a data table provided by a package:
+
+```{r}
+data(BabyNames, package = "DataComputing")
+```
+    
+The `data()` function takes two arguments. The first is the name of the data table that you want to access. Note that it is *not* in quotes. The second is a "named argument." The name of the argument is `package`. The `=` in the above example says to set the value of the argument called `package` to the string constant `"DataComputing"`. Note that the package name is in quotes.
+
+The result of a command like the above is to create a new object in R that you can refer to by name. For instance, you can see the names of the variables with the `names()` function:
+
+```{r}
+names(BabyNames)
+```
+
+**Your task**: Access the `CPS85` data table. Here's a code pane you can use to figure out what package `CPS85` comes from.
+
+```{r DC-2017-01-01-fc26d-scratch, exercise = TRUE}
+
+```
+
+```{r DC-2017-01-01-fc26d-scratch-hint}
+??CPS85
+```
+
+Once you know the name of the package that provides `CPS85`, you can fill in the blanks in the code pane below in order to access the data table and look at the first few rows of it.
+
+
+```{r DC-2017-01-01-fc26d, exercise = TRUE, exercise.setup = "DC-2017-01-01-fc26d-setup", exercise.eval = FALSE}
+data(_____, _____)
+head(_____)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+```{r DC-2017-01-01-fc26d-hint-1, echo = FALSE}
+# The CPS85 data table comes from the "mosaicData" package.
+# Remember the quotes when referring to "mosaicData"
+```
+
+```{r DC-2017-01-01-fc26d-hint-2, echo = FALSE}
+head(CPS85)
+```
+
+```{r DC-2017-01-01-fc26d-solution, echo = FALSE}
+data(CPS85, package = "mosaicData")
+head(CPS85)
+```
+
+```{r DC-2017-01-01-fc26d-check, echo = FALSE}
+test_0 <- find_call("data(CPS85, whatever)", "the first argument to `data()` is the data table, e.g. `CPS85`")
+test_1 <- find_call("data(whatever, package = whatever)", "the second argument to `data()` is `package =`")
+
+test_2 <- find_names(data(CPS85), "remember to use the data() function to access CPS85.")
+test_3 <- check_argument("data(CPS85, package = grab_this)", 
+                         test = agrees(is.character(x), 
+                                       "the name of the package should be in quotes."))
+test_4 <- find_constants("mosaicData", message = "the package containing the data is \"mosaicData\"")
+test_5 <- find_call("data(whatever, package = 'mosaicData')", message = "argument should be the name of the package (in quotes).")
+test_6 <- find_call("head(CPS85)", "give the data table as the argument to `head()`")
+
+USER_CODE %>% test_0 %>% test_1 %>% test_2 %>% test_3 %>%  test_4 %>% test_5 %>% test_6
+```
+
+

@@ -1,0 +1,55 @@
+---
+title: "DC-2017-01-01-75bca"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-01-75bca-setup, echo = FALSE}
+# code to be evaluated before exercise code
+```
+
+When you read a `.csv` or `.xlsx` spreadsheet file, you need to create a name by which to refer to the resulting data table in R.
+
+Some tips:
+
+* Remember that the name of the file goes in quotes.
+* Use ordinary assignment, e.g. `My_table <- ` to give a name to the  data table that will be created.
+* Use `read.csv()` for `.csv` files and `readxl::read_excel` for `.xlsx` files.
+
+
+**Your task**: Read in the file `"http://tiny.cc/dcf/CountryCodes.csv"` and name the resulting object `CCodes`.
+
+
+```{r DC-2017-01-01-75bca, exercise = TRUE, exercise.setup = "DC-2017-01-01-75bca-setup", exercise.eval = FALSE}
+
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+```{r DC-2017-01-01-75bca-hint, echo = FALSE}
+# Use the `read.csv()` function and make assignment to `CCodes`
+```
+
+```{r DC-2017-01-01-75bca-solution, echo = FALSE}
+CCodes <- read.csv("http://tiny.cc/dcf/CountryCodes.csv")
+```
+
+```{r DC-2017-01-01-75bca-check, echo = FALSE}
+set_success_message("Good job. There are several other functions for reading CSV and other forms of file, but we don't need to use them in the next several chapters.")
+test_1 <- find_call("read.csv(whatever)")
+test_2 <- find_statement("[\"'].*[\"']", 
+                        message = "you don't have the file name in quotes.",
+                        regex = TRUE)
+test_3 <- find_constants("http://tiny.cc/dcf/CountryCodes.csv", 
+                        message = "you don't have the name of the file typed correctly.")
+test_4 <- find_assignment("CCodes", message = "remember to assign the output to `CCodes`.")
+USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4
+```
+
+

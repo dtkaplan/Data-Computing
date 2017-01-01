@@ -1,0 +1,45 @@
+---
+title: "DC-2017-01-01-f13ea"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+For this course, most data will come to you in data-table form. But there are several ways that the data might be provided:
+
+* As data from an R package. Many R packages, including `DataComputing`, provide data tables as part of the package. To access these tables, you can load the package. (In these DataCamp exercises, this has often been done for you.)
+* As a file. Data-table files come in many different types. The type is often indicated by the last part of the name (the "filetype extension"). Three common types are:
+    - a specialized spreadsheet file, e.g. `.xmlx` in the Excel system.
+    - a generic spreadsheet file, often a `.csv` (comma-separated values).
+    - a highly efficient format provided by R with file endings like `.rda` or `.Rdata`.
+
+You refer to a table from a package by name, **not in quotes**. The name has to be a legal R object name. The name will **not** end with a filename extension such as `.csv` or `.Rda`.
+
+You refer to a data file by a name also, **always in quotes**. The name often consists of many parts, separated by dashes. 
+
+* Files available over the internet have names beginning with something like `http://` and end with extensions like `.csv` or `.Rdata`, etc.
+* Files on your own computer (or on your account in the RStudio server) often start with `/` or `./` or `~/` and end with `.csv` or `.Rdata`, etc.
+
+
+
+```{r DC-2017-01-01-f13ea, echo = FALSE}
+question('Which of the following is a data table identified by `"http://tiny.cc/dcf/CountryCodes.rda"`.',
+  answer("A file on my computer.", 
+         message = "Think where you see names started with `http://`" ),
+  answer("A file available through the internet", correct = TRUE, 
+         message = "File names starting with 'http://' or 'https://' signal that the file is available via the internet."),
+  answer("A file provided by a package.", 
+         message = "Packages provide data with commands like `data()`."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+

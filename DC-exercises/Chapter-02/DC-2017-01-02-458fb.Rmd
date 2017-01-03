@@ -1,0 +1,45 @@
+---
+title: "DC-2017-01-02-458fb"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-02-458fb-setup, echo = FALSE}
+# code to be evaluated before exercise code
+```
+
+Fix the syntax so that the command works.
+
+```{r DC-2017-01-02-458fb, exercise = TRUE, exercise.setup = "DC-2017-01-02-458fb-setup", exercise.eval = FALSE}
+ralph <- sqrt 100
+```
+
+<div id="DC-2017-01-02-458fb-hint">
+The arguments to functions must *always* be in parentheses.
+</div>
+
+
+```{r DC-2017-01-02-458fb-solution, echo = FALSE}
+ralph <- sqrt(100)
+```
+
+```{r DC-2017-01-02-458fb-code-check, echo = FALSE}
+USER_CODE %>% check_function_calls("sqrt") 
+```
+
+
+```{r DC-2017-01-02-458fb-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- find_call("sqrt(whatever)", "use the sqrt() function") 
+test_2 <- find_call("sqrt(100)", "the argument should be 100")
+test_3 <- find_names("ralph", "assign the result of sqrt(100) to the name ralph")
+USER_CODE %>% test_1 %>% test_2 %>% test_3
+```
+
+

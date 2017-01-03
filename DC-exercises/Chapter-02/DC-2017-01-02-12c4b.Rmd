@@ -1,0 +1,62 @@
+---
+title: "DC-2017-01-02-12c4b"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-02-12c4b-setup, echo = FALSE}
+# code to be evaluated before exercise code
+```
+
+Some of the assignments made below are to illegal names. Fix them. But do not change any that are legal names.
+
+```{r DC-2017-01-02-12c4b, exercise = TRUE, exercise.setup = "DC-2017-01-02-12c4b-setup", exercise.eval = FALSE}
+fred <- "a Flintstone"
+july_2 <- "a date"
+_julie_andrews <- "a singer"
+49ers <- "a football team"
+76_trombones <- "a show tune"
+route_66 <- "a highway"
+Washington DC <- "a city"
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id="DC-2017-01-02-12c4b-hint">
+Names shouldn't start with numbers or punctuation. The only allowed punctuation characters are `.` and `_`. Spaces in names are illegal.
+</div>
+
+```{r DC-2017-01-02-12c4b-code-check, echo = FALSE}
+USER_CODE %>% check_assignment_names()
+```
+
+```{r DC-2017-01-02-12c4b-check, echo = FALSE}
+set_success_message("Good job!") 
+test_a <- find_assignment("fred", "`fred` is a legal name. You shouldn't have changed it.")
+test_b <- find_assignment("july_2", "`july_2` is a legal name. You shouldn't have changed it.")
+test_c <- find_assignment("route_66", "`route_66` is a legal name. You shouldn't have changed it.")
+test_1 <- find_value("a Flintstone", 
+                     message = 'you weren\'t asked to change the value `"a Flintstone"` to which the name was being assigned.') 
+test_2 <- find_value("a date", 
+                     message = 'you weren\'t asked to change the value `"a date"` to which the name was being assigned.')
+test_3 <- find_value("a singer", 
+                     message = 'you weren\'t asked to change the value `"a singer"` to which the name was being assigned.')
+test_4 <- find_value("a football team", 
+                     message = 'you weren\'t asked to change the value `"a football team"` to which the name was being assigned.')
+test_5 <- find_value("a show tune", 
+                     message = 'you weren\'t asked to change the value `"a show tune"` to which the name was being assigned.')
+test_6 <- find_value("a highway", 
+                     message = 'you weren\'t asked to change the value `"a highway"` to which the name was being assigned.')
+test_7 <- find_value("a city", 
+                     message = 'you weren\'t asked to change the value `"a city"` to which the name was being assigned.')
+USER_CODE %>% test_a %>% test_b %>% test_c %>% 
+  test_1 %>% test_2 %>% test_3 %>% test_4 %>% test_5 %>% test_6 %>% test_7 
+```
+
+

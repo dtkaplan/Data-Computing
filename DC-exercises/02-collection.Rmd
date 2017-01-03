@@ -1,0 +1,36 @@
+---
+title: "Data Computing: Chapter 2"
+output: 
+  tutor::tutorial: default
+  html_document: 
+    number_sections: yes
+    toc: yes
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+
+<!-- even though this chunk is empty, it sets up authentication for data logging -->
+
+```{r child = checkr::authentication()}
+```
+
+# Syntax for functions
+
+```{r child="Chapter-02/DC-2017-01-02-458fb.Rmd"}
+```
+
+# Legal and illegal names
+
+```{r child="Chapter-02/DC-2017-01-02-12c4b.Rmd"}
+```
+
+# More illegal names
+
+```{r child="Chapter-02/DC-2017-01-02-0346a.Rmd"}
+```

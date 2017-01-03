@@ -1,0 +1,66 @@
+---
+title: "DC-2017-01-02-0346a"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-02-0346a-setup, echo = FALSE}
+# code to be evaluated before exercise code
+```
+
+Many of the object names in the code pane include illegal characters. 
+Remove **only** those **illegal characters** to form proper object names. Other than the illegal character's being removed, the names should remain exactly the same. Don't replace the illegal characters, simply remove them.'
+
+```{r DC-2017-01-02-0346a, exercise = TRUE, exercise.setup = "DC-2017-01-02-0346a-setup", exercise.eval = FALSE}
+7eleven <- "store"
+seven-eleven <- "convenience store"
+R squared <- 0.25
+p_value <- 0.07
+file name <- "cats.csv"
+"Data set" <- mtcars
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id="DC-2017-01-02-0346a-hint">
+Leading punctuation or numbers are illegal. Within the body of the name, only `_` and `.` are acceptable punctuation.
+</div>
+
+```{r DC-2017-01-02-0346a-solution, echo = FALSE}
+eleven <- "store"
+seveneleven <- "convenience store"
+Rsquared <- 0.25
+p_value <- 0.07
+filename <- "cats.csv"
+Dataset <- mtcars
+```
+
+```{r DC-2017-01-02-0346a-code-check, echo = FALSE}
+USER_CODE %>% check_assignment_names()
+```
+
+
+```{r DC-2017-01-02-0346a-check, echo = FALSE}
+set_success_message("Good job! In practice, you might reasonably have used the period or underscore to replace spaces or other illegal punctuation. But for the sake of checking the completeness of your answer, we asked you simply to remove the illegal characters.") # change as you like
+test_1 <- find_assignment("eleven",
+                          message = "`7eleven` should become `eleven`.")
+test_2 <- find_assignment("seveneleven",
+                          message = "`seven-eleven` should become `seveneleven`.")
+test_3 <- find_assignment("Rsquared",
+                          message = "`R squared` should become `R2`.")
+test_4 <- find_assignment("p_value",
+                          message = "`p_value` was right as it stood.")
+test_5 <- find_assignment("filename",
+                          message = "`file name` should become `filename`.")
+test_6 <- find_assignment("Dataset",
+                          message = "`Data set` should become `Dataset`.")
+USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4 %>% test_5 %>% test_6
+```
+
+

@@ -1,0 +1,38 @@
+---
+title: "DC-2017-01-02-4ef53"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-02-4ef53-setup, echo = FALSE}
+# code to be evaluated before exercise code
+```
+
+The `paste()` function glues together character strings. The command in the code pane is intended to produce the result `"one and two and three"`.  But it's not yet in a correct form, as you'll see when you run the code.
+
+
+```{r DC-2017-01-02-4ef53, exercise = TRUE, exercise.setup = "DC-2017-01-02-4ef53-setup", exercise.eval = FALSE}
+paste("one"; "two"; "three"; sep = " and ")
+```
+
+<div id="DC-2017-01-02-4ef53-hint">
+`paste()` should have four arguments within the parentheses. What character should separate the arguments?
+</div>
+
+```{r DC-2017-01-02-4ef53-solution, echo = FALSE}
+paste("one", "two", "three", sep = " and ")
+```
+
+```{r DC-2017-01-02-4ef53-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- final_ # replace with your own
+USER_CODE %>% test_1 %>% check_value(test = agrees(x == "one and two and three"))()
+```
+
+

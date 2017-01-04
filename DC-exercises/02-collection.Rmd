@@ -17,8 +17,10 @@ knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
 
 <!-- even though this chunk is empty, it sets up authentication for data logging -->
 
+<!--
 ```{r child = checkr::authentication()}
 ```
+-->
 
 # Syntax for functions
 

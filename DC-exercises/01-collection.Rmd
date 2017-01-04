@@ -17,8 +17,11 @@ knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
 
 <!-- even though this chunk is empty, it sets up authentication for data logging -->
 
+<!--
 ```{r child = checkr::authentication()}
 ```
+-->
+
 
 # Introduction to tutorial exercises
 
@@ -30,22 +33,27 @@ knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
 ```{r child="Chapter-01/DC-2016-12-22-f379e.Rmd"}
 ```
 
-# Practice 1: Reading code
+# Warm-up Exercises
+
+You're just at the start of the course, so you can hardly be expected to be able to write complete data-wrangling and visualization commands. In these warm-up exercises, you're asked to read some commands and make some very small modifications to them. Later tutorials will provide a systematic introduction. 
+
+
+## Warm-up 1: Reading code
 
 ```{r child = "Chapter-01/DC-2016-12-22-50dc3.Rmd"}
 ```
 
-# Practice 2: Wrangling sequences
+## Warm-up 2: Wrangling sequences
 
 ```{r child = "Chapter-01/DC-2016-12-22-57e2d.Rmd"}
 ```
 
-# Practice 3: Graphics
+## Warm-up 3: Graphics
 
 ```{r child = "Chapter-01/DC-2016-12-30-a163b.Rmd"}
 ```
 
-# Practice 4: a data-wrangling sequence
+## Warm-up 4: Diamonds
 
 ```{r child = "Chapter-01/DC-2016-12-30-03b65.Rmd"}
 ```

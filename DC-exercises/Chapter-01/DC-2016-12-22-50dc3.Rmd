@@ -22,7 +22,7 @@ So, even though you haven't yet had any opportunity to learn about data wranglin
 
 The `WorldCities` data table contains information about 23,000 cities around the world. Here's a random selection of a few of them:
 
-```{r echo = FALSE}
+```{r echo = FALSE, warning=FALSE}
 library(DataComputing)
 WorldCities %>% sample_n(size = 5) %>%
   select(name, latitude, longitude, country, population)

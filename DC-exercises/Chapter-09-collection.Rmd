@@ -1,0 +1,35 @@
+---
+title: "Data Computing: Chapter 8"
+output: 
+  tutor::tutorial: default
+  html_document: 
+    number_sections: yes
+    toc: yes
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+
+<!-- even though this chunk is eempty, it sets up authentication for data logging -->
+
+<!--
+ 
+```{r child = checkr::authentication()}
+```
+-->
+
+## From `ggplot` graphics
+
+```{r child="Chapter-09/DC-2016-12-23-4d26c.Rmd"}
+```
+
+## Making a graphics frame
+
+```{r child="Chapter-09/DC-2016-12-23-642df.Rmd"}
+```
+

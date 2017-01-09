@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>DC-2017-01-08-63712</title>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("section-TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="section-header">
+
+
+
+<h1 class="title toc-ignore">DC-2017-01-08-63712</h1>
+
+</div>
+
+
+<div class="tutor-exercise-support" data-label="DC-2017-01-08-63712-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(DataComputing)
+data(Births78, package = &quot;mosaicData&quot;)</code></pre>
+</div>
+<p>One of the most widely used data verbs is <code>summarise()</code>. Like all data verbs, <code>summarise()</code> takes as input a data table. It performs a reduction on the data table, for example calculating the sum of the values in a variable.</p>
+<p>Of course, you have to tell <code>summarise()</code> what summaries you want to perform. All summaries involve a “reduction verb”, a function like <code>mean()</code> or <code>sum()</code> that takes the values in a variable and reduces them to a single value.</p>
+<p>We’ll use the <code>Births78</code> data in this exercise. This data table gives the number of births in the US on each day of the year in 1978. The variable <code>births</code> gives the number of babies born on each day.</p>
+<ul>
+<li>You will use the data verb <code>summarise()</code> and will pipe the <code>Births78</code> data table to be the input to <code>summarise()</code>. You will also give, as an argument to <code>summarise()</code> an expression that calculates the total <code>sum()</code> of <code>births</code></li>
+<li>Give the argument the name <code>total</code> so that the output data table has a variable named <code>total</code>.</li>
+</ul>
+<div class="tutor-exercise" data-label="DC-2017-01-08-63712" data-caption="Code" data-lines="0">
+<pre class="text"><code># provide access to Births78
+data(Births78, package = &quot;mosaicData&quot;)
+# the data wrangling package
+library(&quot;dplyr&quot;)
+
+Births78 %&gt;% summarise(___)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.setup":"DC-2017-01-08-63712-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else try(capture.code(solution_code), silent = TRUE)","    if (inherits(SOLN_CODE, \"try-error\")) ","        stop(\"Problem author, there is an error in the solution code.\")","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
+</div>
+<!-- narrative to wrap up (if any) goes here -->
+<div id="section-DC-2017-01-08-63712-hint">
+<p>To create an output data table with a variable <code>total</code>, use named assignment within <code>summarise()</code>, e.g. <code>summarise(total = sum(births))</code>.</p>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-08-63712-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>data(Births78, package = &quot;mosaicData&quot;)
+library(&quot;dplyr&quot;) # or &quot;DataComputing&quot;
+
+Births78 %&gt;% summarise(total = sum(births))</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-08-63712-code-check" data-caption="Code" data-lines="0">
+<pre class="text"><code># put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-08-63712-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>set_success_message(&quot;Good job!&quot;) # change as you like
+test_1 &lt;- find_call(&quot;sum(births)&quot;, 
+                    message = &quot;in summarise(), use `sum()` on the `births` variable to get the total number of births.&quot;)
+
+test_2 &lt;- check_value(test = agrees(&quot;total&quot; %in% names(x)),
+                      message = &quot;use `total` as the name of the variable holding `sum(births)&quot;) # replace with your own
+USER_CODE %&gt;% test_1 %&gt;% final_ %&gt;% test_2</code></pre>
+</div>
+
+<script type="application/shiny-prerendered" data-context="server">
+tutor:::register_http_handlers(session, metadata = NULL)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-2017-01-08-63712-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-08-63712-code-editor`)), session)
+output$`tutor-exercise-DC-2017-01-08-63712-output` <- renderUI({
+  `tutor-exercise-DC-2017-01-08-63712-result`()
+})
+</script>
+ <!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["navigation"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/navigation-1.1"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tabsets.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/highlightjs-1.1"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["default.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["4.5.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/font-awesome-4.5.0"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["css/font-awesome.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.4.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutor"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutor"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tutor.js"]},{"type":"character","attributes":{},"value":["tutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]}]}
+</script>
+<!--/html_preserve-->
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

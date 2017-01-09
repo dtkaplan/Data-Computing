@@ -1,0 +1,57 @@
+---
+title: "Data Computing: Chapter 8"
+output: 
+  tutor::tutorial: default
+  html_document: 
+    number_sections: yes
+    toc: yes
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+
+<!-- even though this chunk is eempty, it sets up authentication for data logging -->
+
+<!--
+ 
+```{r child = checkr::authentication()}
+```
+-->
+
+## From `ggplot` graphics
+
+```{r child="Chapter-08/DC-2017-01-09-75a09.Rmd"}
+```
+
+## Making a graphics frame
+
+```{r child="Chapter-08/DC-2017-01-09-81756.Rmd"}
+```
+
+## Adding a layer
+
+```{r child="Chapter-08/DC-2017-01-09-b82d9.Rmd"}
+```
+
+
+## Remembering `aes()` 
+
+```{r child="Chapter-08/DC-2017-01-09-506cb.Rmd"}
+```
+
+## Mapping an aesthetic in the layer
+
+## Faceting
+
+Facet on high versus low birth-rate (or median age) to distinguish between the rich countries with high death rates and those with low death rates.
+
+## Adding x- and y-axis labels
+
+## Setting x- and y-axis limits
+
+

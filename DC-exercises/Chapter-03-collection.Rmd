@@ -1,0 +1,34 @@
+---
+title: "Data Computing: Chapter 3"
+output: 
+  tutor::tutorial: default
+  html_document: 
+    number_sections: yes
+    toc: yes
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+
+<!-- even though this chunk is empty, it sets up authentication for data logging -->
+
+<!-- 
+```{r child = checkr::authentication()}
+```
+-->
+
+# Names and strings
+
+```{r child="Chapter-03/DC-2017-01-07-a45e3.Rmd"}
+```
+
+# Blocked pipelines
+
+```{r child="Chapter-03/DC-2017-01-07-b876a.Rmd"}
+```
+

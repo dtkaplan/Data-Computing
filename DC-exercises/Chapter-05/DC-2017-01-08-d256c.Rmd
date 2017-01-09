@@ -1,0 +1,70 @@
+---
+title: "DC-2017-01-08-d256c"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+library(statisticalModeling)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-08-d256c-setup, echo = FALSE}
+# code to be evaluated before exercise code
+library(statisticalModeling)
+```
+
+The `gf_counts()` function constructs a graphic with bars representing the counts in each category of a specified variable. For instance, the graphic shows the number of people in a clinical study of treatment for addition whose problem is linked to each of several drugs.
+
+```{r}
+data(HELPrct, package = "mosaicData")
+gf_counts( ~ substance, data = HELPrct)
+```
+
+The count itself is not a variable, but is being derived from a categorical variable, in this case the variable `substance`. The formula given to `gf_counts` will have only a right-hand side: `~ substance`. This tells what variable to place on the x-axis. The count will be calculated and placed on the y-axis.
+
+- Attach the data table `CPS85` from the package `"mosaicData"`.
+- Use `gf_counts()` to graph the number of people in `CPS85` who work in each `sector` of the economy.
+
+```{r DC-2017-01-08-d256c, exercise = TRUE, exercise.setup = "DC-2017-01-08-d256c-setup"} 
+data(____, ____)
+gf_counts(____, ____)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id="DC-2017-01-08-d256c-hint">
+Remember, the formula will be one-sided: `~ sector`.
+</div>
+
+```{r DC-2017-01-08-d256c-solution, echo = FALSE}
+data(CPS85, package = "mosaicData")
+gf_counts(~ sector, data = CPS85)
+```
+
+```{r DC-2017-01-08-d256c-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-08-d256c-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- find_call("data(CPS85, whatever)",
+                    message = "the data come from the `mosaicData` package.")
+test_2 <- find_call("data(CPS85, whatever)",
+                    message = "remember to attach the `CPS85` data table.")
+test_3 <- find_call("gf_counts()", 
+                    message = "use the `gf_counts()` function to make the bar plot.")
+test_4 <- find_call("gf_counts(whatever, data = CPS85)", 
+                    message = "give `CPS85` as the data argument to gf_counts.")
+test_5 <- check_argument("gf_counts(grab_this, whatever)",
+                         test = match_formula(~ sector),
+                        message = "the `sector` variable should be in the x-position in the formula.")
+USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4 %>% test_5
+```
+
+

@@ -1,0 +1,74 @@
+---
+title: "DC-2017-01-08-01a59"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+library(statisticalModeling)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+Here's a simple box-and-whisker plot of wage versus sector of the economy from the `mosaicData::CPS85` data:
+
+```{r}
+library(statisticalModeling)
+data(CPS85, package = "mosaicData")
+gf_boxplot(wage ~ sector, data = CPS85)
+```
+
+In this exercise, you're going to refine the graphic by adding in facets and aesthetics.
+
+- Add a term to the formula that maps the variable `sex` to the fill aethetic. You do this by adding a term of the form `+ fill:sex`
+- Facet the plot by the variable union. You do this by adding a new command at the end: `+ facet_grid( ~ union)`
+
+```{r DC-2017-01-08-01a59-setup, echo = FALSE}
+library(statisticalModeling)
+```
+
+<!-- narrative before exercise -->
+
+```{r DC-2017-01-08-01a59, exercise = TRUE, exercise.setup = "DC-2017-01-08-01a59-setup", exercise.eval = FALSE}
+library(statisticalModeling)
+data(CPS85, package = "mosaicData")
+gf_boxplot(wage ~ sector, data = CPS85)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id = 'DC-2017-01-08-01a59-hint'>
+Use `facet_grid()` to set up the faceting. It takes a one-sided formula, `~ var`, where `var` is the name of the variable you want to facet with respect to.
+</div>
+
+```{r DC-2017-01-08-01a59-solution, echo = FALSE}
+library("statisticalModeling")
+data(CPS85, package = "mosaicData")
+
+gf_boxplot(wage ~ sector + fill:sex, data = CPS85) + facet_grid( ~ union)
+
+```
+
+```{r DC-2017-01-08-01a59-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-08-01a59-check, echo = FALSE}
+set_success_message("Nice! Whether it's a good graphic or not depends on what you're trying to show. This one puts the wages of men and women next to each other for each sector, which is good for comparing wages between the sexes. But for other purposes it might be appropriate to put side by side the wages for union and non-union workers, or to facet by `sector`. Different arrangements of the data can reveal different aspects of the data.") # change as you like
+test_1 <- find_call("gf_boxplot()", "use `gf_boxplot()`. Just add a fill aesthetic and facet by union.")
+test_2 <- find_call("gf_boxplot(whatever, data = CPS85)", "use the `CPS85` data table.")
+test_3 <- check_argument("gf_boxplot(grab_this, whatever)",
+                         test = match_formula(wage ~ sector + fill:sex),
+                         message = "add the fill aesthetic to the formula and map `sex` to fill with `+ fill:sex`")
+test_4 <- find_call("facet_grid()", "remember to use the `facet_grid()` function.")
+test_5 <- check_argument("facet_grid(grab_this)",
+                         test = match_formula(~ union),
+                         message = "use a one-sided formula with `union` on the right side.")
+USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4 %>% test_5 
+```
+
+

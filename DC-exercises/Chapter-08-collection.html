@@ -11,7 +11,7 @@
 
 
 
-<title>Data Computing: Chapter 2</title>
+<title>Data Computing: Chapter 8</title>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -201,13 +201,14 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Data Computing: Chapter 2</h1>
+<h1 class="title toc-ignore">Data Computing: Chapter 8</h1>
 
 </div>
 
 
-<!-- even though this chunk is empty, it sets up authentication for data logging -->
+<!-- even though this chunk is eempty, it sets up authentication for data logging -->
 <!--
+ 
 
 
 
@@ -227,193 +228,205 @@ div.tocify {
 
 
 -->
-<div id="section-syntax-for-functions" class="section level1">
-<h1>Syntax for functions</h1>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-458fb-setup" data-caption="Code" data-lines="0">
-<pre class="text"><code># code to be evaluated before exercise code</code></pre>
+<div id="section-from-ggplot-graphics" class="section level2">
+<h2>From <code>ggplot</code> graphics</h2>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-75a09-scratch-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code># code to be evaluated before exercise code
+library(statisticalModeling)
+library(DataComputing)</code></pre>
 </div>
-<p>Fix the syntax so that the command works.</p>
-<div class="tutor-exercise" data-label="DC-2017-01-02-458fb" data-caption="Code" data-lines="0">
-<pre class="text"><code>ralph &lt;- sqrt 100</code></pre>
-<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.setup":"DC-2017-01-02-458fb-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
+<p>You’ve already seen how <code>gf_point()</code> can be used to draw graphics. For example, the scratch chunk below already contains the commands to draw a scatterplot that relates <code>death</code> rates, <code>life</code> expectancy, and Gross Domestic Project per capita (<code>GDPcapita</code>, which is a measure of economic activity).</p>
+<div class="tutor-exercise" data-label="DC-2017-01-09-75a09-scratch" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(statisticalModeling)
+
+gf_point(death ~ life + alpha:GDPcapita, data = CountryData)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":"50%","warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else try(capture.code(solution_code), silent = TRUE)","    if (inherits(SOLN_CODE, \"try-error\")) ","        stop(\"Problem author, there is an error in the solution code.\")","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
 </div>
-<div id="section-DC-2017-01-02-458fb-hint">
-<p>The arguments to functions must <em>always</em> be in parentheses.</p>
+<p>Functions like <code>gf_point()</code> are built on another graphics system that is very widely used in Data Science, <code>ggplot2</code>. Many people find the formula interface provided by <code>gf_point()</code> easier to use than the native <code>ggplot2</code> interface, but once you get used to <code>ggplot2</code> it is just as easy and it provides greater flexibility.</p>
+<p>By using and argument <code>verbose = TRUE</code> to <code>gf_point()</code>, you can see exactly what is the <code>ggplot2</code> command created.</p>
+<p>Try that in the above code chunk.</p>
+<p>Now copy and paste that <code>ggplot2()</code> command into the following chunk, and confirm that it makes exactly the same plot.</p>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-75a09-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(statisticalModeling)
+data(CountryData, package = &quot;DataComputing&quot;)</code></pre>
 </div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-458fb-solution" data-caption="Code" data-lines="0">
-<pre class="text"><code>ralph &lt;- sqrt(100)</code></pre>
-</div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-458fb-code-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>USER_CODE %&gt;% check_function_calls(&quot;sqrt&quot;) </code></pre>
-</div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-458fb-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>set_success_message(&quot;Good job!&quot;) # change as you like
-test_1 &lt;- find_call(&quot;sqrt(whatever)&quot;, &quot;use the sqrt() function&quot;) 
-test_2 &lt;- find_call(&quot;sqrt(100)&quot;, &quot;the argument should be 100&quot;)
-test_3 &lt;- find_names(&quot;ralph&quot;, &quot;assign the result of sqrt(100) to the name ralph&quot;)
-USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% test_3</code></pre>
-</div>
-</div>
-<div id="section-legal-and-illegal-names" class="section level1">
-<h1>Legal and illegal names</h1>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-12c4b-setup" data-caption="Code" data-lines="0">
-<pre class="text"><code># code to be evaluated before exercise code</code></pre>
-</div>
-<p>Some of the assignments made below are to illegal names. Fix them. But do not change any that are legal names.</p>
-<div class="tutor-exercise" data-label="DC-2017-01-02-12c4b" data-caption="Code" data-lines="0">
-<pre class="text"><code>fred &lt;- &quot;a Flintstone&quot;
-july_2 &lt;- &quot;a date&quot;
-_julie_andrews &lt;- &quot;a singer&quot;
-49ers &lt;- &quot;a football team&quot;
-76_trombones &lt;- &quot;a show tune&quot;
-route_66 &lt;- &quot;a highway&quot;
-Washington DC &lt;- &quot;a city&quot;</code></pre>
-<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.setup":"DC-2017-01-02-12c4b-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
+<div class="tutor-exercise" data-label="DC-2017-01-09-75a09" data-caption="Code" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":"50%","warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"DC-2017-01-09-75a09-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else try(capture.code(solution_code), silent = TRUE)","    if (inherits(SOLN_CODE, \"try-error\")) ","        stop(\"Problem author, there is an error in the solution code.\")","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
 </div>
 <!-- narrative to wrap up (if any) goes here -->
-<div id="section-DC-2017-01-02-12c4b-hint">
-<p>Names shouldn’t start with numbers or punctuation. The only allowed punctuation characters are <code>.</code> and <code>_</code>. Spaces in names are illegal.</p>
+<div id="section-DC-2017-01-09-75a09-hint">
+<p>Add <code>verbose = TRUE</code> as an argument to <code>gf_point()</code> in order to see what the corresponding <code>ggplot2</code> command looks like.</p>
 </div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-12c4b-code-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>USER_CODE %&gt;% check_assignment_names()</code></pre>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-75a09-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code># code or text that&#39;s a solution to the exercise</code></pre>
 </div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-12c4b-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>set_success_message(&quot;Good job!&quot;) 
-test_a &lt;- find_assignment(&quot;fred&quot;, &quot;`fred` is a legal name. You shouldn&#39;t have changed it.&quot;)
-test_b &lt;- find_assignment(&quot;july_2&quot;, &quot;`july_2` is a legal name. You shouldn&#39;t have changed it.&quot;)
-test_c &lt;- find_assignment(&quot;route_66&quot;, &quot;`route_66` is a legal name. You shouldn&#39;t have changed it.&quot;)
-test_1 &lt;- find_value(&quot;a Flintstone&quot;, 
-                     message = &#39;you weren\&#39;t asked to change the value `&quot;a Flintstone&quot;` to which the name was being assigned.&#39;) 
-test_2 &lt;- find_value(&quot;a date&quot;, 
-                     message = &#39;you weren\&#39;t asked to change the value `&quot;a date&quot;` to which the name was being assigned.&#39;)
-test_3 &lt;- find_value(&quot;a singer&quot;, 
-                     message = &#39;you weren\&#39;t asked to change the value `&quot;a singer&quot;` to which the name was being assigned.&#39;)
-test_4 &lt;- find_value(&quot;a football team&quot;, 
-                     message = &#39;you weren\&#39;t asked to change the value `&quot;a football team&quot;` to which the name was being assigned.&#39;)
-test_5 &lt;- find_value(&quot;a show tune&quot;, 
-                     message = &#39;you weren\&#39;t asked to change the value `&quot;a show tune&quot;` to which the name was being assigned.&#39;)
-test_6 &lt;- find_value(&quot;a highway&quot;, 
-                     message = &#39;you weren\&#39;t asked to change the value `&quot;a highway&quot;` to which the name was being assigned.&#39;)
-test_7 &lt;- find_value(&quot;a city&quot;, 
-                     message = &#39;you weren\&#39;t asked to change the value `&quot;a city&quot;` to which the name was being assigned.&#39;)
-USER_CODE %&gt;% test_a %&gt;% test_b %&gt;% test_c %&gt;% 
-  test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4 %&gt;% test_5 %&gt;% test_6 %&gt;% test_7 </code></pre>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-75a09-code-check" data-caption="Code" data-lines="0">
+<pre class="text"><code># put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-75a09-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>set_success_message(&quot;Good.&quot;) # change as you like
+test_1 &lt;- find_call(&quot;ggplot()&quot;, 
+                    message = &quot;use the `ggplot2` command in this code pane.&quot;) 
+test_2 &lt;- find_call(&quot;geom_point()&quot;, 
+                    message = &quot;did you include the whole `ggplot2` command, including `+ geom_point()`?&quot;)
+test_3 &lt;- check_value(test = agrees(inherits(x, &quot;ggplot&quot;)),
+                      message = &quot;it doesn&#39;t look like you copied the whole command.&quot;)
+USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% final_ %&gt;% test_3</code></pre>
 </div>
 </div>
-<div id="section-more-illegal-names" class="section level1">
-<h1>More illegal names</h1>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-0346a-setup" data-caption="Code" data-lines="0">
-<pre class="text"><code># code to be evaluated before exercise code</code></pre>
+<div id="section-making-a-graphics-frame" class="section level2">
+<h2>Making a graphics frame</h2>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-81756-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code>data(CountryData, package = &quot;DataComputing&quot;)
+library(&quot;ggplot2&quot;)
+library(&quot;dplyr&quot;)</code></pre>
 </div>
-<p>Many of the object names in the code pane include illegal characters. Remove <strong>only</strong> those <strong>illegal characters</strong> to form proper object names. Other than the illegal character’s being removed, the names should remain exactly the same. Don’t replace the illegal characters, simply remove them.’</p>
-<div class="tutor-exercise" data-label="DC-2017-01-02-0346a" data-caption="Code" data-lines="0">
-<pre class="text"><code>7eleven &lt;- &quot;store&quot;
-seven-eleven &lt;- &quot;convenience store&quot;
-R squared &lt;- 0.25
-p_value &lt;- 0.07
-file name &lt;- &quot;cats.csv&quot;
-&quot;Data set&quot; &lt;- mtcars</code></pre>
-<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.setup":"DC-2017-01-02-0346a-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
-</div>
-<!-- narrative to wrap up (if any) goes here -->
-<div id="section-DC-2017-01-02-0346a-hint">
-<p>Leading punctuation or numbers are illegal. Within the body of the name, only <code>_</code> and <code>.</code> are acceptable punctuation.</p>
-</div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-0346a-solution" data-caption="Code" data-lines="0">
-<pre class="text"><code>eleven &lt;- &quot;store&quot;
-seveneleven &lt;- &quot;convenience store&quot;
-Rsquared &lt;- 0.25
-p_value &lt;- 0.07
-filename &lt;- &quot;cats.csv&quot;
-Dataset &lt;- mtcars</code></pre>
-</div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-0346a-code-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>USER_CODE %&gt;% check_assignment_names()</code></pre>
-</div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-0346a-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>set_success_message(&quot;Good job! In practice, you might reasonably have used the period or underscore to replace spaces or other illegal punctuation. But for the sake of checking the completeness of your answer, we asked you simply to remove the illegal characters.&quot;) # change as you like
-test_1 &lt;- find_assignment(&quot;eleven&quot;,
-                          message = &quot;`7eleven` should become `eleven`.&quot;)
-test_2 &lt;- find_assignment(&quot;seveneleven&quot;,
-                          message = &quot;`seven-eleven` should become `seveneleven`.&quot;)
-test_3 &lt;- find_assignment(&quot;Rsquared&quot;,
-                          message = &quot;`R squared` should become `R2`.&quot;)
-test_4 &lt;- find_assignment(&quot;p_value&quot;,
-                          message = &quot;`p_value` was right as it stood.&quot;)
-test_5 &lt;- find_assignment(&quot;filename&quot;,
-                          message = &quot;`file name` should become `filename`.&quot;)
-test_6 &lt;- find_assignment(&quot;Dataset&quot;,
-                          message = &quot;`Data set` should become `Dataset`.&quot;)
-USER_CODE %&gt;% test_1 %&gt;% test_2 %&gt;% test_3 %&gt;% test_4 %&gt;% test_5 %&gt;% test_6</code></pre>
-</div>
-</div>
-<div id="section-functions-and-arguments" class="section level1">
-<h1>Functions and arguments</h1>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-4ef53-setup" data-caption="Code" data-lines="0">
-<pre class="text"><code># code to be evaluated before exercise code</code></pre>
-</div>
-<p>The <code>paste()</code> function glues together character strings. The command in the code pane is intended to produce the result <code>&quot;one and two and three&quot;</code>. But it’s not yet in a correct form, as you’ll see when you run the code.</p>
-<div class="tutor-exercise" data-label="DC-2017-01-02-4ef53" data-caption="Code" data-lines="0">
-<pre class="text"><code>paste(&quot;one&quot;; &quot;two&quot;; &quot;three&quot;; sep = &quot; and &quot;)</code></pre>
-<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.setup":"DC-2017-01-02-4ef53-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
-</div>
-<div id="section-DC-2017-01-02-4ef53-hint">
-<p><code>paste()</code> should have four arguments within the parentheses. What character should separate the arguments?</p>
-</div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-4ef53-solution" data-caption="Code" data-lines="0">
-<pre class="text"><code>paste(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, sep = &quot; and &quot;)</code></pre>
-</div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-4ef53-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>set_success_message(&quot;Good job!&quot;) # change as you like
-test_1 &lt;- final_ # replace with your own
-USER_CODE %&gt;% test_1 %&gt;% check_value(test = agrees(x == &quot;one and two and three&quot;))()</code></pre>
-</div>
-</div>
-<div id="section-simple-properties-of-data-tables" class="section level1">
-<h1>Simple properties of data tables</h1>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-b2a9c-setup" data-caption="Code" data-lines="0">
-<pre class="text"><code># code to be evaluated before exercise code</code></pre>
-</div>
-<p>The code pane contains a statement that will read in a data table from the internet.</p>
-<p>Add commands that use the appropriate functions to:</p>
+<p>In previous exercises, you used a formula-based interface to the <code>ggplot2</code> system for graphics. That formula-based interface is intended to be easy for getting started with making simple graphics. In these exercises, you’ll practice with the <code>ggplot</code> interface itself.</p>
+<p>The <code>ggplot()</code> function is used to define a the graphics frame. The frame it makes is blank, ready to have additional layers of glyphs added to it. The typical arguments to <code>ggplot()</code> are:</p>
+<ol style="list-style-type: decimal">
+<li>A data table, given as the first argument or piped into <code>ggplot()</code>.</li>
+<li>An <code>aes()</code> statement which constructs the mapping from variables in the data table to the <code>x</code> and <code>y</code> aesthetics, that is, the frame itself.</li>
+</ol>
+<p>The graphic shows a (blank) frame constructed by <code>ggplot()</code>. (We’ll add layers to this blank frame in the exercises that follow.)</p>
+<p><img src="Chapter-08-collection_files/figure-html/unnamed-chunk-11-1.png" width="50%" /></p>
 <ul>
-<li>Calculate the number of rows</li>
-<li>Calculate the number of columns</li>
-<li>Find the names of the variables</li>
+<li>Read from the graph the variables that have been mapped to the x and y aethetics.</li>
+<li>Fill in the blanks in order to construct a command that will reproduce the blank frame.</li>
 </ul>
-<div class="tutor-exercise" data-label="DC-2017-01-02-b2a9c" data-caption="Code" data-lines="0">
-<pre class="text"><code>Motors &lt;- read.csv(&quot;http://tiny.cc/mosaic/engines.csv&quot;)
+<div class="tutor-exercise" data-label="DC-2017-01-09-81756" data-caption="Code" data-lines="0">
+<pre class="text"><code># Provide access to CountryData
+data(CountryData, package = &quot;DataComputing&quot;)
 
-____(____)   # number of rows in Motors
-____(____)   # number of columns in Motors
-____(____)   # names of  variables in Motors</code></pre>
-<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.setup":"DC-2017-01-02-b2a9c-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else capture.code(solution_code)","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
-</div>
-<div id="section-DC-2017-01-02-b2a9c-hint">
-<p>The functions are <code>nrow()</code>, <code>ncol()</code>, and <code>names()</code>. Each of them takes as an argument the data table.</p>
-</div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-b2a9c-solution" data-caption="Code" data-lines="0">
-<pre class="text"><code>Motors &lt;- read.csv(&quot;http://tiny.cc/mosaic/engines.csv&quot;)
+# Attach the ggplot2 package
+library(&quot;ggplot2&quot;)
 
-nrow(Motors)
-ncol(Motors)
-names(Motors)</code></pre>
+# Fill in the blanks ...
+CountryData %&gt;%
+  ggplot(aes(x = ___, y = ___))</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.setup":"DC-2017-01-09-81756-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else try(capture.code(solution_code), silent = TRUE)","    if (inherits(SOLN_CODE, \"try-error\")) ","        stop(\"Problem author, there is an error in the solution code.\")","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
 </div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-02-b2a9c-check" data-caption="Code" data-lines="0">
-<pre class="text"><code>set_success_message(&quot;Good. These are simple ways to see basic properties of a data table.&quot;)
-test_0 &lt;- find_call(&quot;nrow()&quot;)
-test_1 &lt;- find_call(&quot;nrow(whatever)&quot;, &quot;Use `nrow()` to find the number of rows in a data table.&quot;)
-test_1a &lt;- check_argument(&quot;nrow(grab_this)&quot;, test = agrees(is.data.frame(x)))
-test_2 &lt;- find_call(&quot;names(whatever)&quot;, &quot;`names()` finds the names of the variables in a data table.&quot;)
-test_2a &lt;- check_argument(&quot;names(grab_this)&quot;, test = agrees(is.data.frame(x)))
-test_3 &lt;- find_call(&quot;ncol(whatever)&quot;, &quot;Use `ncol()` to find the number of columns in a data table.&quot;)
-test_3a &lt;- check_argument(&quot;ncols(grab_this)&quot;, test = agrees(is.data.frame(x)))
-USER_CODE %&gt;% 
-#  test_0 %&gt;% was_mistake(message = &quot;give the data table as the argument to nrow().&quot;) %&gt;%
-  test_1 %&gt;% test_1a %&gt;%
-  test_2 %&gt;% test_2a %&gt;%
-  test_3 # %&gt;% test_3a</code></pre>
+<!-- narrative to wrap up (if any) goes here -->
+<div id="section-DC-2017-01-09-81756-hint">
+<p>As you can see, <code>life</code> is being mapped to the x aesthetic, <code>death</code> to the y aesthetic. It will seem a bit odd at first, but remember to use <code>aes()</code> as a function, given as an argument to <code>ggplot()</code>, and map the aesthetics by giving appropriate arguments to <code>aes()</code>.</p>
 </div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-81756-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>data(CountryData, package = &quot;DataComputing&quot;)
+library(&quot;ggplot2&quot;)
+CountryData %&gt;% ggplot(aes(x = life, y = death))</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-81756-code-check" data-caption="Code" data-lines="0">
+<pre class="text"><code># put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-81756-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>set_success_message(&quot;Good job!&quot;) # change as you like
+test_1 &lt;- find_call(&quot;aes(x = life, y = whatever)&quot;,
+                    message = &quot;map `life` to the x axis.&quot;)
+test_2 &lt;- find_call(&quot;aes(x = whatever, y = death)&quot;,
+                    message = &quot;map `death to the y axis&quot;)
+USER_CODE %&gt;% test_1 %&gt;% test_2</code></pre>
+</div>
+</div>
+<div id="section-adding-a-layer" class="section level2">
+<h2>Adding a layer</h2>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-b82d9-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(DataComputing)</code></pre>
+</div>
+<p>A blank frame is useful only as a place to draw glyphs. The <code>ggplot()</code> function only creates the frame, it doesn’t do any drawing.</p>
+<p>You draw glyphs by adding a layer to the plot. There are many, many functions in the <code>ggplot</code> system for drawing different types of glyphs. For example a scatter plot can be made with <code>geom_point()</code>, a box-and-whiskers plot with <code>geom_boxplot()</code>, and so on.</p>
+<p>It’s typical that the x and y aesthetics are set in the <code>aes()</code> function, contained as an argument to <code>ggplot()</code>. Similarly, the data table containing the cases to be plotted is piped into the <code>ggplot()</code> function. This is the way that the command in the folloing code pane is set up.</p>
+<p>To add a layer into the frame, follow the <code>ggplot()</code> function call with a <code>+</code> and follow that with a call to the layer-drawing function. (The <code>+</code> is a kind of piping operator, specifically for <code>ggplot()</code>. In data wrangling, the pipe operator is, of course, <code>%&gt;%</code>. It’s only for historical reasons that <code>ggplot()</code> uses <code>+</code> instead of <code>%&gt;%</code>.)</p>
+<ul>
+<li>Add a scatter-plot layer to the plot being made in the code pane.</li>
+</ul>
+<div class="tutor-exercise" data-label="DC-2017-01-09-b82d9" data-caption="Code" data-lines="0">
+<pre class="text"><code>CountryData %&gt;%
+  ggplot(aes(x = life, y = death))</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":"50%","warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"DC-2017-01-09-b82d9-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else try(capture.code(solution_code), silent = TRUE)","    if (inherits(SOLN_CODE, \"try-error\")) ","        stop(\"Problem author, there is an error in the solution code.\")","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
+</div>
+<!-- narrative to wrap up (if any) goes here -->
+<div id="section-DC-2017-01-09-b82d9-hint">
+<p>Scatter plots are made with <code>geom_point()</code></p>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-b82d9-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>CountryData %&gt;%
+  ggplot(aes(x = life, y = death)) +
+  geom_point()</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-b82d9-code-check" data-caption="Code" data-lines="0">
+<pre class="text"><code># put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-b82d9-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>set_success_message(&quot;Good job!&quot;) # change as you like
+test_1 &lt;- find_call(&quot;whatever + whatever&quot;,
+                    message = &quot;use `+` to connect the frame and the glyph layer.&quot;)
+test_2 &lt;- find_call(&quot;geom_point()&quot;, &quot;the added layer should be a scatter plot of the cases in `CountryData`.&quot;)
+test_3 &lt;- check_value(test = agrees(inherits(x, &quot;ggplot&quot;)), 
+                      message = &quot;it doesn&#39;t look like the plot was made.&quot;)
+USER_CODE %&gt;% test_2 %&gt;% test_1 %&gt;% test_2 %&gt;% test_3</code></pre>
+</div>
+</div>
+<div id="section-remembering-aes" class="section level2">
+<h2>Remembering <code>aes()</code></h2>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-506cb-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(DataComputing)
+library(ggplot2)</code></pre>
+</div>
+<p>The commands in the code pane are a non-working attempt to create a scatterplot of <code>death</code> rate versus <code>life</code> expectancy in the <code>CountryData</code> data table. Fix it.</p>
+<div class="tutor-exercise" data-label="DC-2017-01-09-506cb" data-caption="Code" data-lines="0">
+<pre class="text"><code>CountryData %&gt;%
+  ggplot(x = life, y = death) + 
+  geom_point()</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":"50%","warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.setup":"DC-2017-01-09-506cb-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else try(capture.code(solution_code), silent = TRUE)","    if (inherits(SOLN_CODE, \"try-error\")) ","        stop(\"Problem author, there is an error in the solution code.\")","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
+</div>
+<div id="section-DC-2017-01-09-506cb-hint">
+<p>Almost everything is correct in the command as given: the name of the data table, the use of <code>geom_point()</code> to add a scatter-plot layer, the variable names. Just one thing is missing.</p>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-506cb-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>CountryData %&gt;%
+  ggplot(aes(x = life, y = death)) + 
+  geom_point()</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-506cb-code-check" data-caption="Code" data-lines="0">
+<pre class="text"><code># put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-09-506cb-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>set_success_message(&quot;Good job!&quot;) # change as you like
+test_0 &lt;- find_pipe_start(&quot;CountryData&quot;,
+                          message = &quot;put back `CountryData` as the start of the pipe.&quot;)
+test_1 &lt;- find_call(&quot;ggplot(whatever, x = whatever, y = whatever)&quot;)
+test_2 &lt;- find_call(&quot;aes(x = whatever, y = whatever)&quot;,
+                    message = &quot;where do you map the variables to the x and y aesthetics?&quot; )
+test_3 &lt;- find_call(&quot;whatever + whatever&quot;, 
+                    message = &quot;the two components of the plot --- the frame made by `ggplot()` and the layer made by `geom_point()` --- are connected with the `+` operator.&quot;)
+test_4 &lt;- find_call(&quot;geom_point()&quot;,
+                    message = &quot;remember to add the scatter-plot layer with `geom_point()`.&quot;)
+USER_CODE %&gt;% test_0 %&gt;% test_1 %&gt;% was_mistake(&quot;you still haven&#39;t fixed it.&quot;) %&gt;% test_2 %&gt;% test_3 %&gt;% test_4 </code></pre>
+</div>
+</div>
+<div id="section-mapping-an-aesthetic-in-the-layer" class="section level2">
+<h2>Mapping an aesthetic in the layer</h2>
+</div>
+<div id="section-faceting" class="section level2">
+<h2>Faceting</h2>
+<p>Facet on high versus low birth-rate (or median age) to distinguish between the rich countries with high death rates and those with low death rates.</p>
+</div>
+<div id="section-adding-x--and-y-axis-labels" class="section level2">
+<h2>Adding x- and y-axis labels</h2>
+</div>
+<div id="section-setting-x--and-y-axis-limits" class="section level2">
+<h2>Setting x- and y-axis limits</h2>
 
 <script type="application/shiny-prerendered" data-context="server-start">
 library(checkr)
@@ -440,37 +453,37 @@ tutor:::register_http_handlers(session, metadata = NULL)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutor-exercise-DC-2017-01-02-458fb-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-02-458fb-code-editor`)), session)
-output$`tutor-exercise-DC-2017-01-02-458fb-output` <- renderUI({
-  `tutor-exercise-DC-2017-01-02-458fb-result`()
+`tutor-exercise-DC-2017-01-09-75a09-scratch-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-09-75a09-scratch-code-editor`)), session)
+output$`tutor-exercise-DC-2017-01-09-75a09-scratch-output` <- renderUI({
+  `tutor-exercise-DC-2017-01-09-75a09-scratch-result`()
 })
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutor-exercise-DC-2017-01-02-12c4b-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-02-12c4b-code-editor`)), session)
-output$`tutor-exercise-DC-2017-01-02-12c4b-output` <- renderUI({
-  `tutor-exercise-DC-2017-01-02-12c4b-result`()
+`tutor-exercise-DC-2017-01-09-75a09-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-09-75a09-code-editor`)), session)
+output$`tutor-exercise-DC-2017-01-09-75a09-output` <- renderUI({
+  `tutor-exercise-DC-2017-01-09-75a09-result`()
 })
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutor-exercise-DC-2017-01-02-0346a-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-02-0346a-code-editor`)), session)
-output$`tutor-exercise-DC-2017-01-02-0346a-output` <- renderUI({
-  `tutor-exercise-DC-2017-01-02-0346a-result`()
+`tutor-exercise-DC-2017-01-09-81756-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-09-81756-code-editor`)), session)
+output$`tutor-exercise-DC-2017-01-09-81756-output` <- renderUI({
+  `tutor-exercise-DC-2017-01-09-81756-result`()
 })
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutor-exercise-DC-2017-01-02-4ef53-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-02-4ef53-code-editor`)), session)
-output$`tutor-exercise-DC-2017-01-02-4ef53-output` <- renderUI({
-  `tutor-exercise-DC-2017-01-02-4ef53-result`()
+`tutor-exercise-DC-2017-01-09-b82d9-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-09-b82d9-code-editor`)), session)
+output$`tutor-exercise-DC-2017-01-09-b82d9-output` <- renderUI({
+  `tutor-exercise-DC-2017-01-09-b82d9-result`()
 })
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutor-exercise-DC-2017-01-02-b2a9c-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-02-b2a9c-code-editor`)), session)
-output$`tutor-exercise-DC-2017-01-02-b2a9c-output` <- renderUI({
-  `tutor-exercise-DC-2017-01-02-b2a9c-result`()
+`tutor-exercise-DC-2017-01-09-506cb-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-09-506cb-code-editor`)), session)
+output$`tutor-exercise-DC-2017-01-09-506cb-output` <- renderUI({
+  `tutor-exercise-DC-2017-01-09-506cb-result`()
 })
 </script>
  <!--html_preserve-->

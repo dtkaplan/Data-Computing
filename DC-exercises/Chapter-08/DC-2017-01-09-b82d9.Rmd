@@ -1,0 +1,61 @@
+---
+title: "DC-2017-01-09-b82d9"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-09-b82d9-setup, echo = FALSE}
+library(DataComputing)
+```
+
+A blank frame is useful only as a place to draw glyphs.  The `ggplot()` function only creates the frame, it doesn't do any drawing.
+
+You draw glyphs by adding a layer to the plot. There are many, many functions in the `ggplot` system for drawing different types of glyphs. For example a scatter plot can be made with `geom_point()`, a box-and-whiskers plot with `geom_boxplot()`, and so on.
+
+It's typical that the x and y aesthetics are set in the `aes()` function, contained as an argument to `ggplot()`. Similarly, the data table containing the cases to be plotted is piped into the `ggplot()` function. This is the way that the command in the folloing code pane is set up.
+
+To add a layer into the frame, follow the `ggplot()` function call with a `+` and follow that with a call to the layer-drawing function. (The `+` is a kind of piping operator, specifically for `ggplot()`. In data wrangling, the pipe operator is, of course, `%>%`. It's only for historical reasons that `ggplot()` uses `+` instead of `%>%`.)
+
+* Add a scatter-plot layer to the plot being made in the code pane.
+
+```{r DC-2017-01-09-b82d9, exercise = TRUE, exercise.setup = "DC-2017-01-09-b82d9-setup", exercise.eval = FALSE, warning =FALSE, message=FALSE, out.width="50%"}
+CountryData %>%
+  ggplot(aes(x = life, y = death))
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id='DC-2017-01-09-b82d9-hint'>
+Scatter plots are made with `geom_point()`
+</div>
+
+```{r DC-2017-01-09-b82d9-solution, echo = FALSE}
+CountryData %>%
+  ggplot(aes(x = life, y = death)) +
+  geom_point()
+```
+
+```{r DC-2017-01-09-b82d9-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-09-b82d9-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- find_call("whatever + whatever",
+                    message = "use `+` to connect the frame and the glyph layer.")
+test_2 <- find_call("geom_point()", "the added layer should be a scatter plot of the cases in `CountryData`.")
+test_3 <- check_value(test = agrees(inherits(x, "ggplot")), 
+                      message = "it doesn't look like the plot was made.")
+USER_CODE %>% test_2 %>% test_1 %>% test_2 %>% test_3
+```
+
+

@@ -1,0 +1,80 @@
+---
+title: "DC-2017-01-08-28dca"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+library(DataComputing)
+library(statisticalModeling)
+```
+
+```{r DC-2017-01-08-28dca-setup, echo = FALSE}
+library(DataComputing)
+library(statisticalModeling)
+```
+
+The figure shows a graph of death rates versus birth rates, country by country. There's a U-shaped pattern in the graph: at low birth rates, as birth rate increases from one country to another the death rate goes down. But for high birth rates, increasing birth rate is associated with increasing death rate.
+
+```{r warning = FALSE}
+gf_point(death ~ birth, data = CountryData)
+```
+
+One possible explanation for the U-shaped pattern is this: In countries with good health, the death rate is largely shaped by the age distribution in the country. In such countries, a high birth rate is associated with a younger population, hence one with a lower death rate. (Example: Mexico, which has a much lower death rate than its neighbor, the US) In countries with poor health, the death rate is high. But at the same time, women in those countries have many children who, often, have a high mortality rate.
+
+The graphic, as it is, does not incorporate the overall health of countries, so it's not possible to compare the hypothesis in the previous paragraph with the data.
+
+- Life expectancy (`life`) is one measure of a country's overall health.
+- Map `life` to the glyph size in the plot. Do this by adding on to the formula: `+ size:life`.
+- Examine the plot carefully to see if the graphic supports the hypothesis given above.
+- Now, rather than using size to represent `life`, use color. You do this by modifying the formula in the obvious way, `color:life` in place of `size:life`.
+
+
+```{r DC-2017-01-08-28dca, exercise = TRUE, exercise.setup = "DC-2017-01-08-28dca-setup", exercise.eval = FALSE, warning = FALSE}
+
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id="DC-2017-01-08-28dca-hint">
+The formula will have two parts on the right-hand side of the tilde: `death ~ birth + size:life`. 
+</div>
+
+
+```{r DC-2017-01-08-28dca-solution, echo = FALSE}
+gf_point(death ~ birth + size:life, data = CountryData)
+```
+
+```{r DC-2017-01-08-28dca-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-08-28dca-check, echo = FALSE}
+set_success_message("Good. Many design choices in graphic design are a matter of mapping variables to the aesthetic properties of glyphs.  In the `gf_` function formulas, the variable on the left of the tilde determines the variable mapped to y. The first variable on the right sets the variable to be mapped to x. Then other aesthetics are set by pairs in the form aethetic:variable, for instance `size:life` or `color:life`.") # change as you like
+test_1 <- find_call("gf_point()", "use the `gf_point()` function to make a scatter plot.")
+test_2 <- check_argument("gf_point(grab_this, whatever)",
+                          test = match_formula(death ~ birth + size:life),
+                          message = "`death` should be on the y axis, `birth` on the x axis, and `life` should be mapped to the size aesthetic.")
+USER_CODE %>% test_1 %>% test_2
+```
+
+In the scratch pane below, remake the graph using different aesthetics for the `life` variable, e.g. `color`, `alpha`, `shape`.
+
+```{r DC-2017-01-08-28dca-scratch, exercise = TRUE, warning = FALSE}
+
+```
+
+```{r DC-2017-01-08-28dca-Q1, echo = FALSE}
+question("Which one of the aesthetics generates an error message?",
+         answer("color", correct = FALSE),
+         answer("alpha", correct = FALSE),
+         answer("shape", correct = TRUE, message = "There are only a few different shapes, so shape is not a good aesthetic to represent a quantitative variable with many levels. On the other hand, color, alpha, and size can be varied continuously."),
+         allow_retry = TRUE,
+         random_answer_order = TRUE)
+```

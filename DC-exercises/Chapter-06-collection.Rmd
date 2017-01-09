@@ -1,0 +1,44 @@
+---
+title: "Data Computing: Chapter 6"
+output: 
+  tutor::tutorial: default
+  html_document: 
+    number_sections: yes
+    toc: yes
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+
+<!-- even though this chunk is eempty, it sets up authentication for data logging -->
+
+<!--
+ 
+```{r child = checkr::authentication()}
+```
+-->
+
+# Faceting and fill
+
+```{r child="Chapter-06/DC-2017-01-08-32f7b.Rmd"}
+```
+
+# Aesthetics for life
+
+```{r child="Chapter-06/DC-2017-01-08-28dca.Rmd"}
+```
+
+# Box-and-whisker fill
+
+```{r child="Chapter-06/DC-2017-01-08-01a59.Rmd"}
+```
+
+
+
+
+

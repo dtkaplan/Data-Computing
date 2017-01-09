@@ -1,0 +1,55 @@
+---
+title: "Data Computing: Chapter 7"
+output: 
+  tutor::tutorial: default
+  html_document: 
+    number_sections: yes
+    toc: yes
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+
+<!-- even though this chunk is eempty, it sets up authentication for data logging -->
+
+<!--
+ 
+```{r child = checkr::authentication()}
+```
+-->
+
+## Pipes and data verbs
+
+```{r child="Chapter-07/DC-2017-01-08-b769a.Rmd"}
+```
+
+## Reduction verbs and `summarise()`
+
+```{r child="Chapter-07/DC-2017-01-08-63712.Rmd"}
+```
+
+## Groupwise summaries
+
+```{r child="Chapter-07/DC-2017-01-08-7d4bc.Rmd"}
+```
+
+## `group_by()` with other data verbs
+
+```{r child="Chapter-07/DC-2017-01-08-092fe.Rmd"}
+```
+
+## Not data verbs
+
+```{r child="Chapter-07/DC-2017-01-08-5719a.Rmd"}
+```
+
+## Grouping with more than one variable
+
+```{r child="Chapter-07/DC-2017-01-08-f2db1.Rmd"}
+```
+

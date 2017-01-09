@@ -1,0 +1,44 @@
+---
+title: "DC-2017-01-08-f2db1"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+`group_by()` can use multiple variables when forming groups. You do this by giving multiple arguments to `group_by()`.
+
+Figure out and explain what groups are formed by `group_by()` in this data-wrangling statement.
+
+```{r DC-2017-01-08-f2db1-scratch, exercise = TRUE}
+data(CPS85, package = "mosaicData")
+library(dplyr) # or DataComputing
+CPS85 %>%
+  group_by(sex, sector) %>%
+  summarise(wage = mean(wage))
+```    
+      
+
+```{r DC-2017-01-08-f2db1, echo = FALSE}
+question('What is `group_by()` doing to form the groups?',
+  answer("It divides the groups identified by `sex` into subgroups according to what `sector` they are in.", 
+         correct = TRUE,
+         message = "You can use any number of variables to define groups." ),
+  answer("It chooses one or the other of `sex` or `sector` to form the groups.", 
+         correct = FALSE, 
+         message = "Why should it do the choosing? You are the one who determines what the computer is going to do, not the other way around."),
+  answer("It provides two different reports: one broken down by `sex` and another one by `sector`.", 
+         correct = FALSE,
+         message = "Note that each sex is subdivided into each of the sectors; it's not a separate list of the two sexes and the 8 sectors. There aren't any women in the construction sector, so there are 15 rather than 16 rows."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+

@@ -1,0 +1,59 @@
+---
+title: "DC-2017-01-07-a45e3"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+Fix the statement so that it pulls out data for babies named Alfred from the `DataComputing::BabyNames` data table
+
+```{r DC-2017-01-07-a45e3-setup, echo = FALSE}
+# code to be evaluated before exercise code
+library(dplyr)
+data(BabyNames, package = "DataComputing")
+Alfred <- "Fred"
+```
+
+<!-- narrative before exercise -->
+
+```{r DC-2017-01-07-a45e3, exercise = TRUE, exercise.setup = "DC-2017-01-07-a45e3-setup", exercise.eval = FALSE}
+Just_the_Alfreds <- 
+    ____ %>% 
+    filter(name == Alfred)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id="DC-2017-01-07-a45e3-hint">
+- A pipe can never be at the start of a line.
+- A data table should be given before the first pipe (`%>%`).
+- Literal names, like `"Alfred"`, should be in quotes.
+</div>
+
+```{r DC-2017-01-07-a45e3-solution, echo = FALSE}
+Just_the_Alfreds <-
+    BabyNames %>%
+    filter(name == "Alfred")
+```
+
+```{r DC-2017-01-07-a45e3-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-07-a45e3-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_0 <- find_assignment("Just_the_Alfreds")
+test_1 <- check_value(test = agrees(all(names(x) == names(BabyNames)) ), message = "the resulting data frame should have the same variables as `BabyNames`.")
+test_2 <- check_value(test = agrees(all(x[["name"]] == "Alfred")), message = "only the Alfreds should appear in the result.")
+
+USER_CODE %>% test_0 %>% test_1 %>% test_2
+```
+

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>DC-2017-01-08-28dca</title>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("section-TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="section-header">
+
+
+
+<h1 class="title toc-ignore">DC-2017-01-08-28dca</h1>
+
+</div>
+
+
+<div class="tutor-exercise-support" data-label="DC-2017-01-08-28dca-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(DataComputing)
+library(statisticalModeling)</code></pre>
+</div>
+<p>The figure shows a graph of death rates versus birth rates, country by country. There’s a U-shaped pattern in the graph: at low birth rates, as birth rate increases from one country to another the death rate goes down. But for high birth rates, increasing birth rate is associated with increasing death rate.</p>
+<pre class="r"><code>gf_point(death ~ birth, data = CountryData)</code></pre>
+<p><img src="DC-2017-01-08-28dca_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>One possible explanation for the U-shaped pattern is this: In countries with good health, the death rate is largely shaped by the age distribution in the country. In such countries, a high birth rate is associated with a younger population, hence one with a lower death rate. (Example: Mexico, which has a much lower death rate than its neighbor, the US) In countries with poor health, the death rate is high. But at the same time, women in those countries have many children who, often, have a high mortality rate.</p>
+<p>The graphic, as it is, does not incorporate the overall health of countries, so it’s not possible to compare the hypothesis in the previous paragraph with the data.</p>
+<ul>
+<li>Life expectancy (<code>life</code>) is one measure of a country’s overall health.</li>
+<li>Map <code>life</code> to the glyph size in the plot. Do this by adding on to the formula: <code>+ size:life</code>.</li>
+<li>Examine the plot carefully to see if the graphic supports the hypothesis given above.</li>
+<li>Now, rather than using size to represent <code>life</code>, use color. You do this by modifying the formula in the obvious way, <code>color:life</code> in place of <code>size:life</code>.</li>
+</ul>
+<div class="tutor-exercise" data-label="DC-2017-01-08-28dca" data-caption="Code" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":false,"error":false,"message":true,"exercise.df_print":"default","exercise.setup":"DC-2017-01-08-28dca-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else try(capture.code(solution_code), silent = TRUE)","    if (inherits(SOLN_CODE, \"try-error\")) ","        stop(\"Problem author, there is an error in the solution code.\")","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
+</div>
+<!-- narrative to wrap up (if any) goes here -->
+<div id="section-DC-2017-01-08-28dca-hint">
+<p>The formula will have two parts on the right-hand side of the tilde: <code>death ~ birth + size:life</code>.</p>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-08-28dca-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>gf_point(death ~ birth + size:life, data = CountryData)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-08-28dca-code-check" data-caption="Code" data-lines="0">
+<pre class="text"><code># put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)</code></pre>
+</div>
+<div class="tutor-exercise-support" data-label="DC-2017-01-08-28dca-check" data-caption="Code" data-lines="0">
+<pre class="text"><code>set_success_message(&quot;Many design choices in graphic design are a matter of mapping variables to the aesthetic properties of glyphs.  In the `gf_` function formulas, the variable on the left of the tilde determines the variable mapped to y. The first variable on the right sets the variable to be mapped to x. Then other aesthetics are set by pairs in the form aethetic:variable, for instance `size:life` or `color:life`.&quot;) # change as you like
+test_1 &lt;- find_call(&quot;gf_point()&quot;, &quot;use the `gf_point()` function to make a scatter plot.&quot;)
+test_2 &lt;- check_argument(&quot;gf_point(grab_this, whatever)&quot;,
+                          test = match_formula(death ~ birth + size:life),
+                          message = &quot;`death` should be on the y axis, `birth` on the x axis, and `life` should be mapped to the size aesthetic.&quot;)
+USER_CODE %&gt;% test_1 %&gt;% test_2</code></pre>
+</div>
+<p>In the scratch pane below, remake the graph using different aesthetics for the <code>life</code> variable, e.g. <code>color</code>, <code>alpha</code>, <code>shape</code>.</p>
+<div class="tutor-exercise" data-label="DC-2017-01-08-28dca-scratch" data-caption="Code" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":false,"error":false,"message":true,"exercise.df_print":"default","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else try(capture.code(solution_code), silent = TRUE)","    if (inherits(SOLN_CODE, \"try-error\")) ","        stop(\"Problem author, there is an error in the solution code.\")","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
+</div>
+
+<div id="htmlwidget-41bd5e2b6f64f4b8b8aa" style="width:100%;height:auto;", class = "quiz html-widget">
+<div class="panel panel-default">
+<div class="panel-body quizArea">
+</div>
+</div>
+</div>
+
+<script type="application/json" data-for="htmlwidget-41bd5e2b6f64f4b8b8aa">{"x":{"question":"Which one of the aesthetics generates an error message?","answers":[{"option":"color","correct":false,"message":null},{"option":"alpha","correct":false,"message":null},{"option":"shape","correct":true,"message":"There are only a few different shapes, so shape is not a good aesthetic to represent a quantitative variable with many levels. On the other hand, color, alpha, and size can be varied continuously."}],"label":"DC-2017-01-08-28dca-Q1","skipStartButton":true,"perQuestionResponseAnswers":true,"perQuestionResponseMessaging":true,"preventUnanswered":true,"displayQuestionCount":false,"displayQuestionNumber":false,"disableRanking":true,"nextQuestionText":"","checkAnswerText":"Submit Answer","allowRetry":true,"randomSortAnswers":true,"json":{"info":{"name":"","main":""},"questions":[{"q":"Which one of the aesthetics generates an error message?","a":[{"option":"color","correct":false,"message":null},{"option":"alpha","correct":false,"message":null},{"option":"shape","correct":true,"message":"There are only a few different shapes, so shape is not a good aesthetic to represent a quantitative variable with many levels. On the other hand, color, alpha, and size can be varied continuously."}],"correct":"Correct!","incorrect":"Incorrect."}]}},"evals":[],"jsHooks":[]}</script> 
+<script type="application/shiny-prerendered" data-context="server">
+tutor:::register_http_handlers(session, metadata = NULL)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-2017-01-08-28dca-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-08-28dca-code-editor`)), session)
+output$`tutor-exercise-DC-2017-01-08-28dca-output` <- renderUI({
+  `tutor-exercise-DC-2017-01-08-28dca-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutor-exercise-DC-2017-01-08-28dca-scratch-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-08-28dca-scratch-code-editor`)), session)
+output$`tutor-exercise-DC-2017-01-08-28dca-scratch-output` <- renderUI({
+  `tutor-exercise-DC-2017-01-08-28dca-scratch-result`()
+})
+</script>
+ <!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["navigation"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/navigation-1.1"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tabsets.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/highlightjs-1.1"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["default.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["4.5.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/font-awesome-4.5.0"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["css/font-awesome.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.4.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutor"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutor"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tutor.js"]},{"type":"character","attributes":{},"value":["tutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["0.8"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["quiz-binding"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["quiz.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/bootstrap.min.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["rmarkdown"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutor"]},{"type":"character","attributes":{},"value":["0.1.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutor"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["tutor.js"]},{"type":"character","attributes":{},"value":["tutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.4.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","all_files","package"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["slickquiz"]},{"type":"character","attributes":{},"value":["1.5.20"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/slickquiz"]}]},{"type":"NULL","attributes":{},"value":{}},{"type":"character","attributes":{},"value":["js/slickQuiz.js"]},{"type":"character","attributes":{},"value":["css/slickQuiz.css","css/slickQuizTutor.css"]},{"type":"NULL","attributes":{},"value":{}},{"type":"NULL","attributes":{},"value":{}},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["tutor"]}]}]}
+</script>
+<!--/html_preserve-->
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

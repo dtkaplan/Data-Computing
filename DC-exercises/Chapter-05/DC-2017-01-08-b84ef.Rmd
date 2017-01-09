@@ -1,0 +1,72 @@
+---
+title: "DC-2017-01-08-b84ef"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-08-b84ef-setup, echo = FALSE}
+# code to be evaluated before exercise code
+```
+
+R is an open-source platform. As such, many people can contribute their ideas and the community of users can choose among them. One of the areas where this plays out is in graphics. There are many ways to draw graphics using R.
+
+The graphics system we use in this course is provided by the `"ggplot2"` package. This is one of many extremely popular packages written by [Hadley Wickham](https://en.wikipedia.org/wiki/Hadley_Wickham), the chief scientist at RStudio.
+
+The functions provided by `"ggplot2"` constitute what can be called an Application Programming Interface (API). Many people find the `"ggplot2"` API hard to figure out at first. In the *Data Computing* textbook, a menu-driven alternative is provided.
+
+In these exercises, you'll use yet another alternative interface provided by the `"statisticalModeling"` package. This interface, implemented by functions whose names start with `gf_`, allows you to use model formulas to specify `"ggplot2"` graphics.
+
+A *formula* in R is an expression built around the `~` ("tilde") sign. It enables you to describe a relationship among variables. For instance: `wage ~ age` means "wage versus age."
+
+Use the `library()` function to attach the `"statisticalModeling"` package. Then ask for help on one of the functions: `help(gf_point)`.
+
+
+- Use `library()` to attach the `"statisticalModeling"` package, which provides the `gf_` interface to `"ggplot2"`.
+- Use `data()` to load the `CountryData` table from `"DataComputing"`.
+- `gf_point()` makes a scatter plot: one point for each case.
+    - plot the death rate (`death`) versus birth rate (`birth`) the `CountryData`. 
+    
+```{r DC-2017-01-08-b84ef, exercise = TRUE, exercise.setup = "DC-2017-01-08-b84ef-setup", exercise.eval = FALSE}
+library(___)
+data(CountryData, package = "DataComputing")
+
+gf_point(__formula__, data = __datatable__)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id="DC-2017-01-08-b84ef-hint">
+The formula will be `death ~ birth`.
+</div>
+
+```{r DC-2017-01-08-b84ef-solution, echo = FALSE}
+library(statisticalModeling)
+data(CountryData, package = "DataComputing")
+
+gf_point(death ~ birth, data = CountryData)
+```
+
+```{r DC-2017-01-08-b84ef-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-08-b84ef-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- find_call("gf_point(whatever, data = CountryData)",
+                    "the data argument should be the name of the data table whose cases you want to plot.")
+test_2 <- check_argument("gf_point(grab_this, whatever)",
+                         test = match_formula(death ~ life),
+                         message = "make sure you're plotting `death` vs `birth`.")
+USER_CODE %>% test_1 %>% test_2
+```
+
+

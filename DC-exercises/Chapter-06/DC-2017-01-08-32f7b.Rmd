@@ -1,0 +1,75 @@
+---
+title: "DC-2017-01-08-32f7b"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+library(DataComputing)
+library(statisticalModeling)
+data(CPS85, package = "mosaicData")
+```
+
+```{r DC-2017-01-08-32f7b-setup, echo = FALSE}
+data(CPS85, package = "mosaicData")
+library(ggplot2)
+library(DataComputing)
+library(statisticalModeling)
+```
+
+In the previous chapter, you graphed a summary of the `CPS85` data like that shown in the figure: counts of people working in each sector of the economy. 
+
+```{r}
+gf_counts(~ sector, data = CPS85)
+```
+
+In this exercise, you're going to add new aethetics to the bars and facet the graph. Things have been set up so that you need only replace the blanks `___` with the appropriate variable. 
+
+- Set the "fill" color for the bars based on whether the person belongs to a `union`. To do this, fill in the blank following `fill:` with the variable that is to be mapped to the fill aesthetic.
+- Facet the graph based on `sex`. To do this, complete the formula argument to the `facet_grid()` function.
+
+
+```{r DC-2017-01-08-32f7b, exercise = TRUE, exercise.setup = "DC-2017-01-08-32f7b-setup", exercise.eval = FALSE}
+library("statisticalModeling")
+library("ggplot2")
+data(CPS85, package = "mosaicData")
+gf_counts( ~ sector + fill:___, data = CPS85) + facet_grid( ~ ___)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id = "DC-2017-01-08-32f7b-hint">
+Put the right variable names in the blanks.
+</div>
+
+```{r DC-2017-01-08-32f7b-solution, echo = FALSE}
+library(statisticalModeling)
+library(ggplot2)
+data(CPS85, package = "mosaicData")
+gf_counts( ~ sector + fill:union, data = CPS85) + facet_grid( ~ sex)
+```
+
+```{r DC-2017-01-08-32f7b-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-08-32f7b-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- find_call("gf_counts()")
+test_2 <- check_argument("gf_counts(grab_this, whatever)",
+                         test = match_formula(~ sector + fill:union),
+                         message = "set the fill aesthetic using `union`.")
+test_3 <- find_call("facet_grid()", "remember to facet the graph")
+test_4 <- check_argument("facet_grid(grab_this)",
+                         test = match_formula(~ sex),
+                         message = "facet the graph by `sex`")
+USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4 
+```
+
+

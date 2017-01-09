@@ -1,0 +1,46 @@
+---
+title: "DC-2017-01-08-5719a"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+A data verb is a function that takes a data table as an input and produces a data table as an input.
+
+In the scratch code pane, try each of these R expressions on the `Births78` data table.
+
+* `nrow(Births78)`
+* `names(Births78)`
+* `class(Births78)`
+
+```{r DC-2017-01-08-5719a-scratch, exercise = TRUE}
+data(Births78, package = "mosaicData")
+
+
+```
+
+
+```{r DC-2017-01-08-5719a, echo = FALSE}
+question('None of these functions are data verbs. Explain why.',
+  answer("They don't take a data table as input.", 
+         correct = FALSE,
+         message = "But they are taking `Births78` as input, and `Births78` is a data table." ),
+  answer("They don't have any output.", 
+         correct = FALSE, 
+         message = "Each of them has an output."),
+  answer("They don't produce a data table as an output", 
+         correct = TRUE,
+         message = "The output is not in the form of a data table. `nrow()` produces a single number, `names()` produces a set of character strings, and `class()` gives a character string identifying the class of the input."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+

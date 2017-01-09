@@ -1,0 +1,46 @@
+---
+title: "DC-2017-01-08-092fe"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-08-092fe-setup, echo = FALSE}
+# code to be evaluated before exercise code
+```
+
+The `group_by()` function simply marks the data table as having groups (specified by the arguments to `group_by()`). Those groups can be used by any data verb, not just `summarise()`.
+
+The code in the following pane pipes the output of `group_by()` into `sample_n()`. Run the code, examine the output and try to figure out how `sample_n()` used the groups marked by `group_by()`.
+
+
+```{r DC-2017-01-08-092fe-scratch, exercise = TRUE, exercise.setup = "DC-2017-01-08-092fe-setup", exercise.eval = FALSE}
+data(Births78, package = "mosaicData")
+library("dplyr") # or DataComputing
+
+Births78 %>% 
+  group_by(wday) %>%
+  sample_n(size = 2)
+```
+
+```{r DC-2017-01-08-092fe, echo = FALSE}
+question( "Which way did `sample_n()` use the groups?",
+  answer("It randomly picked a group and selected only cases within that group.",
+         message = "If this were right, all of the cases in the output would have the same value of `wday`.",
+         correct = FALSE),
+  answer("It operated separately on each group and collected the results for all the groups together into the output.", 
+         message = "`group_by()` marks the groups and other data verbs (from the `dplyr` package) then operate on the groups individually.",
+         correct = TRUE),
+  answer("It ignored the groups.", 
+         message = "If it ignored the groups, there would be no pattern in the output relating to the groups. But there is. Look again.",
+         correct = FALSE),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+

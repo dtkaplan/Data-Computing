@@ -1,0 +1,67 @@
+---
+title: "DC-2017-01-08-63712"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-08-63712-setup, echo = FALSE}
+library(DataComputing)
+data(Births78, package = "mosaicData")
+```
+
+One of the most widely used data verbs is `summarise()`. Like all data verbs, `summarise()` takes as input a data table. It performs a reduction on the data table, for example calculating the sum of the values in a variable.
+
+Of course, you have to tell `summarise()` what summaries you want to perform. All summaries involve a "reduction verb", a function like `mean()` or `sum()` that takes the values in a variable and reduces them to a single value.
+
+We'll use the `Births78` data in this exercise. This data table gives the number of births in the US on each day of the year in 1978. The variable `births` gives the number of babies born on each day.
+
+- You will use the data verb `summarise()` and will pipe the `Births78` data table to be the input to `summarise()`. You will also give, as an argument to `summarise()` an expression that calculates the total `sum()` of `births` 
+- Give the argument the name `total` so that the output data table has a variable named `total`.
+
+
+```{r DC-2017-01-08-63712, exercise = TRUE, exercise.setup = "DC-2017-01-08-63712-setup", exercise.eval = FALSE}
+# provide access to Births78
+data(Births78, package = "mosaicData")
+# the data wrangling package
+library("dplyr")
+
+Births78 %>% summarise(___)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id="DC-2017-01-08-63712-hint">
+The reduction verb `sum()` takes a variable as input and provides as output the sum of all the values in that variable. `sum(births)` is an expression that can be given as an argument to the data verb `summarise()` to instruct it to evaluate the expression on the data table piped in as input. Naming the argument, e.g. `summarise(total = sum(births))` gives the name `total` to the corresponding output of `summarise()`.
+</div>
+
+```{r DC-2017-01-08-63712-solution, echo = FALSE}
+data(Births78, package = "mosaicData")
+library("dplyr") # or "DataComputing"
+
+Births78 %>% summarise(total = sum(births))
+```
+
+```{r DC-2017-01-08-63712-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-08-63712-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- find_call("sum(births)", 
+                    message = "in summarise(), use `sum()` on the `births` variable to get the total number of births.")
+
+test_2 <- check_value(test = agrees("total" %in% names(x)),
+                      message = "use `total` as the name of the variable holding `sum(births)") # replace with your own
+USER_CODE %>% test_1 %>% final_ %>% test_2
+```
+
+

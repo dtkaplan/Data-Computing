@@ -1,0 +1,45 @@
+---
+title: "Data Computing: Chapter 5"
+output: 
+  tutor::tutorial: default
+  html_document: 
+    number_sections: yes
+    toc: yes
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+
+<!-- even though this chunk is eempty, it sets up authentication for data logging -->
+
+<!--
+ 
+```{r child = checkr::authentication()}
+```
+-->
+
+# Scatter plot
+
+```{r child="Chapter-05/DC-2017-01-08-b84ef.Rmd"}
+```
+
+
+
+# Bar plot
+
+```{r child="Chapter-05/DC-2017-01-08-d256c.Rmd"}
+```
+
+# Box-and-whisker plots
+
+```{r child="Chapter-05/DC-2017-01-08-2f4d3.Rmd"}
+```
+
+
+
+

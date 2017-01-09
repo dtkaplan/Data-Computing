@@ -73,7 +73,7 @@ gf_point(death ~ birth, data = CountryData)
 
 
 *** =hint
-The formula will have to parts on the right-hand side of the tilde: `death ~ birth + size:life`. 
+The formula will have two parts on the right-hand side of the tilde: `death ~ birth + size:life`. 
 
 *** =sample_code
 ```{r}

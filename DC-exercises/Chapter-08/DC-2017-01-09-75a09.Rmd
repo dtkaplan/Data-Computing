@@ -1,0 +1,73 @@
+---
+title: "DC-2017-01-09-75a09"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+library(DataComputing)
+```
+
+```{r DC-2017-01-09-75a09-scratch-setup, echo = FALSE, message = FALSE}
+# code to be evaluated before exercise code
+library(statisticalModeling)
+library(DataComputing)
+```
+
+You've already seen how `gf_point()` can be used to draw graphics. For example, the scratch chunk below already contains the commands to draw a scatterplot that relates `death` rates, `life` expectancy, and Gross Domestic Project per capita (`GDPcapita`, which is a measure of economic activity). 
+
+```{r DC-2017-01-09-75a09-scratch, exercise = TRUE, exercise.eval = FALSE, warning = FALSE, message = FALSE, out.width = "50%"}
+library(statisticalModeling)
+
+gf_point(death ~ life + alpha:GDPcapita, data = CountryData)
+```
+
+Functions like `gf_point()` are built on another graphics system that is very widely used in Data Science, `ggplot2`. Many people find the formula interface provided by `gf_point()` easier to use than the native `ggplot2` interface, but once you get used to `ggplot2` it is just as easy and it provides greater flexibility.
+
+By using and argument `verbose = TRUE` to `gf_point()`, you can see exactly what is the `ggplot2` command created.
+
+Try that in the above code chunk.
+
+Now copy and paste that `ggplot2()` command into the following chunk, and confirm that it makes exactly the same plot.
+
+```{r DC-2017-01-09-75a09-setup, warning = FALSE, message = FALSE, out.width = "50%", echo = FALSE}
+library(statisticalModeling)
+data(CountryData, package = "DataComputing")
+```
+
+```{r DC-2017-01-09-75a09, exercise = TRUE, exercise.setup = "DC-2017-01-09-75a09-setup", exercise.eval = FALSE, warning = FALSE, message = FALSE, out.width = "50%"}
+
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id="DC-2017-01-09-75a09-hint">
+Add `verbose = TRUE` as an argument to `gf_point()` in order to see what the corresponding `ggplot2` command looks like.
+</div>
+
+```{r DC-2017-01-09-75a09-solution, echo = FALSE}
+# code or text that's a solution to the exercise
+```
+
+```{r DC-2017-01-09-75a09-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-09-75a09-check, echo = FALSE}
+set_success_message("Good.") # change as you like
+test_1 <- find_call("ggplot()", 
+                    message = "use the `ggplot2` command in this code pane.") 
+test_2 <- find_call("geom_point()", 
+                    message = "did you include the whole `ggplot2` command, including `+ geom_point()`?")
+test_3 <- check_value(test = agrees(inherits(x, "ggplot")),
+                      message = "it doesn't look like you copied the whole command.")
+USER_CODE %>% test_1 %>% test_2 %>% final_ %>% test_3
+```
+
+

@@ -1,0 +1,56 @@
+---
+title: "DC-2017-01-07-b876a"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+Fix the statement so that it finds the total number of babies represented in the `BabyNames` data table.
+
+```{r DC-2017-01-07-b876a-setup, echo = FALSE}
+# code to be evaluated before exercise code
+library(dplyr)
+data(BabyNames, package = "DataComputing")
+```
+
+<!-- narrative before exercise -->
+
+```{r DC-2017-01-07-b876a, exercise = TRUE, exercise.setup = "DC-2017-01-07-b876a-setup", exercise.eval = FALSE}
+How_many_babies <- 
+    BabyNames %>% 
+    summarise(BabyNames, total = sum(Count))
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id="DC-2017-01-07-b876a-hint">
+When a data table is piped into a function, you should not also include the table as an explicit first argument, so `BabyNames %>% summarise(total = sum(count)))` instead of `BabyNames %>% summarise(BabyNames, total = sum(count))`.
+</div>
+
+```{r DC-2017-01-07-b876a-solution, echo = FALSE}
+How_many_babies <- 
+    BabyNames %>% 
+    summarise(total = sum(count))
+```
+
+```{r DC-2017-01-07-b876a-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-07-b876a-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_0 <- find_assignment("How_many_babies")
+test_1 <- check_value(test = agrees(all(names(x) == "total" )), message = "the resulting data frame should have just one variable, `total`.")
+test_2 <- check_value(test = agrees(x[["total"]][1] > 1e7), message = "There should be several hundred million babies altogether")
+
+USER_CODE %>% test_0 #%>% test_1 %>% test_2
+```
+

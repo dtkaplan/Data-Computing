@@ -1,0 +1,91 @@
+---
+title: "DC-2017-01-08-b769a"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+library(DataComputing)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-01-08-b769a-setup, echo = FALSE}
+library(DataComputing)
+```
+A data verb is a function that takes a data table as input and produces a data table as output. `sample_n()` is a data verb that performs a very simple tasks: it draws a random sample of cases from the input data table and presents that sample as the output.
+
+The code pane shows a simple data-wrangling expression using `sample_n()`. Run that expression several times to see that the output differs from run to run: the sample is random! The `size =` argument to `sample_n()` sets how big the sample will be.
+
+
+- First, re-write the expression using pipe notation.
+- Second, arrange that the output of the expression is stored in an object named `My_sample`.
+- Finally, arrange the argument to `sample_n()` so that there are 10 cases in the output.
+
+
+```{r DC-2017-01-08-b769a, exercise = TRUE, exercise.setup = "DC-2017-01-08-b769a-setup", exercise.eval = FALSE}
+# read in the Births78 data table
+data(Births78, package = "mosaicData")
+
+# select a random sample of 3 cases
+sample_n(Births78, size = 3)
+
+# First, re-write the sample_n() above to use pipe notation
+
+
+# Second, re-write the above to store the output under the name My_sample
+
+
+# Last, arrange for there to be 10 random cases in My_sample
+
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id="DC-2017-01-08-b769a-hint">
+Two things change in pipe notation:
+
+- The original expression began with a data verb whose first argument was a data table. The pipe expression begins with the input data table followed by a pipe symbol `%>%`.
+- In the pipe expression, the data verb comes after the pipe.
+- In the pipe expression, the data table is **not** given as an argument inside the parentheses. Instead, the pipe is telling the data verb which data table to take as input.
+</div>
+
+```{r DC-2017-01-08-b769a-solution, echo = FALSE}
+# First
+Births78 %>% 
+  sample_n(size = 3)
+# Second
+My_sample <- 
+  Births78 %>%
+  sample_n(size = 3)
+# Last
+My_sample <- 
+  Births78 %>%
+  sample_n(size = 10)
+```
+
+```{r DC-2017-01-08-b769a-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-08-b769a-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- find_pipe_start("Births78",
+                          message = "you should use `Births78` as the start of a pipe into `sample_n()`.")
+test_2 <- find_call("sample_n(whatever, size = 3)", 
+                    message = "pipe `Births78` into `sample_n(), giving sample_n() the argument `size = 3`.")
+test_2a <- find_call("sample_n(whatever, Births78, whatever)")
+test_3 <- find_assignment("My_sample", "did you do an assignment to `My_sample`?")
+test_4 <- check_value(test = agrees(nrow(x) == 10), 
+                      message = "in the last step, the sample size should be 10.")
+USER_CODE %>% test_1 %>% then(inclusive = TRUE) %>% 
+  test_2a %>% 
+  was_mistake(message = "when piping into a function, the data table does not need to be given explicitly to the function.") %>% 
+  test_2 %>% test_3 %>% final_ %>% test_4 
+```
+
+

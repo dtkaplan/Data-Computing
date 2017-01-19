@@ -11,7 +11,7 @@
 
 
 
-<title>DC-2017-01-07-a45e3</title>
+<title>DC-2017-01-10-08371</title>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -106,53 +106,68 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">DC-2017-01-07-a45e3</h1>
+<h1 class="title toc-ignore">DC-2017-01-10-08371</h1>
 
 </div>
 
 
-<p>Fix the statement so that it pulls out data for babies named Alfred from the <code>DataComputing::BabyNames</code> data table</p>
-<div class="tutor-exercise-support" data-label="DC-2017-01-07-a45e3-setup" data-caption="Code" data-lines="0">
-<pre class="text"><code># code to be evaluated before exercise code
-library(dplyr, quietly = TRUE, verbose = FALSE)
-data(BabyNames, package = &quot;DataComputing&quot;)
-Alfred &lt;- &quot;Fred&quot;</code></pre>
+<div class="tutor-exercise-support" data-label="DC-2017-01-10-08371-setup" data-caption="Code" data-lines="0">
+<pre class="text"><code>library(DataComputing)
+data(&quot;bad_drivers&quot;, package = &quot;fivethirtyeight&quot;)
+library(exercisedata)</code></pre>
 </div>
-<!-- narrative before exercise -->
-<div class="tutor-exercise" data-label="DC-2017-01-07-a45e3" data-caption="Code" data-lines="0">
-<pre class="text"><code>Just_the_Alfreds &lt;- 
-    ____ %&gt;% 
-    filter(name == Alfred)
-
-Just_the_Alfreds # prints the result</code></pre>
-<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.setup":"DC-2017-01-07-a45e3-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else try(capture.code(solution_code), silent = TRUE)","    if (inherits(SOLN_CODE, \"try-error\")) ","        stop(\"Problem author, there is an error in the solution code.\")","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
+<p>The data table <code>bad_drivers</code> from the <code>fivethirtyeight</code> package, has information on fatal car accidents in the United States on a state by state basis. The variable <code>num_drivers</code> gives the number of fatal accidents per one-billion miles driven.</p>
+<p>In this exercise, you’re going to see whether there is a correlation between <code>num_drivers</code> and the geographical size of the state. But <code>bad_drivers</code> does not have any data on the size of states. Instead, you can access state-by-state area data from the table <code>State_pop_area</code> which is already in your workspace.</p>
+<p>Your task: Create a glyph-ready data table named <code>By_state</code> from which you can construct this graph.</p>
+<pre class="r"><code>ggplot(By_state, aes(x = area, y = num_drivers)) + geom_point() + scale_x_log10()</code></pre>
+<p><img src="DC-2017-01-10-08371_files/figure-html/unnamed-chunk-3-1.png" width="50%" /></p>
+<p>Your data table, <code>By_state</code> should end up looking like this:</p>
+<pre><code>## # A tibble: 6 × 3
+##        state num_drivers   area
+##        &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;
+## 1    Alabama        18.8  50645
+## 2     Alaska        18.1 570641
+## 3    Arizona        18.6 113594
+## 4   Arkansas        22.4  52035
+## 5 California        12.0 155779
+## 6   Colorado        13.6 103642</code></pre>
+<p>To construct <code>By_state</code>, you will have to</p>
+<ol style="list-style-type: decimal">
+<li>join the data in <code>State_pop_area</code> with that in <code>bad_drivers</code>, and</li>
+<li>select the variables needed for the graph.</li>
+</ol>
+<div class="tutor-exercise" data-label="DC-2017-01-10-08371" data-caption="Code" data-lines="0">
+<pre class="text"><code>data(bad_drivers, package = &quot;fivethirtyeight&quot;)
+By_state &lt;-
+  bad_drivers %&gt;%
+  __bring_in_the_area_data__ %&gt;%
+  select(__vars_to_keep__)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":7,"fig.height":5,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":672,"warning":true,"error":false,"message":true,"exercise.df_print":"default","exercise.setup":"DC-2017-01-10-08371-setup","exercise.checker":["function (label = NULL, user_code = NULL, solution_code = NULL, ","    check_code = NULL, envir_result = NULL, evaluate_result = NULL, ","    ..., debug = FALSE) ","{","    if (debug) {","        save_file_name <- sprintf(\"~/Downloads/CheckR/chunk-%s.rds\", ","            label)","        saveRDS(list(label = label, user_code = user_code, solution_code = solution_code, ","            check_code = check_code, envir = envir_result, evaluate_result = evaluate_result), ","            file = save_file_name)","    }","    if (is.null(envir_result)) {","        res <- pre_check_code(user_code, check_code)","        if (nchar(res) > 0) ","            return(list(message = res, correct = FALSE))","        else return(TRUE)","    }","    USER_CODE <- capture.code(user_code)","    SOLN_CODE <- if (is.null(solution_code)) ","        \"\"","    else try(capture.code(solution_code), silent = TRUE)","    if (inherits(SOLN_CODE, \"try-error\")) ","        stop(\"Problem author, there is an error in the solution code.\")","    test_envir <- new.env()","    assign(\"USER_CODE\", USER_CODE, envir = test_envir)","    assign(\"SOLN_CODE\", SOLN_CODE, envir = test_envir)","    commands <- parse(text = paste(check_code, collapse = \"\\n\"))","    final_result <- list(correct = TRUE, message = \"passed\", ","        user_code = user_code, type = \"success\", location = \"prepend\")","    for (k in 1:length(commands)) {","        R <- eval(commands[k], envir = test_envir)","        if (is.test_result(R) || is.capture(R)) {","            if (R$passed) ","                next","            else {","                final_result$message <- paste(\"Sorry, but\", R$message)","                final_result$correct = FALSE","                final_result$type = \"info\"","                break","            }","            stop(\"Shouldn't get here. Statement returned neither a test result or a capture.\")","        }","    }","    if (final_result$correct) {","        final_result$message <- get_success_message()","    }","    log_entry <- list(user = get_user_name(), date = date(), ","        label = label, message = final_result$message, correct = final_result$correct, ","        user_code = final_result$user_code)","    final_result","}"]}</script>
 </div>
 <!-- narrative to wrap up (if any) goes here -->
-<div id="section-DC-2017-01-07-a45e3-hint">
-<ul>
-<li>A pipe can never be at the start of a line.</li>
-<li>A data table should be given before the first pipe (<code>%&gt;%</code>).</li>
-<li>Literal names, like <code>&quot;Alfred&quot;</code>, should be in quotes.</li>
-</ul>
+<div id="section-DC-2017-01-10-08371-hint">
+<p>The join data verbs, such as <code>left_join()</code>, have one data table piped in to the function and the other table given as an argument, like this: <code>One %&gt;% left_join(Two)</code></p>
 </div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-07-a45e3-solution" data-caption="Code" data-lines="0">
-<pre class="text"><code>Just_the_Alfreds &lt;-
-    BabyNames %&gt;%
-    filter(name == &quot;Alfred&quot;)</code></pre>
+<div class="tutor-exercise-support" data-label="DC-2017-01-10-08371-solution" data-caption="Code" data-lines="0">
+<pre class="text"><code>By_state &lt;-
+  bad_drivers %&gt;% 
+  left_join(State_pop_area) %&gt;%
+  select(num_drivers, area)
+head(By_state) # to display your result</code></pre>
 </div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-07-a45e3-code-check" data-caption="Code" data-lines="0">
+<div class="tutor-exercise-support" data-label="DC-2017-01-10-08371-code-check" data-caption="Code" data-lines="0">
 <pre class="text"><code># put pre-evaluation checking here. This can be blank, in which case
 # the code will be checked by the interpreter with the usual R error messages
 # shown in the even of a problem.
 check_blanks(USER_CODE)</code></pre>
 </div>
-<div class="tutor-exercise-support" data-label="DC-2017-01-07-a45e3-check" data-caption="Code" data-lines="0">
+<div class="tutor-exercise-support" data-label="DC-2017-01-10-08371-check" data-caption="Code" data-lines="0">
 <pre class="text"><code>set_success_message(&quot;Good job!&quot;) # change as you like
-test_0 &lt;- find_assignment(&quot;Just_the_Alfreds&quot;)
-test_1 &lt;- check_value(test = agrees(all(names(x) == names(BabyNames)) ), message = &quot;the resulting data frame should have the same variables as `BabyNames`.&quot;)
-test_2 &lt;- check_value(test = agrees(all(x[[&quot;name&quot;]] == &quot;Alfred&quot;)), message = &quot;only the Alfreds should appear in the result.&quot;)
-
-USER_CODE %&gt;% test_0 %&gt;% test_1 %&gt;% test_2</code></pre>
+test_1 &lt;- find_assignment(&quot;By_state&quot;,
+                          message = &quot;remember to store the resulting table under the name `By_state`.&quot;)
+test_2 &lt;- find_call(&quot;left_join()&quot;,
+                    message = &quot;`left_join()` is a good choice for a join verb here.&quot;)
+USER_CODE %&gt;% test_1 %&gt;% test_2</code></pre>
 </div>
 
 <script type="application/shiny-prerendered" data-context="server">
@@ -160,9 +175,9 @@ tutor:::register_http_handlers(session, metadata = NULL)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutor-exercise-DC-2017-01-07-a45e3-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-07-a45e3-code-editor`)), session)
-output$`tutor-exercise-DC-2017-01-07-a45e3-output` <- renderUI({
-  `tutor-exercise-DC-2017-01-07-a45e3-result`()
+`tutor-exercise-DC-2017-01-10-08371-result` <- tutor:::setup_exercise_handler(reactive(req(input$`tutor-exercise-DC-2017-01-10-08371-code-editor`)), session)
+output$`tutor-exercise-DC-2017-01-10-08371-output` <- renderUI({
+  `tutor-exercise-DC-2017-01-10-08371-result`()
 })
 </script>
  <!--html_preserve-->

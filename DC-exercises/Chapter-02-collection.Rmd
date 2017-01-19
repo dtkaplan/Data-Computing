@@ -22,6 +22,7 @@ knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
 ```
 -->
 
+
 # Syntax for functions
 
 ```{r child="Chapter-02/DC-2017-01-02-458fb.Rmd"}

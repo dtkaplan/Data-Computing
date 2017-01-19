@@ -7,6 +7,7 @@ runtime: shiny_prerendered
 ```{r include=FALSE}
 library(tutor)
 library(checkr)
+library(DataComputing)
 knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
 ```
 
@@ -14,7 +15,7 @@ Fix the statement so that it pulls out data for babies named Alfred from the `Da
 
 ```{r DC-2017-01-07-a45e3-setup, echo = FALSE}
 # code to be evaluated before exercise code
-library(dplyr)
+library(dplyr, quietly = TRUE, verbose = FALSE)
 data(BabyNames, package = "DataComputing")
 Alfred <- "Fred"
 ```
@@ -25,6 +26,8 @@ Alfred <- "Fred"
 Just_the_Alfreds <- 
     ____ %>% 
     filter(name == Alfred)
+
+Just_the_Alfreds # prints the result
 ```
 
 <!-- narrative to wrap up (if any) goes here -->

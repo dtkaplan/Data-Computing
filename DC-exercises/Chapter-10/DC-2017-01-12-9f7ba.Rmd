@@ -1,0 +1,57 @@
+---
+title: "DC-2017-01-12-9f7ba"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+library(DataComputing)
+library(exercisedata)
+A <- State_pop_area[c(45,9,14,34,26, 16, 39),]
+row.names(A) <- NULL
+data(bad_drivers, package = "fivethirtyeight")
+B <- bad_drivers[c(47, 39, 9, 32, 4, 44), c(1,7,8)]
+row.names(B) <- NULL
+```
+
+In this exercise, you'll use various kinds of join
+
+1. Just the entries in table B that are not in table A
+2. All the entries in table A and corresponding values from table B.
+3. All the entries in table B, with the corresponding values from A but putting in `NA`s 
+for those entries in B that do not have a correspondence in A.
+
+```{r DC-2017-01-12-9f7ba-scratch-setup, exercise = TRUE, echo = FALSE}
+library(DataComputing)
+library(exercisedata)
+```
+
+```{r DC-2017-01-12-9f7ba-scratch, exercise.setup = "DC-2017-01-10-9f7ba-scratch-setup", exercise.eval = FALSE,exercise = TRUE}
+__Left_table__ %>%
+  __join_verb__(__Right_table__)
+```
+
+
+
+```{r DC-2017-01-12-9f7ba, echo = FALSE}
+question('Which join verb did you use and which was the left table?',
+  answer("Choice 1", 
+         correct = TRUE,
+         message = "response 1" ),
+  answer("choice 2", 
+         correct = FALSE, 
+         message = "message 2."),
+  answer("choice 3", 
+         correct = FALSE,
+         message = "message 3"),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+

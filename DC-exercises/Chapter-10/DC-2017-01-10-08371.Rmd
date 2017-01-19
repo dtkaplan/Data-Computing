@@ -1,0 +1,91 @@
+---
+title: "DC-2017-01-10-08371"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+library(DataComputing)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+library(fivethirtyeight)
+library(exercisedata)
+data("bad_drivers", package = "fivethirtyeight")
+```
+
+```{r DC-2017-01-10-08371-setup, echo = FALSE}
+library(DataComputing)
+data("bad_drivers", package = "fivethirtyeight")
+library(exercisedata)
+```
+
+The data table `bad_drivers` from the `fivethirtyeight` package, has information on fatal car accidents in the United States on a state by state basis. The variable `num_drivers` gives the number of fatal accidents per one-billion miles driven.
+
+In this exercise, you're going to see whether there is a correlation between `num_drivers` and the geographical size of the state. But `bad_drivers` does not have any data on the size of states. Instead, you can access state-by-state area data from the table `State_pop_area` which is already in your workspace.
+
+Your task: Create a glyph-ready data table named `By_state` from which you can construct this graph.
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+By_state <-
+  bad_drivers %>%
+  left_join(State_pop_area) %>%
+  select(state, num_drivers, area)
+```
+
+```{r out.width = "50%", warning = FALSE, message = FALSE}
+ggplot(By_state, aes(x = area, y = num_drivers)) + geom_point() + scale_x_log10()
+```
+
+Your data table, `By_state` should end up looking like this:
+
+```{r echo = FALSE}
+head(By_state)
+```
+
+To construct `By_state`, you will have to 
+
+1. join the data in `State_pop_area` with that in `bad_drivers`, and
+2. select the variables needed for the graph.
+
+
+```{r DC-2017-01-10-08371, exercise = TRUE, exercise.setup = "DC-2017-01-10-08371-setup", exercise.eval = FALSE}
+data(bad_drivers, package = "fivethirtyeight")
+By_state <-
+  bad_drivers %>%
+  __bring_in_the_area_data__ %>%
+  select(__vars_to_keep__)
+By_state # display the results
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+<div id="DC-2017-01-10-08371-hint">
+The join data verbs, such as `left_join()`, have one data table piped in to the function and the other table given as an argument, like this:
+    `One %>% left_join(Two)`
+</div>
+
+```{r DC-2017-01-10-08371-solution, echo = FALSE}
+By_state <-
+  bad_drivers %>% 
+  left_join(State_pop_area) %>%
+  select(num_drivers, area)
+head(By_state) # to display your result
+```
+
+```{r DC-2017-01-10-08371-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-01-10-08371-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- find_assignment("By_state",
+                          message = "remember to store the resulting table under the name `By_state`.")
+test_2 <- find_call("left_join()",
+                    message = "`left_join()` is a good choice for a join verb here.")
+USER_CODE %>% test_1 %>% test_2
+```
+
+

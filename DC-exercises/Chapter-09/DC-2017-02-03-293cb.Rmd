@@ -1,0 +1,92 @@
+---
+title: "DC-2017-02-03-293cb"
+output: tutor::tutorial
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+library(DataComputing)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-02-03-293cb-forall, echo = FALSE}
+library(DataComputing)
+```
+
+Names change in popularity over the years. Consider how the popularity of "Jane" and "Mary" has evolved as shown by the `BabyNames` data. To remind you, here are a few random cases from `BabyNames`.
+
+```{r echo = FALSE}
+BabyNames %>% sample_n(size = 3)
+```
+
+1. **Track the yearly number of Janes and Marys over the years.**
+
+Fill in the blanks to create a data-wrangling statement that will show how many Janes and Marys there were in each year.  Remember that the `count` variable in `BabyNames` gives how many babies of that name and sex were born in each year.
+
+```{r DC-2017-02-03-293cb-1, exercise = TRUE, exercise.setup = "DC-2017-02-03-293cb-forall", exercise.eval = FALSE}
+Result <-
+  BabyNames %>%
+  ____(name %in% c("Jane", "Mary")) %>% # keep just the Janes and Marys
+  group_by(____, ____) %>% # for each year for each name
+  summarise(count = ____)
+```
+
+The output of the data wrangling has been assigned to the name `Result`. Run the following code chunk to see what the `Result` looks like. 
+
+```{r DC-2017-02-03-293cb-1print, exercise = TRUE, exercise.setup = "DC-2017-02-03-293cb-forall", exercise.eval = FALSE}
+Result
+```
+
+Notice that `sex` doesn't appear in the result, even though it was a variable in the input `BabyNames`.
+
+```{r DC-2017-02-03-293cb-1b, echo = FALSE}
+question('Why doesn\'t `sex` appear in the result?`',
+  answer("The variable `sex` doesn\'t appear in the `group_by()` statement, so both males and females were summed up together.", 
+         correct = TRUE ),
+  answer("The names 'Mary' and 'Jane' are given only to females.", 
+         correct = FALSE, 
+         message = "Actually, there are boys named 'Mary' and 'Jane'. It may be uncommon, but according to the Social Security data it does happen."),
+  answer("The `filter()` statement eliminated any males from the data.", 
+         correct = FALSE,
+         message = "No, the filter statement doesn't say anything about `sex`."),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+
+2. **Plot out the result of (1).**
+
+First, run the code following code chunk to verify that it works. 
+
+Then modify the plotting command to ...
+
+* *Map* the name (Mary or Jane) to the aesthetic of color.  Remember that mapping to aesthetics is always done inside the `aes()` function.
+* Instead of using dots as the glyph, use a line that connects consecutive values: `geom_line()`.
+* Change the y-axis label to "Yearly Births": `+ ylab("Yearly Births")`
+* *Set* the line thickness to `size=2`. Remember that "setting" refers to adjusting the value of an aesthetic to a constant.  Thus, it's *outside* the `aes()` function.
+* Add a vertical line to mark a year in which something happened that might relate to the increase or decrease the popularity of the name.  Examples: The movie [*Whatever Happened to Baby Jane*](http://en.wikipedia.org/wiki/What_Ever_Happened_to_Baby_Jane%3F_%281962_film%29) came out in 1962. Film actress Mary Pickford started her movie career in 1910, In 1936 Mary became the Queen of the United Kingdom.  The vertical-line glyph is made with`geom_vline()`. The relevant aesthetic is `xintercept`, which you can set to a single year or a vector of years.
+
+```{r DC-2017-02-03-293cb-2, exercise = TRUE, exercise.eval = FALSE}
+Result %>% 
+  ggplot(aes(x = year, y = count)) +
+  geom_point()
+```
+
+
+
+
+  
+3. **Pick out names of interest to you.**
+
+Plot out their popularity over time. You can copy and modify the code from the previous chunks to do this.
+
+```{r DC-2017-02-03-293cb-3, exercise = TRUE, exercise.eval = FALSE, exercise.lines = 8}
+```
+
+
+<!-- identifier for the source problem file is the tooltip on the "+" below. -->
+<a href="#" title = "DC-2017-02-03-293cb">+</a>
+

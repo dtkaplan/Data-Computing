@@ -1,0 +1,78 @@
+---
+title: "DC-2017-02-03-4a876"
+output: html_document
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+CHANGE THIS PROPORTION-Counting into a join operation. Create an auxiliary table which finds the total number of babies born each year. Then join this to the Mary/Jane table.
+
+
+### 3. Look at the *proportion* of births rather than the count
+
+In the previous item you graphed the number of babies each year. Here, you should modify things so that 
+
+```{r DC-2017-02-03-293cb-2, exercise = TRUE, exercise.eval = FALSE}
+Result2 <-
+  BabyNames %>%
+  group_by(year) %>%
+  mutate(total = ????(count)) %>%
+  filter(????) %>%
+  mutate(proportion = ???? / ????)
+# Then add your plot command
+
+```
+
+* Why is `sex` a variable in `Result2`? Eliminate it, keeping just the girls.
+    Note: It would likely be better to add up the boys and girls, but this is surprisingly hard.  It becomes much easier once you have another data verb to work with: `inner_join()`.  
+* What happens if the `filter()` step is put *before* the `mutate()` step?
+
+Just as you did with count vs year, graph proportion vs year.
+```{r eval=FALSE}
+Result2 %>%
+  Your ggplot statements go here!
+```
+
+
+
+```{r DC-2017-02-03-4a876-setup, echo = FALSE}
+# code to be evaluated before exercise code
+```
+
+<!-- narrative before exercise -->
+
+```{r DC-2017-02-03-4a876, exercise = TRUE, exercise.setup = "DC-2017-02-03-4a876-setup", exercise.eval = FALSE}
+sqrt(17) # Starting code for exercise
+```
+
+<!-- narrative to wrap up (if any) goes here -->
+
+```{r DC-2017-02-03-4a876-hint, echo = FALSE}
+# hint text or code. Can offer multiple hints with similar chunks ending in hint-1, hint-2, etc.
+```
+
+```{r DC-2017-02-03-4a876-solution, echo = FALSE}
+# code or text that's a solution to the exercise
+```
+
+```{r DC-2017-02-03-4a876-code-check, echo = FALSE}
+# put pre-evaluation checking here. This can be blank, in which case
+# the code will be checked by the interpreter with the usual R error messages
+# shown in the even of a problem.
+check_blanks(USER_CODE)
+```
+
+```{r DC-2017-02-03-4a876-check, echo = FALSE}
+set_success_message("Good job!") # change as you like
+test_1 <- final_ # replace with your own
+USER_CODE %>% test_1
+```
+
+<!-- identifier for the source problem file is the tooltip on the "+" below. -->
+<a href="#" title = "DC-2017-02-03-4a876">+</a>
+

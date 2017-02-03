@@ -1,0 +1,144 @@
+---
+title: "DC-2017-02-03-9802c"
+output: tutor::tutorial
+runtime: shiny_prerendered
+---
+
+```{r include=FALSE}
+library(tutor)
+library(checkr)
+library(dplyr)
+knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+```
+
+```{r DC-2017-02-03-9802c-forall, echo = FALSE}
+library(DataComputing, quietly = TRUE)
+```
+
+Each year, the US Social Security Administration publishes a list of the most popular names given to babies.  In both 2014 & 2015, [the list](http://www.ssa.gov/oact/babynames/#ht=2) showed Emma and Olivia leading for girls, Noah and Liam for boys.
+
+The `BabyNames` data table in the `DataComputing` package comes from the Social Security Administration's listing of the names givens to babies in each year, and the number of babies of each sex given that name. (Only names with 5 or more babies are published by the SSA.)
+
+In the following questions, you're going to be working with a very small subset of `BabyNames`, 200 randomly selected cases from the years since 2000. By working first with the small subset, you'll be able to quickly view the output from your data-wrangling commands to see if they are what you expected. When you have the commands working correctly, replace the small subset with `BabyNames`, so that you can see the results for the entire data table.
+
+Run this command to construct the small sample.
+
+```{r DC-2017-02-03-9802c-subset, exercise = TRUE, exercise.setup = "DC-2017-02-03-9802c-forall", exercise.eval = FALSE}
+SmallSubset <-
+  BabyNames %>%
+  filter(year > 2000) %>%
+  sample_n(size = 200)
+SmallSubset # displays the sample
+```
+
+```{r DC-2017-02-03-9802c-subset-check, echo = FALSE}
+set_success_message("Good.  Note that since sampling is done at
+random, each time you run the command the `SmallSubset` will change.") 
+test_1 <- find_assignment("SmallSubset") #
+test_2 <- check_value(test = agrees(nrow(x) == 200), "there should be 200 cases in the `SmallSubset`.")
+test_3 <- check_value(test = agrees(all(names(x) == names(BabyNames))), message = "the SmallSubset should be drawn from `BabyNames`.")
+test_4 <- check_value(test = agrees(max(x$year) > 2000), "we want just the years after 2000")
+USER_CODE %>% test_1 %>% test_2 %>% test_3 %>% test_4
+```
+
+As you can see from the table displayed when you ran the commands to create `SmallSubset`, there are four variables in the data. `count` is the number of babies of the given `name` and `sex` born in the corresponding `year`.  The cases in the data are not individual babies, but groups of babies.
+
+
+
+1. **How many babies are represented?**
+
+```{r DC-2017-02-03-9802c-1, exercise = TRUE, exercise.setup = "DC-2017-02-03-9802c-forall", exercise.eval = FALSE, render = print.default}
+SmallSubset %>%
+  summarise(total = ____) # use a reduction verb
+```
+
+<div id="DC-2017-02-03-9802c-1-hint">
+You'll want to add up all the numbers in the `count` variable. A good reduction verb for this is `sum()`.
+</div>
+
+```{r DC-2017-02-03-9802c-1-solution, echo = FALSE}
+SmallSubset %>%
+  summarise(total = sum(count)) # use a reduction verb
+```
+
+
+```{r DC-2017-02-03-9802c-1-check, echo = FALSE}
+test_0 <- find_call("summarise(total = whatever)", "use the `summarise() data verb here and call the variable produced as output `total`")
+test_1 <- find_call("sum(count)")
+USER_CODE %>% test_0 %>% test_1
+```
+
+
+
+2. **How many babies are there in each year?**
+
+```{r DC-2017-02-03-9802c-2, exercise = TRUE, exercise.eval = FALSE}
+SmallSubset %>% 
+  group_by(____) %>% 
+  summarise(total = ____)
+```
+
+<div id="DC-2017-02-03-9802c-2-hint">
+The variable you give as an argument to `group_by()` determines how the whole set of data is broken up into parts. You want to break up the total count of babies by year.
+</div>
+
+```{r DC-2017-02-03-9802c-2-solution, echo = FALSE}
+SmallSubset %>% 
+  group_by(year) %>% 
+  summarise(total = sum(count))
+```
+
+```{r DC-2017-02-03-9802c-2-check, echo = FALSE}
+test_1 <- find_call("group_by(whatever)", "use `group_by()` before `summarise()`")
+test_2 <- find_names(group_by(year), "if you are going to split up the total by year, you should use `year` as the grouping variable")
+test_3 <- find_names(summarise(total = sum(count)), "use exactly the same `summarise()` command as in the previous item in this exercise.")
+USER_CODE %>% test_1  %>% test_2 %>% then %>% test_3
+```
+
+**3. How many distinct names in each year?**
+
+```{r DC-2017-02-03-9802c-3, exercise = TRUE, exercise.eval = FALSE}
+SmallSubset %>%
+  group_by(____) %>%
+  summarise(name_count = n_distinct(____))
+```
+
+```{r DC-2017-02-03-9802c-3-check, echo = FALSE}
+test_1 <- find_call("group_by(whatever)", "use `group_by()` before `summarise()`")
+test_2 <- find_names(group_by(year), "if you are going to split up the total by year, you should use `year` as the grouping variable")
+test_3 <- find_names(n_distinct(name), "the variable given as the argument to `n_distinct()` should be the variable for which you want to count the number of distinct levels.")
+test_4 <- check_value(agrees(names(x)[1] == "year" && names(x)[2] == "name_count"), "only the two variables `year` and `name_count` should be in the result." )
+USER_CODE %>% test_1  %>% test_2 %>% then %>% test_3 %>% final_ %>% test_4
+```
+
+4. **How many distinct names of each sex in each year?**
+
+```{r DC-2017-02-03-9802c-4, exercise = TRUE, exercise.eval = FALSE}
+SmallSubset %>%
+  group_by(____, ____) %>%
+  summarise(____)
+```
+
+```{r DC-2017-02-03-9802c-4-check, echo = FALSE}
+test_1 <- find_call("group_by(whatever)", "use `group_by()` before `summarise()`")
+test_2 <- find_names(group_by(year, sex), "if you are going to split up the total by year, you should use `year` as the grouping variable")
+test_3 <- find_names(n_distinct(name), "the variable given as the argument to `n_distinct()` should be the variable for which you want to count the number of distinct levels.")
+test_4 <- check_value(
+  test = agrees(0==length(setdiff(names(x), c("sex", "year", "name_count")))), 
+  message = "only the three variables `year`, `sex` and `name_count` should be in the result." )
+USER_CODE %>% test_1  %>% test_2 %>% then %>% test_3 %>% final_ %>% test_4
+```
+
+
+<!-- narrative to wrap up (if any) goes here -->
+
+
+
+
+
+
+
+
+<!-- identifier for the source problem file is the tooltip on the "+" below. -->
+<a href="#" title = "DC-2017-02-03-9802c">+</a>
+

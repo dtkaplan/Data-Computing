@@ -12,16 +12,18 @@ runtime: shiny_prerendered
 library(tutor)
 library(checkr)
 knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+# Remember that .httr-oauth and checkr_app_token.rds should be in the
+# same directory as this Rmd file, and uploaded to the server along with 
+# this file.
+turn_on_google_logging("DCF_checkr_log", "COMP110-students")
 ```
 
 
-<!-- even though this chunk is eempty, it sets up authentication for data logging -->
-
-<!--
+<!-- even though this chunk is empty, it sets up authentication for data logging -->
  
 ```{r child = checkr::authentication()}
 ```
--->
+
 
 # Faceting and fill
 

@@ -39,7 +39,7 @@ Here is a scratch window, so that you can figure out what the variables, etc. ar
 
 ```
 
-### Popular?
+1. **Popular?**
 
 Write a wrangling statement to extract out only those names where the total number of births over all the years and both sexes is greater than 10,000.  Your result will look like this (although the names in `Twenty` will be different.)
 
@@ -67,7 +67,7 @@ USER_CODE %>% test_1 %>%
               "are you sure you have only those names that appear 10,000 or more times.")()
 ```
 
-### Popular ever?
+2. **Popular ever?**
 
 Write a wrangling statement to extract only those names for which there is some year where the total numbers of babies is greater than 50 (combining boys and girls). Your result should look like this: the name followed by the total count in the best year and the year in which that occurred.
 
@@ -109,7 +109,7 @@ USER_CODE %>% final_ %>%
               "are you sure you have only those names where there were more than 50 babies in the most popular year?")
 ```
 
-### Popular always?
+3. **Popular always?**
 
 Now write a wrangling statement that extract only those names which appear at least 50 times per year for at least 80 of the 134 year time span. Your result should look
 like this:
@@ -155,3 +155,5 @@ USER_CODE %>% test_1 %>%
               "are you sure you have only those names that appear in 80 or more years."))()
 ```
 
+<!-- identifier for the source problem file is the tooltip on the "+" below. -->
+<a href="#" title = "DC-2016-12-23-4d26c">+</a>
